@@ -32,4 +32,22 @@ CREATE TABLE alimento (
 );
 
 
+-- Selecionar todos os registros da tabela "cliente"
+SELECT * FROM cliente;
 
+-- Selecionar todos os registros da tabela "usuario"
+SELECT * FROM usuario;
+
+-- Selecionar todos os registros da tabela "instituicoes"
+SELECT * FROM instituicoes;
+
+-- Remo��o da tabela de usu�rios pessoa f�sica
+DROP TABLE cliente;
+
+-- Remo��o da tabela de usu�rios pessoa jur�dica
+DROP TABLE usuario;
+
+-- Remo��o da tabela principal de usu�rios
+DROP TABLE instituicoes;
+
+commit;
