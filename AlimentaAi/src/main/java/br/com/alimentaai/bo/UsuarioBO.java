@@ -9,7 +9,6 @@ public class UsuarioBO {
     public Usuario cadastrarUsuarioBo(String json) {
         uc = new UsuarioController();
         Usuario dadosUsuario = uc.cadastro(json);
-        System.out.printf(String.valueOf(dadosUsuario));
         return uc.cadastrarUsuario(dadosUsuario);
     }
 }

@@ -16,6 +16,9 @@ public class UsuarioController {
         Connection con = Conexao.abrirConexao();
         UsuarioDAO usuarioDAO = new UsuarioDAO(con);
         UsuarioService usuarioService = new UsuarioService();
+        ClienteController clienteController = new ClienteController();
+
+        String clienteId = clienteController.generateUniqueId();
 
         String nome = usuario.getNome();
         String email = usuario.getEmail();
@@ -24,6 +27,8 @@ public class UsuarioController {
         String endereco = usuario.getEndereco();
         String cpf = usuario.getCpf();
         String nascimento = usuario.getNascimento();
+        String clienteIdFixo = clienteId;
+        int tipoCliente = 0;
 
         // Cria um objeto MessageDigest para calcular o hash SHA-256 da senha
         MessageDigest digest;
@@ -53,8 +58,9 @@ public class UsuarioController {
             usuario.setEndereco(endereco);
             usuario.setCpf(cpf);
             usuario.setNascimento(nascimento);
+            usuario.setClienteId(clienteIdFixo);
+            usuario.setTipoCliente(tipoCliente);
 
-            System.out.println(usuario);
             System.out.println(usuarioDAO.inserir(usuario));
 
         } else {

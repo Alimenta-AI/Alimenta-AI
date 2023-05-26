@@ -22,22 +22,40 @@ public class UsuarioDAO {
 
     public String inserir(Usuario usuario) {
 
-        String sql = "insert into usuario(clienteid, cpf, nome, email, senha, celular, endereco, nascimento) values (?,?,?,?,?,?)";
+        String sqlCliente = "insert into cliente(nome, email, senha, celular, endereco, clienteId, tipoCliente) values (?,?,?,?,?,?,?)";
+        String sqlUsuario = "insert into usuario(clienteId, cpf, nascimento) values (?,?,?)";
+
         try {
-            PreparedStatement ps = getCon().prepareStatement(sql);
+            PreparedStatement ps = getCon().prepareStatement(sqlCliente);
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getEmail());
             ps.setString(3, usuario.getSenha());
             ps.setString(4, usuario.getCelular());
-            ps.setString(5, usuario.getCpf());
-            ps.setString(6, usuario.getNascimento());
+            ps.setString(5, usuario.getEndereco());
+            ps.setString(6, usuario.getClienteId());
+            ps.setInt(7, usuario.getTipoCliente());
             if (ps.executeUpdate() > 0) {
-                return "Inserido com sucesso.";
+                System.out.println("Inserido com sucesso.");
             } else {
-                return "Erro ao inserir.";
+                System.out.println("Erro ao inserir.");
             }
         } catch (SQLException e) {
             return e.getMessage();
         }
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sqlUsuario);
+            ps.setString(1, usuario.getClienteId());
+            ps.setString(2, usuario.getCpf());
+            ps.setString(3, usuario.getNascimento());
+            if (ps.executeUpdate() > 0) {
+                System.out.println("Inserido com sucesso.");
+            } else {
+                System.out.println("Erro ao inserir.");
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+
+        return "Success";
     }
 }

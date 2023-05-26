@@ -9,14 +9,7 @@ import br.com.alimentaai.model.Usuario;
 
 @Path("/usuario")
 public class UserResource {
-
     private UsuarioBO usuarioBO = new UsuarioBO();
-
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON_PATCH_JSON)
-//    public String buscarUsuarios() {
-//        return usuarioBO.exibirDadosUsuarioBo();
-//    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

@@ -3,7 +3,8 @@ package br.com.alimentaai.model;
 public class Instituicao extends Cliente{
     private String cnpj;
 
-    public Instituicao(String cnpj) {
+    public Instituicao(String nome, String email, String senha, String celular, String endereco, String clienteId, int tipoCliente, String cnpj) {
+        super(nome, email, senha, celular, endereco, clienteId, tipoCliente);
         this.cnpj = cnpj;
     }
 

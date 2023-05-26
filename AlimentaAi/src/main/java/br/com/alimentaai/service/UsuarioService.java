@@ -19,36 +19,36 @@ public class UsuarioService {
 
         // Validar o nome
         if (nome == null || nome.trim().equals("")) {
-            dadosValidos = validarNome(nome);
+            dadosValidos = false;//validarNome(nome);
         }
 
         // Validar o e-mail
         if (email == null || email.trim().equals("")) {
-            dadosValidos = validaEmail(email);
+            dadosValidos = false;//validaEmail(email);
         }
 
         // Validar a senha
         if (senha == null || senha.trim().equals("")) {
-            dadosValidos = validarSenha(senha);
+            dadosValidos = false;//validarSenha(senha);
         }
 
         // Validar o celular
         if (celular == null || celular.trim().equals("")) {
-            dadosValidos = validarCelular(celular);
+            dadosValidos = false;//validarCelular(celular);
         }
 
         // Validar o CPF
         if (cpf == null || cpf.trim().equals("")) {
-            dadosValidos = validarCpf(cpf);
+            dadosValidos = false;//validarCpf(cpf);
         }
 
         // Validar o Nascimento
         if (nascimento == null) {
-            dadosValidos = false;
+            dadosValidos = false;//validarNascimento(nascimento);
         }
         //Validar o endereco
         if (endereco == null || endereco.trim().equals("")) {
-            dadosValidos = false;
+            dadosValidos = false;//validarEndereco(endereco);
         }
 
         return dadosValidos;

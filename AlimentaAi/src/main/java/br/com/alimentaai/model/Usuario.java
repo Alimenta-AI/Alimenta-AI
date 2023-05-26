@@ -6,7 +6,8 @@ public class Usuario extends Cliente{
     private String nascimento;
     private String cpf;
 
-    public Usuario(String nascimento, String cpf) {
+    public Usuario(String nome, String email, String senha, String celular, String endereco, String clienteId, int tipoCliente, String nascimento, String cpf) {
+        super(nome, email, senha, celular, endereco, clienteId, tipoCliente);
         this.nascimento = nascimento;
         this.cpf = cpf;
     }
