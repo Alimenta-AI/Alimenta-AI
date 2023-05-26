@@ -4,6 +4,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
 //import br.com.uinvest.bo.UsuarioBO;
+import br.com.alimentaai.bo.UsuarioBO;
 import br.com.alimentaai.model.Usuario;
 
 @Path("/usuario")
@@ -11,11 +12,11 @@ public class UserResource {
 
     private UsuarioBO usuarioBO = new UsuarioBO();
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON_PATCH_JSON)
-    public String buscarUsuarios() {
-        return usuarioBO.exibirDadosUsuarioBo();
-    }
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON_PATCH_JSON)
+//    public String buscarUsuarios() {
+//        return usuarioBO.exibirDadosUsuarioBo();
+//    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -23,7 +24,7 @@ public class UserResource {
         System.out.println(json);
         Usuario cadastrando = usuarioBO.cadastrarUsuarioBo(json);
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-        builder.path((cadastrando.getNickName()));
+        builder.path((cadastrando.getNome()));
         return Response.created(builder.build()).build();
     }
 }

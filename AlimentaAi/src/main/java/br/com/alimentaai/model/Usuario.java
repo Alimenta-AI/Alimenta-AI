@@ -1,12 +1,12 @@
 package br.com.alimentaai.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Usuario extends Cliente{
-    private Date nascimento;
+    private String nascimento;
     private String cpf;
 
-    public Usuario(Date nascimento, String cpf) {
+    public Usuario(String nascimento, String cpf) {
         this.nascimento = nascimento;
         this.cpf = cpf;
     }
@@ -14,11 +14,11 @@ public class Usuario extends Cliente{
     public Usuario() {
     }
 
-    public Date getNascimento() {
+    public String getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(Date nascimento) {
+    public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
     }
 
