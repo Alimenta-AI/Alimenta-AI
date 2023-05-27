@@ -30,7 +30,7 @@ CREATE TABLE alimento (
   FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
---Insert cliente--
+--Inserts cliente--
 INSERT INTO cliente VALUES ('João Silva', 'joao.silva@email.com', 'senha123', '9876543210', 'Rua A, 123', 'CLT001', 0);
 INSERT INTO cliente VALUES ('Maria Santos', 'maria.santos@email.com', 'senha456', '9876543211', 'Rua B, 456', 'CLT002', 1);
 INSERT INTO cliente VALUES ('Pedro Almeida', 'pedro.almeida@email.com', 'senha789', '9876543212', 'Rua C, 789', 'CLT003', 1);
@@ -66,14 +66,39 @@ INSERT INTO instituicao VALUES ('CLT008', '89012345678901');
 INSERT INTO instituicao VALUES ('CLT009', '90123456789012');
 INSERT INTO instituicao VALUES ('CLT010', '01234567890123');
 
---Insert alimento--
-INSERT INTO alimento VALUES ('ALM001', 'Maçã','29/MAR/2003', 10, 'CLT001');
-INSERT INTO alimento VALUES ('ALM002', 'Arroz, 31/DEC/2024', 5, 'CLT002');
-INSERT INTO alimento VALUES ('ALM003', 'Feijão', '15/SEP/2023', 7, 'CLT003');
-INSERT INTO alimento VALUES ('ALM004', 'Frango', '30/JUN/2023', 2, 'CLT004');
-INSERT INTO alimento VALUES ('ALM005', 'Pão de Forma' , '31/MAY/2023', 3, 'CLT005');
-INSERT INTO alimento VALUES ('ALM006', 'Leite','30/JUN/2023', 4, 'CLT006');
-INSERT INTO alimento VALUES ('ALM007', 'Cenoura','28/MAY/2023', 6, 'CLT007');
-INSERT INTO alimento VALUES ('ALM008', 'Banana','15/JUN/2023', 8, 'CLT008');
-INSERT INTO alimento VALUES ('ALM009', 'Tomate','29/MAY/2023',3, 'CLT009');
-INSERT INTO alimento VALUES ('ALM010', 'Biscoito','31/JUL/2023', 5, 'CLT010');
+--Inserts alimento--
+INSERT INTO alimento VALUES ('ALM001', 'Maçã', TO_DATE('29/03/2003', 'DD/MM/YYYY'), 10, 'CLT001');
+INSERT INTO alimento VALUES ('ALM002', 'Arroz', TO_DATE('31/12/2024', 'DD/MM/YYYY'), 5, 'CLT002');
+INSERT INTO alimento VALUES ('ALM003', 'Feijão', TO_DATE('15/09/2023', 'DD/MM/YYYY'), 7, 'CLT003');
+INSERT INTO alimento VALUES ('ALM004', 'Frango', TO_DATE('01/01/2022', 'DD/MM/YYYY'), 2, 'CLT004');
+INSERT INTO alimento VALUES ('ALM005', 'Pão de Forma', TO_DATE('31/05/2023', 'DD/MM/YYYY'), 3, 'CLT005');
+INSERT INTO alimento VALUES ('ALM006', 'Leite', TO_DATE('01/06/2023', 'DD/MM/YYYY'), 4, 'CLT006');
+INSERT INTO alimento VALUES ('ALM007', 'Cenoura', TO_DATE('28/05/2023', 'DD/MM/YYYY'), 6, 'CLT007');
+INSERT INTO alimento VALUES ('ALM008', 'Banana', TO_DATE('01/07/2023', 'DD/MM/YYYY'), 8, 'CLT008');
+INSERT INTO alimento VALUES ('ALM009', 'Tomate', TO_DATE('29/05/2023', 'DD/MM/YYYY'), 3, 'CLT009');
+INSERT INTO alimento VALUES ('ALM010', 'Biscoito', TO_DATE('31/07/2023', 'DD/MM/YYYY'), 5, 'CLT010');
+
+--clientes que possuem tipoCliente igual 1--
+SELECT nome, email, endereco FROM cliente WHERE tipoCliente = 1 ORDER BY nome;
+
+--alimentos (nome, validade) e seus respectivos clientes (nome) para alimentos com quantidade maior que 5.--
+SELECT alimento.nome, alimento.validade, cliente.nome
+FROM alimento
+JOIN cliente ON alimento.clienteId = cliente.clienteId
+WHERE alimento.quantidade > 5
+ORDER BY alimento.validade;
+
+--Obter a contagem de alimentos por tipo de cliente--
+SELECT cliente.tipoCliente, COUNT(*) quantidade_alimentos
+FROM alimento
+JOIN cliente ON alimento.clienteId = cliente.clienteId
+GROUP BY cliente.tipoCliente;
+
+--Obter a média de quantidade de alimentos por tipo de cliente, considerando apenas os clientes que possuem mais de 3 alimentos.--
+SELECT cliente.tipoCliente, AVG(alimento.quantidade) media_alimentos
+FROM alimento
+JOIN cliente ON alimento.clienteId = cliente.clienteId
+GROUP BY cliente.tipoCliente
+HAVING COUNT(*) > 3;
+
+
