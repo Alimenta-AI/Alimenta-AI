@@ -1,7 +1,6 @@
 package br.com.alimentaai.dao;
 
 import br.com.alimentaai.model.Usuario;
-import com.google.gson.Gson;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

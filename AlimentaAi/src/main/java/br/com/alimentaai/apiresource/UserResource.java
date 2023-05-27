@@ -3,7 +3,6 @@ package br.com.alimentaai.apiresource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
-//import br.com.uinvest.bo.UsuarioBO;
 import br.com.alimentaai.bo.UsuarioBO;
 import br.com.alimentaai.model.Usuario;
 

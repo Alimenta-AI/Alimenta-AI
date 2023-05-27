@@ -6,11 +6,8 @@ public class Cliente {
     private String senha;
     private String celular;
     private String endereco;
-
     private String clienteId;
-
     private int tipoCliente;
-
     public Cliente(String nome, String email, String senha, String celular, String endereco, String clienteId, int tipoCliente) {
         this.nome = nome;
         this.email = email;
