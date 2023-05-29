@@ -1,0 +1,13 @@
+Relatorio de Instituicoes 
+
+A Alimenta-AI possui 10 Instituicoes 
+1.CLT001               
+2.CLT002               
+3.CLT003               
+4.CLT004               
+5.CLT005               
+6.CLT006               
+7.CLT007               
+8.CLT008               
+9.CLT009               
+10.CLT010               

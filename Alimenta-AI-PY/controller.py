@@ -36,13 +36,13 @@ def menuInicial():
     print(
         '=============== <<< ''\033[1;96m''Aliementa-AI''\033[0;0m'' >>> ===============')
     print(
-        '|  [''\033[1;36m''1''\033[0;0m''] Clientes                                |')
+        '|  [''\033[1;36m''1''\033[0;0m''] Clientes                                 |')
     print(
-        '|  [''\033[1;36m''2''\033[0;0m''] Instituições                         |')
+        '|  [''\033[1;36m''2''\033[0;0m''] Instituições                             |')
     print(
-        '|  [''\033[1;36m''3''\033[0;0m''] Doação     |')
+        '|  [''\033[1;36m''3''\033[0;0m''] Doação                                   |')
     print(
-        '|  [''\033[1;36m''0''\033[0;0m''] Sair                                    |')
+        '|  [''\033[1;36m''0''\033[0;0m''] Sair                                     |')
     print('------------------------------------------------')
     try:
         escolha = int(input('\033[1;36m''Insira a opção: ''\033[0;0m'))
@@ -78,14 +78,16 @@ def menuInicial():
 
 
 def subMenuClientes():
-    print('========== <<< ''\033[1;96m''U-Invest''\033[0;0m'' >>> ==========')
+    print('========== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==========')
     print(
-        '|  [''\033[1;36m''1''\033[0;0m''] Cadastrar Usuário             |')
+        '|  [''\033[1;36m''1''\033[0;0m''] Cadastrar Usuário              |')
     print(
-        '|  [''\033[1;36m''2''\033[0;0m''] Dados do Usuário              |')
+        '|  [''\033[1;36m''2''\033[0;0m''] Dados do Usuário               |')
     print(
-        '|  [''\033[1;36m''3''\033[0;0m''] Mostrar Usuários              |')
-    print('|  [''\033[1;36m''4''\033[0;0m''] Gerar Relatório de Usuarios   |')
+        '|  [''\033[1;36m''3''\033[0;0m''] Mostrar Usuários               |')
+
+    print('|  [''\033[1;36m''4''\033[0;0m''] Gerar Relatório de Usuarios  |')
+
     print(
         '|  [''\033[1;36m''5''\033[0;0m''] Remover Usuário               |')
     print('|  [''\033[1;36m''0''\033[0;0m''] Voltar                        |')
@@ -131,13 +133,13 @@ def subMenuClientes():
 
 
 def subMenuInstituicoes():
-    print('========== <<< ''\033[1;96m''U-Invest''\033[0;0m'' >>> ==========')
-    print('|  [''\033[1;36m''1''\033[0;0m''] Cadastrar Curso               |')
-    print('|  [''\033[1;36m''2''\033[0;0m''] Dados do Curso                |')
-    print('|  [''\033[1;36m''3''\033[0;0m''] Mostrar Cursos                |')
-    print('|  [''\033[1;36m''4''\033[0;0m''] Gerar Relatorio de Cursos     |')
-    print('|  [''\033[1;36m''5''\033[0;0m''] Gerenciar Curso               |')
-    print('|  [''\033[1;36m''6''\033[0;0m''] Remover Curso                 |')
+    print('========== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==========')
+    print('|  [''\033[1;36m''1''\033[0;0m''] Cadastrar Instituicao               |')
+    print('|  [''\033[1;36m''2''\033[0;0m''] Dados do Instituicao                |')
+    print('|  [''\033[1;36m''3''\033[0;0m''] Mostrar Instituicoes                |')
+    print('|  [''\033[1;36m''4''\033[0;0m''] Gerar Relatorio de Instituicoes     |')
+    print('|  [''\033[1;36m''5''\033[0;0m''] Gerenciar Instituicao               |')
+    print('|  [''\033[1;36m''6''\033[0;0m''] Remover Instituicao                 |')
     print('|  [''\033[1;36m''0''\033[0;0m''] Voltar                        |')
     print('--------------------------------------')
     try:
@@ -151,22 +153,22 @@ def subMenuInstituicoes():
         return
     print('--------------------------------------')
     if escolha == 1:
-        cadastroCurso()
+        cadastroInstituicao()
         subMenuInstituicoes()
     elif escolha == 2:
-        dadosCurso()
+        dadosInstituicao()
         subMenuInstituicoes()
     elif escolha == 3:
-        mostrarCursos()
+        mostrarInstituicao()
         subMenuInstituicoes()
     elif escolha == 4:
-        relatorioCurso()
+        relatorioInstituicao()
         subMenuInstituicoes()
     elif escolha == 5:
-        gerenciarCurso()
+        gerenciarInstituicao()
         subMenuInstituicoes()
     elif escolha == 6:
-        removeCurso()
+        removeInstituicao()
         subMenuInstituicoes()
     elif escolha == 0:
         sleep(1)
@@ -180,13 +182,11 @@ def subMenuInstituicoes():
         subMenuInstituicoes()
 
 
-def subMenuDocs():
+def subMenuDoacao():
     print(
-        '============== <<< ''\033[1;96m''U-Invest''\033[0;0m'' >>> ==============')
-    print('|  [''\033[1;36m''1''\033[0;0m''] Gerar Documentaçao                    |')
-    print('|  [''\033[1;36m''2''\033[0;0m''] Imprimir Documentaçao                 |')
-    print('|  [''\033[1;36m''3''\033[0;0m''] Visualizar Documentaçao na Web        |')
-    print('|  [''\033[1;36m''4''\033[0;0m''] Acessar Protótipo da Plataforma Web   |')
+        '============== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==============')
+    print('|  [''\033[1;36m''1''\033[0;0m''] Tipos de Doacao                       |')
+    print('|  [''\033[1;36m''2''\033[0;0m''] Empresas                              |')
     print('|  [''\033[1;36m''0''\033[0;0m''] Voltar                                |')
     print('----------------------------------------------')
     x = input('\033[1;36m''Insira a opção: ''\033[0;0m')
@@ -201,7 +201,7 @@ def confereLoginExistente(nome, login):
     dados = f"""SELECT * FROM usuario WHERE nome = '{nome}' OR nickname = '{login}'"""
     inst_SQL.execute(dados)
     listaUsuario = inst_SQL.fetchall()
-    if (len(listaUsuario) != 0):
+    if len(listaUsuario) != 0:
         return True
     else:
         return False
@@ -215,7 +215,7 @@ def cadastro():
         nome = service.Nome()  # Retorna o nome validado
         login = service.User()  # Retorna o login validado
 
-        if (confereLoginExistente(nome, login)):
+        if confereLoginExistente(nome, login):
             print('\033[1;31m''Login ja existente!''\033[0;0m')
             criaBarra()
             return
@@ -224,19 +224,23 @@ def cadastro():
         senha = service.Senha()
         email = service.Email()
         cpf = service.Cpf()
-
-        data = ''.join(service.Data().split('/'))
+        endereco = service.endereco()
+        clienteId = service.clienteID()
+        tipoCliente = service.tipo_cliente()
+        nascimento = ''.join(service.Data().split('/'))
 
         celular = service.Celular()
-        perfilInvestidor = service.PerfilInvestidor()
-        saldo = service.Saldo()
 
         # Executa o insert na tabela do sql
-        cadastro = f"""INSERT INTO usuario (cpf, email, celular, nome, saldo, senha, perfil_investidor, nickname, nascimento) VALUES ('{cpf}','{email}','{celular}','{nome}',{saldo},'{senha}','{perfilInvestidor}','{login}','{data}')"""
-        inst_SQL.execute(cadastro)
+
+        cadastro1 = f"""INSERT INTO cliente (nome, email, senha, celular, endereco, clienteId, tipoCliente) VALUES ({nome}, {email}, {senha}, {celular}, {endereco}, {clienteId}, {tipoCliente} )"""
+        cadastro2 = f"""INSERT INTO usuario (clienteId, cpf, nascimento) VALUES ({clienteId}, {cpf} , {nascimento})"""
+
+        inst_SQL.execute(cadastro1)
+        inst_SQL.execute(cadastro2)
+
         conn.commit()
         conn.close()
-
         limpaTerminal()
         criaBarra()
         print('\033[1;32m''Usuario Cadastrado com sucesso!''\033[0;0m')
@@ -263,7 +267,7 @@ def mostraDados():
     # Variavel de validação do login
     valida = False
 
-    dados = f"""SELECT * FROM usuario WHERE nickname = '{userLogin}' AND senha = '{userSenha}'"""
+    dados = f"""SELECT * FROM cliente WHERE nome = '{userLogin}' AND senha = '{userSenha}'"""
     inst_SQL.execute(dados)
     listaUsuario = inst_SQL.fetchall()
     if (len(listaUsuario) != 0):
@@ -273,14 +277,13 @@ def mostraDados():
         criaBarra()
         # Dados do usuario
         for usuario in listaUsuario:
-            print(f'''\033[1;36mNome: \033[0;0m{usuario[3]}''')
-            print(f'''\033[1;36mEmail: \033[0;0m{usuario[1]}''')
-            print(f'''\033[1;36mLogin: \033[0;0m{usuario[7]}''')
-            print(f'''\033[1;36mCelular: \033[0;0m{usuario[2]}''')
-            print(f'''\033[1;36mCpf: \033[0;0m{usuario[0]}''')
-            print(f'''\033[1;36mData de Nascimento: \033[0;0m{usuario[8]}''')
-            print(f'''\033[1;36mNível de Investidor: \033[0;0m{usuario[6]}''')
-            print(f'''\033[1;36mSaldo: \033[0;0m{usuario[4]}''')
+            print(f'''\033[1;36mNome: \033[0;0m{usuario[1]}''')
+            print(f'''\033[1;36mEmail: \033[0;0m{usuario[2]}''')
+            print(f'''\033[1;36mSenha: \033[0;0m{usuario[3]}''')
+            print(f'''\033[1;36mCelular: \033[0;0m{usuario[4]}''')
+            print(f'''\033[1;36mEndereco: \033[0;0m{usuario[5]}''')
+            print(f'''\033[1;36mClienteID: \033[0;0m{usuario[6]}''')
+            print(f'''\033[1;36mTipoCliente: \033[0;0m{usuario[7]}''')
         criaBarra()
         valida = True
     else:
@@ -296,16 +299,17 @@ def mostraDados():
 
 def usuariosCadastrados():
     limpaTerminal()
-    print('''\033[1;36m=== Usuarios Cadastrados ===\033[0;0m''')
+    print('''\033[1;36m=== Clientes Cadastrados ===\033[0;0m''')
     # Usuarios
     dados = f"""SELECT * FROM usuario"""
     inst_SQL.execute(dados)
     listaUsuario = inst_SQL.fetchall()
     for usuario in listaUsuario:
-        nome = usuario[3]
-        user = usuario[7]
+        nome = usuario[0]
+        cpf = usuario[1]
+        nascimento = usuario[2]
         print(
-            f'''\033[1;36mNome: \033[0;0m{nome} | \033[1;36mLogin: \033[0;0m{user}''')
+            f'''\033[1;36mNome: \033[0;0m{nome} | \033[1;36mcpf: \033[0;0m{cpf} | \033[1;36mNascimento: \033[0;0m{nascimento} ''')
     criaBarra()
     return
 
@@ -317,12 +321,12 @@ def relatorio():
     arquivo.write('\n')
 
     # Consulta SQL para obter os nomes dos usuários
-    dados = """SELECT nome FROM usuario"""
+    dados = """SELECT nome FROM cliente"""
     inst_SQL.execute(dados)
     listaNomes = inst_SQL.fetchall()
 
     countUsers = len(listaNomes)
-    arquivo.write(f'A U-Invest possui {countUsers} usuarios \n')
+    arquivo.write(f'A Alimenta-AI possui {countUsers} usuarios \n')
     for i, nome in enumerate(listaNomes, start=1):
         arquivo.write(f'{i}.{nome[0]} \n')
     arquivo.write(f'{dia}/{mes}/{ano}')
@@ -335,9 +339,9 @@ def relatorio():
 
 def removerUsuario():
     limpaTerminal()
-    print('=== << ''\033[1; 33m''Dados do Usuario''\033[0;0m'' >> ===')
+    print('=== << ''\033[1; 33m''Dados do cliente''\033[0;0m'' >> ===')
     criaBarra()
-    print('\033[1;33m''Logue para excluir seu usuario!''\033[0; 0m')
+    print('\033[1;33m''Logue para excluir seu cliente!''\033[0; 0m')
     criaBarra()
     userLogin = input('Login: ')
     userSenha = input('Senha: ')
@@ -345,17 +349,17 @@ def removerUsuario():
     # Variavel de validação do login
     valida = False
 
-    dados = f"""SELECT * FROM usuario WHERE nickname = '{userLogin}' AND senha = '{userSenha}'"""
+    dados = f"""SELECT * FROM cliente WHERE nome = '{userLogin}' AND senha = '{userSenha}'"""
     inst_SQL.execute(dados)
     listaUsuario = inst_SQL.fetchall()
     if (len(listaUsuario) != 0):
         limpaTerminal()
         criaBarra()
-        print('\033[1;32m''Usuario Logado! Excluindo... ''\033[0; 0m')
+        print('\033[1;32m''Cliente Logado! Excluindo... ''\033[0; 0m')
         criaBarra()
         sleep(5)
         # Excluir usuario que logou
-        delete_query = f"""DELETE FROM usuario WHERE nickname = '{userLogin}'"""
+        delete_query = f"""DELETE FROM cliente WHERE nome = '{userLogin}'"""
         inst_SQL.execute(delete_query)
         conn.commit()
         print('\033[1;32m''Usuario Excluido! ''\033[0; 0m')
@@ -406,32 +410,25 @@ def userAdminValidate():
     return valida
 
 
-def cadastroCurso():
+def cadastroInstituicao():
     try:
         limpaTerminal()
-        print('====== < ''\033[1;92m''Cadastrar Curso''\033[0;0m'' > ======')
-        nome = service.NomeCurso()
-        nomeProfessor = service.Professor()
-        duracao = service.DuracaoCurso()
-        resumo = service.ResumoCurso()
-        pontuacao = service.PontuacaoCurso(duracao)
-        avaliacao = service.AvaliacaoCurso([5, 4, 3, 5, 2, 5, 6, 7, -1])
-        cdCurso = service.CdCurso()
+        print('====== < ''\033[1;92m''Cadastrar Instituicao''\033[0;0m'' > ======')
+        clienteId = service.clienteID()
+        cnpj = service.cnpj()
 
-        print(duracao, avaliacao, resumo,
-              nomeProfessor, nome, cdCurso, pontuacao)
-        print(type(duracao), type(avaliacao), type(resumo), type(
-            nomeProfessor), type(nome), type(cdCurso), type(pontuacao))
+        print(clienteId, cnpj)
+        print(type(clienteId), type(cnpj))
 
         # Executa o insert na tabela do sql
-        cadastro = f"""INSERT INTO curso (duracao, avaliacao, resumo, professor, nome, id_curso, pontuacao) VALUES ({duracao},{avaliacao},'{resumo}','{nomeProfessor}','{nome}','{cdCurso}',{pontuacao})"""
-        inst_SQL.execute(cadastro)
+        instituicaoCadastro = f"""INSERT INTO Instituicao (clienteId, cnpj) VALUES ({clienteId},{cnpj})"""
+        inst_SQL.execute(instituicaoCadastro)
         conn.commit()
         conn.close()
 
         limpaTerminal()
         criaBarra()
-        print('\033[1;32m''Curso Cadastrado com sucesso!''\033[0;0m')
+        print('\033[1;32m''Instituicao Cadastrado com sucesso!''\033[0;0m')
         criaBarra()
         subMenuInstituicoes()
     except ValueError:
@@ -440,33 +437,29 @@ def cadastroCurso():
         print('\033[1;31m''Erro de transação com o BD''\033[0;0m')
 
 
-def dadosCurso():
+def dadosInstituicao():
     limpaTerminal()
-    print('=== << ''\033[1; 33m''Dados do Curso''\033[0;0m'' >> ===')
+    print('=== << ''\033[1; 33m''Dados do Instituicao''\033[0;0m'' >> ===')
     criaBarra()
-    print('\033[1;33m''Digite o código do Curso para ver dados!''\033[0; 0m')
+    print('\033[1;33m''Digite o código do Instituicao para ver dados!''\033[0; 0m')
     criaBarra()
-    codigo = input('Código: ')
+    id = input('id: ')
 
     # Variavel de validação do login
     valida = False
 
-    dados = f"""SELECT * FROM curso WHERE id_curso = '{codigo}'"""
+    dados = f"""SELECT * FROM Instituicao WHERE clienteid = '{id}'"""
     inst_SQL.execute(dados)
-    listaCurso = inst_SQL.fetchall()
-    if (len(listaCurso) != 0):
+    listaInstituicao = inst_SQL.fetchall()
+    if (len(listaInstituicao) != 0):
         limpaTerminal()
         criaBarra()
-        print('\033[1;32m''Curso encontrado! Dados do Curso: ''\033[0; 0m')
+        print('\033[1;32m''Instituicao encontrado! Dados do Instituicao: ''\033[0; 0m')
         criaBarra()
-        for curso in listaCurso:
-            print(f'''\033[1;36mNome: \033[0;0m{curso[4]}''')
-            print(f'''\033[1;36mProfessor: \033[0;0m{curso[3]}''')
-            print(f'''\033[1;36mDuração: \033[0;0m{curso[0]}''')
-            print(f'''\033[1;36mAvaliação: \033[0;0m{curso[1]}''')
-            print(f'''\033[1;36mResumo: \033[0;0m{curso[2]}''')
-            print(f'''\033[1;36mPontuação: \033[0;0m{curso[6]}''')
-            print(f'''\033[1;36mCódigo: \033[0;0m{curso[5]}''')
+        for Instituicao in listaInstituicao:
+            print(f'''\033[1;36mClienteID: \033[0;0m{Instituicao[0]}''')
+            print(f'''\033[1;36mCnpj: \033[0;0m{Instituicao[1]}''')
+
 
         criaBarra()
         valida = True
@@ -475,52 +468,51 @@ def dadosCurso():
     if not valida:
         limpaTerminal()
         criaBarra()
-        print('\033[1;31m''Erro! Código não encontrado ou inexistente.''\033[0; 0m')
+        print('\033[1;31m''Erro! ID não encontrado ou inexistente.''\033[0; 0m')
         criaBarra()
         subMenuInstituicoes()
 
 
-def mostrarCursos():
+def mostrarInstituicao():
     limpaTerminal()
-    print('=== Cursos Cadastrados ===')
-    dados = f"""SELECT * FROM curso"""
+    print('=== Instituicoes Cadastrados ===')
+    dados = f"""SELECT * FROM Instituicao"""
     inst_SQL.execute(dados)
-    listaCursos = inst_SQL.fetchall()
-    for curso in listaCursos:
-        nome = curso[4]
-        professor = curso[3]
-        duracao = curso[0]
+    listaInstituicoes = inst_SQL.fetchall()
+    for Instituicao in listaInstituicoes:
+        clienteid = Instituicao[1]
+        cnpj = Instituicao[2]
         print(
-            f'''\033[1;36mNome: \033[0;0m{nome} | \033[1;36mProfessor: \033[0;0m{professor} | \033[1;36mDuração: \033[0;0m{duracao}''')
+            f'''\033[1;36mClienteID: \033[0;0m{clienteid} | \033[1;36mcnpj: \033[0;0m{cnpj} ''')
     criaBarra()
     return
 
-def relatorioCurso():
+def relatorioInstituicao():
     limpaTerminal()
-    arquivo = open('relatorioCursos.txt', 'w+', encoding='utf-8')
-    arquivo.write('Relatorio de Cursos \n')
+    arquivo = open('relatorioInstituicoes.txt', 'w+', encoding='utf-8')
+    arquivo.write('Relatorio de Instituicoes \n')
     arquivo.write('\n')
 
     # Consulta SQL para obter os nomes dos usuários
-    dados = """SELECT nome FROM curso"""
+    dados = """SELECT clienteid FROM Instituicao"""
     inst_SQL.execute(dados)
     listaNomes = inst_SQL.fetchall()
 
     countUsers = len(listaNomes)
-    arquivo.write(f'A U-Invest possui {countUsers} cursos \n')
+    arquivo.write(f'A Alimenta-AI possui {countUsers} Instituicoes \n')
     for i, nome in enumerate(listaNomes, start=1):
         arquivo.write(f'{i}.{nome[0]} \n')
     criaBarra()
-    print('\033[1;32m'"Relatorio gerado em 'relatorioCursos.txt'"'\033[0;0m')
+    print('\033[1;32m'"Relatorio gerado em 'relatorioInstituicoes.txt'"'\033[0;0m')
     criaBarra()
     arquivo.close()
     return
 
-def gerenciarCurso():
+def gerenciarInstituicao():
     limpaTerminal()
     lista_dados = []
-    id = int(input(f'''\033[1;36mDigite o código do curso que deseja gerenciar: \033[0;0m'''))
-    consulta = f"""SELECT * FROM curso WHERE id_curso = '{id}'"""
+    id = input(f'''\033[1;36mDigite o código do Instituicao que deseja gerenciar: \033[0;0m''')
+    consulta = f"""SELECT * FROM Instituicao WHERE clienteID = '{id}'"""
     inst_SQL.execute(consulta)
     dados = inst_SQL.fetchall()
 
@@ -531,16 +523,13 @@ def gerenciarCurso():
             print('\033[1;31m''Erro! Código não encontrado ou inexistente.''\033[0; 0m')
         else:
             try:
-                nome = input(f'''\033[1;36mDigite o novo nome do curso: \033[0;0m''')
-                professor = input(f'''\033[1;36mDigite o nome do novo professor: \033[0;0m''')
-                duracao = int(input(f'''\033[1;36mDigite a nova duração do curso: \033[0;0m'''))
-                resumo = input(f'''\033[1;36mDigite a nova descrição do curso: \033[0;0m''')
-                pontuacao = int(input(f'''\033[1;36mDigite a nova pontuação para o curso: \033[0;0m'''))
+                clienteID = input(f'''\033[1;36mDigite o novo Cliente ID: \033[0;0m''')
+                cnpj = input(f'''\033[1;36mDigite o novo CNPJ: \033[0;0m''')
             except ValueError:
                 print('\033[1;31m''Digite valores numericos''\033[0; 0m')
             else:
                 try:
-                    str_update = f"""UPDATE curso SET nome='{nome}',professor='{professor}',duracao={duracao},resumo='{resumo}',pontuacao={pontuacao} WHERE id_curso='{id}'"""
+                    str_update = f"""UPDATE Instituicao SET clienteID='{clienteID}',CNPJ='{cnpj}' WHERE id_Instituicao='{id}'"""
                     inst_SQL.execute(str_update)
                     conn.commit()
                 except:
@@ -550,30 +539,30 @@ def gerenciarCurso():
     subMenuInstituicoes()
 
 
-def removeCurso():
+def removeInstituicao():
     limpaTerminal()
-    print('=== << ''\033[1; 33m''Dados do Curso''\033[0;0m'' >> ===')
+    print('=== << ''\033[1; 33m''Dados do Instituicao''\033[0;0m'' >> ===')
     criaBarra()
-    print('\033[1;33m''Digite o código do Curso para excluir''\033[0; 0m')
+    print('\033[1;33m''Digite o código do Instituicao para excluir''\033[0; 0m')
     criaBarra()
-    codigo = input('Código: ')
+    id = input('id: ')
 
     valida = False
 
-    dados = f"""SELECT * FROM curso WHERE id_curso = '{codigo}'"""
+    dados = f"""SELECT * FROM Instituicao WHERE clienteID = '{id}'"""
     inst_SQL.execute(dados)
-    listaCurso = inst_SQL.fetchall()
-    if (len(listaCurso) != 0):
+    listaInstituicao = inst_SQL.fetchall()
+    if (len(listaInstituicao) != 0):
         limpaTerminal()
         criaBarra()
-        print('\033[1;32m''Curso encontrado! Excluindo... ''\033[0; 0m')
+        print('\033[1;32m''Instituicao encontrado! Excluindo... ''\033[0; 0m')
         criaBarra()
         sleep(5)
-        # Excluir curso
-        delete_query = f"""DELETE FROM curso WHERE id_curso = '{codigo}'"""
+        # Excluir Instituicao
+        delete_query = f"""DELETE FROM Instituicao WHERE clienteID = '{id}'"""
         inst_SQL.execute(delete_query)
         conn.commit()
-        print('\033[1;32m''Curso Excluido! ''\033[0; 0m')
+        print('\033[1;32m''Instituicao Excluido! ''\033[0; 0m')
         criaBarra()
         valida = True
     else:
