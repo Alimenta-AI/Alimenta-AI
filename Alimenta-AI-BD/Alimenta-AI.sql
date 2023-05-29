@@ -1,44 +1,38 @@
 CREATE TABLE cliente (
-    nome varchar2(50) NOT NULL,
-    email varchar2(50) UNIQUE NOT NULL,
-    senha varchar2(20) NOT NULL,
-    celular CHAR(11) UNIQUE NOT NULL,
-    endereco VARCHAR(200) NOT NULL,
-    clienteId CHAR(20) PRIMARY KEY,
-    tipoCliente NUMBER(1) NOT NULL
+    clienteId CHAR(20) PRIMARY KEY,
+    nome VARCHAR2(50) NOT NULL,
+    email VARCHAR2(50) UNIQUE NOT NULL,
+    senha VARCHAR2(20) NOT NULL,
+    celular CHAR(11) UNIQUE NOT NULL,
+    endereco VARCHAR(200) NOT NULL,
+    tipoCliente NUMBER(1) NOT NULL
 );
 
 CREATE TABLE usuario (
-  clienteId CHAR(20) PRIMARY KEY, 
-  cpf CHAR(11) UNIQUE NOT NULL,
-  nascimento varchar2(8) NOT NULL, --DDmmYYYY
-  FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
+    clienteId CHAR(20) PRIMARY KEY,
+    cpf CHAR(11) UNIQUE NOT NULL,
+    nascimento VARCHAR2(8) NOT NULL,
+    FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
 CREATE TABLE instituicao (
-  clienteId CHAR(20) PRIMARY KEY,
-  cnpj CHAR(14) UNIQUE NOT NULL,
-  FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
-);
-
-CREATE TABLE alimento (
-  alimentoId CHAR(20) PRIMARY KEY,
-  nome VARCHAR2(50) NOT NULL,
-  validade DATE,
-  quantidade NUMBER(10, 2) NOT NULL,
-  clienteId CHAR(20) NOT NULL,
-  FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
+    clienteId CHAR(20) PRIMARY KEY,
+    website VARCHAR2(150),
+    tipo VARCHAR2(15),
+    cnpj CHAR(14) UNIQUE NOT NULL,
+    FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
 CREATE TABLE movimentacao (
-    num_solicitacao CHAR(10) PRIMARY KEY,
-    data DATE NOT NULL,
-    descricao VARCHAR2(50) NOT NULL,
-    categoria VARCHAR2(20) NOT NULL,
-    clienteId CHAR(20),
-    FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
+    clienteIdUsuario CHAR(20),
+    clienteIdInstituicao CHAR(20),
+    num_solicitacao CHAR(10) PRIMARY KEY,
+    data_movimentacao VARCHAR2(8) NOT NULL,
+    descricao VARCHAR2(150) NOT NULL,
+    categoria VARCHAR2(20) NOT NULL,
+    FOREIGN KEY (clienteIdUsuario) REFERENCES cliente(clienteId),
+    FOREIGN KEY (clienteIdInstituicao) REFERENCES cliente(clienteId)
 );
-
 --Inserts cliente--
 INSERT INTO cliente VALUES ('João Silva', 'joao.silva@email.com', 'senha123', '9876543210', 'Rua A, 123', 'CLT001', 0);
 INSERT INTO cliente VALUES ('Maria Santos', 'maria.santos@email.com', 'senha456', '9876543211', 'Rua B, 456', 'CLT002', 1);
