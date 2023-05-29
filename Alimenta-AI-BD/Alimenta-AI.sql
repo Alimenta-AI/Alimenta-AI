@@ -30,6 +30,15 @@ CREATE TABLE alimento (
   FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
+CREATE TABLE movimentacao (
+    num_solicitacao CHAR(10) PRIMARY KEY,
+    data DATE NOT NULL,
+    descricao VARCHAR2(50) NOT NULL,
+    categoria VARCHAR2(20) NOT NULL,
+    clienteId CHAR(20),
+    FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
+);
+
 --Inserts cliente--
 INSERT INTO cliente VALUES ('João Silva', 'joao.silva@email.com', 'senha123', '9876543210', 'Rua A, 123', 'CLT001', 0);
 INSERT INTO cliente VALUES ('Maria Santos', 'maria.santos@email.com', 'senha456', '9876543211', 'Rua B, 456', 'CLT002', 1);
@@ -77,6 +86,18 @@ INSERT INTO alimento VALUES ('ALM007', 'Cenoura', TO_DATE('28/05/2023', 'DD/MM/Y
 INSERT INTO alimento VALUES ('ALM008', 'Banana', TO_DATE('01/07/2023', 'DD/MM/YYYY'), 8, 'CLT008');
 INSERT INTO alimento VALUES ('ALM009', 'Tomate', TO_DATE('29/05/2023', 'DD/MM/YYYY'), 3, 'CLT009');
 INSERT INTO alimento VALUES ('ALM010', 'Biscoito', TO_DATE('31/07/2023', 'DD/MM/YYYY'), 5, 'CLT010');
+
+--Inserts movimentacao--
+INSERT INTO movimentacao VALUES ('SOL001', TO_DATE('2023-05-29', 'YYYY-MM-DD'), 'Solicitação 1', 'Categoria 1', 'CLT001');
+INSERT INTO movimentacao VALUES ('SOL002', TO_DATE('2023-05-28', 'YYYY-MM-DD'), 'Solicitação 2', 'Categoria 2', 'CLT002');
+INSERT INTO movimentacao VALUES ('SOL003', TO_DATE('2023-05-27', 'YYYY-MM-DD'), 'Solicitação 3', 'Categoria 1', 'CLT003');
+INSERT INTO movimentacao VALUES ('SOL004', TO_DATE('2023-05-26', 'YYYY-MM-DD'), 'Solicitação 4', 'Categoria 3', 'CLT004');
+INSERT INTO movimentacao VALUES ('SOL005', TO_DATE('2023-05-25', 'YYYY-MM-DD'), 'Solicitação 5', 'Categoria 2', 'CLT005');
+INSERT INTO movimentacao VALUES ('SOL006', TO_DATE('2023-05-24', 'YYYY-MM-DD'), 'Solicitação 6', 'Categoria 1', 'CLT006');
+INSERT INTO movimentacao VALUES ('SOL007', TO_DATE('2023-05-23', 'YYYY-MM-DD'), 'Solicitação 7', 'Categoria 3', 'CLT007');
+INSERT INTO movimentacao VALUES ('SOL008', TO_DATE('2023-05-22', 'YYYY-MM-DD'), 'Solicitação 8', 'Categoria 2', 'CLT008');
+INSERT INTO movimentacao VALUES ('SOL009', TO_DATE('2023-05-21', 'YYYY-MM-DD'), 'Solicitação 9', 'Categoria 1', 'CLT009');
+INSERT INTO movimentacao VALUES ('SOL010', TO_DATE('2023-05-20', 'YYYY-MM-DD'), 'Solicitação 10', 'Categoria 3', 'CLT010');
 
 --clientes que possuem tipoCliente igual 1--
 SELECT nome, email, endereco FROM cliente WHERE tipoCliente = 1 ORDER BY nome;
