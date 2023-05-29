@@ -183,15 +183,79 @@ def subMenuInstituicoes():
 
 
 def subMenuDoacao():
-    print(
-        '============== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==============')
+    print('============== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==============')
     print('|  [''\033[1;36m''1''\033[0;0m''] Tipos de Doacao                       |')
     print('|  [''\033[1;36m''2''\033[0;0m''] Empresas                              |')
     print('|  [''\033[1;36m''0''\033[0;0m''] Voltar                                |')
     print('----------------------------------------------')
     x = input('\033[1;36m''Insira a opção: ''\033[0;0m')
     print('----------------------------------------------')
+
+    if x == '1':
+        # Opção selecionada: Tipos de Doacao
+        print('Tipos de Doacao')
+        print('1. Alimento')
+        print('2. Dinheiro')
+        tipo_doacao = input('Insira a opção: ')
+
+        print('Tipo de doação selecionado:', tipo_doacao)
+
+        if tipo_doacao == '1':
+            print()
+            query = "SELECT nome FROM Alimento"
+            inst_SQL.execute(query)
+            resultados = inst_SQL.fetchall()
+
+            # Exibir os resultados com números sequenciais
+            print('\033[1;36mAlimentos Disponíveis\033[0;0m')
+            contador = 1
+            for row in resultados:
+                print(f"{contador}: {row[0]}")
+                contador += 1
+
+
+    elif x == '2':
+
+        limpaTerminal()
+
+        print('=== << ''\033[1;33m''Dados do Instituicao''\033[0;0m'' >> ===')
+
+        criaBarra()
+
+        print('\033[1;33m''Lista de Instituicoes Cadastradas:''\033[0;0m')
+
+        criaBarra()
+
+        dados = "SELECT * FROM Instituicao"
+
+        inst_SQL.execute(dados)
+
+        listaInstituicao = inst_SQL.fetchall()
+
+        if len(listaInstituicao) != 0:
+
+            for Instituicao in listaInstituicao:
+                print(f'''\033[1;36mClienteID: \033[0;0m{Instituicao[0]}''')
+
+                print(f'''\033[1;36mCnpj: \033[0;0m{Instituicao[1]}''')
+
+                criaBarra()
+
+        else:
+
+            print('\033[1;31m''Nenhuma Instituicao cadastrada!''\033[0;0m')
+
+        subMenuDoacao()
+    elif x == '0':
+        # Opção selecionada: Voltar
+        print('Voltar')
+
+    else:
+        # Opção inválida
+        print('Opção inválida')
+
     return x
+
 
 
 ''' Função de Cadastrar / Checar login existente / Adicionar dados no arquivo txt de logins '''
@@ -212,10 +276,9 @@ def cadastro():
         limpaTerminal()
         print('====== < ''\033[1;92m''Cadastrar Usuário''\033[0;0m'' > ======')
 
-        nome = service.Nome()  # Retorna o nome validado
-        login = service.User()  # Retorna o login validado
+        nome = service.Nome()# Retorna o nome validado
 
-        if confereLoginExistente(nome, login):
+        if confereLoginExistente(nome):
             print('\033[1;31m''Login ja existente!''\033[0;0m')
             criaBarra()
             return
@@ -228,7 +291,6 @@ def cadastro():
         clienteId = service.clienteID()
         tipoCliente = service.tipo_cliente()
         nascimento = ''.join(service.Data().split('/'))
-
         celular = service.Celular()
 
         # Executa o insert na tabela do sql
@@ -421,20 +483,28 @@ def cadastroInstituicao():
         print(type(clienteId), type(cnpj))
 
         # Executa o insert na tabela do sql
-        instituicaoCadastro = f"""INSERT INTO Instituicao (clienteId, cnpj) VALUES ({clienteId},{cnpj})"""
+        instituicaoCadastro = f"INSERT INTO Instituicao (clienteId, cnpj) VALUES ({clienteId}, '{cnpj}')"
         inst_SQL.execute(instituicaoCadastro)
         conn.commit()
         conn.close()
 
         limpaTerminal()
         criaBarra()
-        print('\033[1;32m''Instituicao Cadastrado com sucesso!''\033[0;0m')
+        print('\033[1;32m''Instituicao Cadastrada com sucesso!''\033[0;0m')
         criaBarra()
         subMenuInstituicoes()
     except ValueError:
-        print("Digite valores numéricos")
+        limpaTerminal()
+        criaBarra()
+        print("Digite valores numéricos válidos!")
+        criaBarra()
+        cadastroInstituicao()
     except:
+        limpaTerminal()
+        criaBarra()
         print('\033[1;31m''Erro de transação com o BD''\033[0;0m')
+        criaBarra()
+
 
 
 def dadosInstituicao():
@@ -480,8 +550,8 @@ def mostrarInstituicao():
     inst_SQL.execute(dados)
     listaInstituicoes = inst_SQL.fetchall()
     for Instituicao in listaInstituicoes:
-        clienteid = Instituicao[1]
-        cnpj = Instituicao[2]
+        clienteid = Instituicao[0]
+        cnpj = Instituicao[1]
         print(
             f'''\033[1;36mClienteID: \033[0;0m{clienteid} | \033[1;36mcnpj: \033[0;0m{cnpj} ''')
     criaBarra()

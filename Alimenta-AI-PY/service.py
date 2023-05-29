@@ -37,14 +37,6 @@ def Email():
             print('Email Inválido! Deve conter "@" e ".com"')
 
 
-def User():
-    while True:
-        login = input('User: ')
-        if login == '':
-            print('Error! Entrada vazia.')
-            continue
-        return login.strip(' ')
-
 
 def Celular():
     while True:
@@ -98,7 +90,7 @@ def Cpf():
 def cnpj():
     while True:
         try:
-            CNPJ = input('CNPJ (Apenas Números): ')
+            CNPJ = input(int('CNPJ (Apenas Números): '))
             if len(CNPJ) == 14:
                 return CNPJ
             else:
