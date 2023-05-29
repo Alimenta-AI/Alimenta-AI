@@ -78,7 +78,8 @@ def menuInicial():
 
 
 def subMenuClientes():
-    print('========== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==========')
+    print(
+        '========== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==========')
     print(
         '|  [''\033[1;36m''1''\033[0;0m''] Cadastrar Usuário              |')
     print(
@@ -133,7 +134,8 @@ def subMenuClientes():
 
 
 def subMenuInstituicoes():
-    print('========== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==========')
+    print(
+        '========== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==========')
     print('|  [''\033[1;36m''1''\033[0;0m''] Cadastrar Instituicao               |')
     print('|  [''\033[1;36m''2''\033[0;0m''] Dados do Instituicao                |')
     print('|  [''\033[1;36m''3''\033[0;0m''] Mostrar Instituicoes                |')
@@ -183,7 +185,8 @@ def subMenuInstituicoes():
 
 
 def subMenuDoacao():
-    print('============== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==============')
+    print(
+        '============== <<< ''\033[1;96m''Alimenta-AI''\033[0;0m'' >>> ==============')
     print('|  [''\033[1;36m''1''\033[0;0m''] Tipos de Doacao                       |')
     print('|  [''\033[1;36m''2''\033[0;0m''] Empresas                              |')
     print('|  [''\033[1;36m''0''\033[0;0m''] Voltar                                |')
@@ -212,7 +215,6 @@ def subMenuDoacao():
             for row in resultados:
                 print(f"{contador}: {row[0]}")
                 contador += 1
-
 
     elif x == '2':
 
@@ -257,12 +259,11 @@ def subMenuDoacao():
     return x
 
 
-
 ''' Função de Cadastrar / Checar login existente / Adicionar dados no arquivo txt de logins '''
 
 
-def confereLoginExistente(nome, login):
-    dados = f"""SELECT * FROM usuario WHERE nome = '{nome}' OR nickname = '{login}'"""
+def confereLoginExistente(cpf):
+    dados = f"""SELECT * FROM usuario WHERE cpf = '{cpf}'"""
     inst_SQL.execute(dados)
     listaUsuario = inst_SQL.fetchall()
     if len(listaUsuario) != 0:
@@ -276,30 +277,31 @@ def cadastro():
         limpaTerminal()
         print('====== < ''\033[1;92m''Cadastrar Usuário''\033[0;0m'' > ======')
 
-        nome = service.Nome()# Retorna o nome validado
+        # Retornando valores validados
+        nome = service.Nome()
+        senha = service.Senha()
+        email = service.Email()
+        cpf = service.Cpf()
 
-        if confereLoginExistente(nome):
+        if confereLoginExistente(cpf):
             print('\033[1;31m''Login ja existente!''\033[0;0m')
             criaBarra()
             return
 
-        # Retornando valores validados
-        senha = service.Senha()
-        email = service.Email()
-        cpf = service.Cpf()
         endereco = service.endereco()
         clienteId = service.clienteID()
         tipoCliente = service.tipo_cliente()
         nascimento = ''.join(service.Data().split('/'))
+        print(nascimento)
         celular = service.Celular()
 
         # Executa o insert na tabela do sql
 
-        cadastro1 = f"""INSERT INTO cliente (nome, email, senha, celular, endereco, clienteId, tipoCliente) VALUES ({nome}, {email}, {senha}, {celular}, {endereco}, {clienteId}, {tipoCliente} )"""
-        cadastro2 = f"""INSERT INTO usuario (clienteId, cpf, nascimento) VALUES ({clienteId}, {cpf} , {nascimento})"""
+        cadastroCliente = f"""INSERT INTO cliente (nome, email, senha, celular, endereco, clienteId, tipoCliente) VALUES ({nome}, {email}, {senha}, {celular}, {endereco}, {clienteId}, {tipoCliente} )"""
+        cadastroUsuario = f"""INSERT INTO usuario (clienteId, cpf, nascimento) VALUES ({clienteId}, {cpf} , {nascimento})"""
 
-        inst_SQL.execute(cadastro1)
-        inst_SQL.execute(cadastro2)
+        inst_SQL.execute(cadastroCliente)
+        inst_SQL.execute(cadastroUsuario)
 
         conn.commit()
         conn.close()
@@ -475,7 +477,8 @@ def userAdminValidate():
 def cadastroInstituicao():
     try:
         limpaTerminal()
-        print('====== < ''\033[1;92m''Cadastrar Instituicao''\033[0;0m'' > ======')
+        print(
+            '====== < ''\033[1;92m''Cadastrar Instituicao''\033[0;0m'' > ======')
         clienteId = service.clienteID()
         cnpj = service.cnpj()
 
@@ -506,7 +509,6 @@ def cadastroInstituicao():
         criaBarra()
 
 
-
 def dadosInstituicao():
     limpaTerminal()
     print('=== << ''\033[1; 33m''Dados do Instituicao''\033[0;0m'' >> ===')
@@ -524,12 +526,12 @@ def dadosInstituicao():
     if (len(listaInstituicao) != 0):
         limpaTerminal()
         criaBarra()
-        print('\033[1;32m''Instituicao encontrado! Dados do Instituicao: ''\033[0; 0m')
+        print(
+            '\033[1;32m''Instituicao encontrado! Dados do Instituicao: ''\033[0; 0m')
         criaBarra()
         for Instituicao in listaInstituicao:
             print(f'''\033[1;36mClienteID: \033[0;0m{Instituicao[0]}''')
             print(f'''\033[1;36mCnpj: \033[0;0m{Instituicao[1]}''')
-
 
         criaBarra()
         valida = True
@@ -557,6 +559,7 @@ def mostrarInstituicao():
     criaBarra()
     return
 
+
 def relatorioInstituicao():
     limpaTerminal()
     arquivo = open('relatorioInstituicoes.txt', 'w+', encoding='utf-8')
@@ -578,10 +581,12 @@ def relatorioInstituicao():
     arquivo.close()
     return
 
+
 def gerenciarInstituicao():
     limpaTerminal()
     lista_dados = []
-    id = input(f'''\033[1;36mDigite o código do Instituicao que deseja gerenciar: \033[0;0m''')
+    id = input(
+        f'''\033[1;36mDigite o código do Instituicao que deseja gerenciar: \033[0;0m''')
     consulta = f"""SELECT * FROM Instituicao WHERE clienteID = '{id}'"""
     inst_SQL.execute(consulta)
     dados = inst_SQL.fetchall()
@@ -590,10 +595,12 @@ def gerenciarInstituicao():
         lista_dados.append(dado)
 
         if (len(lista_dados) == 0):
-            print('\033[1;31m''Erro! Código não encontrado ou inexistente.''\033[0; 0m')
+            print(
+                '\033[1;31m''Erro! Código não encontrado ou inexistente.''\033[0; 0m')
         else:
             try:
-                clienteID = input(f'''\033[1;36mDigite o novo Cliente ID: \033[0;0m''')
+                clienteID = input(
+                    f'''\033[1;36mDigite o novo Cliente ID: \033[0;0m''')
                 cnpj = input(f'''\033[1;36mDigite o novo CNPJ: \033[0;0m''')
             except ValueError:
                 print('\033[1;31m''Digite valores numericos''\033[0; 0m')
@@ -605,7 +612,8 @@ def gerenciarInstituicao():
                 except:
                     print('\033[1;31m''Erro de transacao com o BD''\033[0; 0m')
                 else:
-                    print(f'''\033[1;32mDados alterados com sucesso\033[0;0m''')
+                    print(
+                        f'''\033[1;32mDados alterados com sucesso\033[0;0m''')
     subMenuInstituicoes()
 
 

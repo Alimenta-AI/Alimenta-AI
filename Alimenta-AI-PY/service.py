@@ -37,7 +37,6 @@ def Email():
             print('Email Inválido! Deve conter "@" e ".com"')
 
 
-
 def Celular():
     while True:
         celular = input('Celular (Apenas Números): ')
@@ -68,6 +67,7 @@ def Data():
         if data.count('/') == 2 and data != '//':
             dia, mes, ano = data.split('/')
             if 1 <= int(dia) <= 31 and 1 <= int(mes) <= 12 and 1900 <= int(ano) <= 2022:
+                print(data.strip(' '))
                 return data.strip(' ')
             else:
                 print('Dia/Mes/Ano Inválido(s)')
@@ -102,10 +102,12 @@ def cnpj():
 def clienteID():
     return None
 
+
 def tipo_cliente():
     while True:
         try:
-            tipo = int(input('Tipo de Cliente (0 - Pessoa Física, 1 - Pessoa Jurídica): '))
+            tipo = int(
+                input('Tipo de Cliente (0 - Pessoa Física, 1 - Pessoa Jurídica): '))
             if tipo == 0 or tipo == 1:
                 return tipo
             else:
@@ -117,14 +119,15 @@ def tipo_cliente():
 def endereco():
     while True:
         try:
-            rua = input('Rua: ')
+            cep = input('CEP: ')
+            endereco = input('Endereco: ')
             numero = input('Número: ')
             cidade = input('Cidade: ')
             estado = input('Estado: ')
-            cep = input('CEP: ')
 
-            return rua, numero, cidade, estado, cep
+            enderecoCompleto = ', '.join(
+                [cep, endereco, numero, cidade, estado])
+
+            return enderecoCompleto
         except ValueError:
             print("Erro! Digite valores válidos!")
-
-
