@@ -1,40 +1,41 @@
 CREATE TABLE cliente (
-    clienteId CHAR(20) PRIMARY KEY,
-    nome VARCHAR2(50) NOT NULL,
-    email VARCHAR2(50) UNIQUE NOT NULL,
-    senha VARCHAR2(20) NOT NULL,
-    celular CHAR(11) UNIQUE NOT NULL,
-    endereco VARCHAR(200) NOT NULL,
-    tipoCliente NUMBER(1) NOT NULL
+  clienteId CHAR(20) PRIMARY KEY,
+  nome VARCHAR2(50) NOT NULL,
+  email VARCHAR2(50) UNIQUE NOT NULL,
+  senha VARCHAR2(20) NOT NULL,
+  celular CHAR(11) UNIQUE NOT NULL,
+  endereco VARCHAR(200) NOT NULL,
+  tipoCliente NUMBER(1) NOT NULL
 );
 
 CREATE TABLE usuario (
-    clienteId CHAR(20) PRIMARY KEY,
-    cpf CHAR(11) UNIQUE NOT NULL,
-    nascimento VARCHAR2(8) NOT NULL,
-    FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
+  clienteId CHAR(20) PRIMARY KEY,
+  cpf CHAR(11) UNIQUE NOT NULL,
+  nascimento VARCHAR2(8) NOT NULL,
+  FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
 CREATE TABLE instituicao (
-    clienteId CHAR(20) PRIMARY KEY,
-    website VARCHAR2(150),
-    tipo VARCHAR2(15),
-    cnpj CHAR(14) UNIQUE NOT NULL,
-    FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
+  clienteId CHAR(20) PRIMARY KEY,
+  website VARCHAR2(150),
+  tipo VARCHAR2(15),
+  cnpj CHAR(14) UNIQUE NOT NULL,
+  FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
 CREATE TABLE movimentacao (
-    clienteIdUsuario CHAR(20),
-    clienteIdInstituicao CHAR(20),
-    num_solicitacao CHAR(10) PRIMARY KEY,
-    data_movimentacao VARCHAR2(8) NOT NULL,
-    descricao VARCHAR2(150) NOT NULL,
-    categoria VARCHAR2(20) NOT NULL,
-    FOREIGN KEY (clienteIdUsuario) REFERENCES cliente(clienteId),
-    FOREIGN KEY (clienteIdInstituicao) REFERENCES cliente(clienteId)
+  clienteIdUsuario CHAR(20),
+  clienteIdInstituicao CHAR(20),
+  num_solicitacao CHAR(10) PRIMARY KEY,
+  data_movimentacao VARCHAR2(8) NOT NULL,
+  descricao VARCHAR2(150) NOT NULL,
+  categoria VARCHAR2(20) NOT NULL,
+  FOREIGN KEY (clienteIdUsuario) REFERENCES cliente(clienteId),
+  FOREIGN KEY (clienteIdInstituicao) REFERENCES cliente(clienteId)
 );
+
 --Inserts cliente--
-INSERT INTO cliente VALUES ('João Silva', 'joao.silva@email.com', 'senha123', '9876543210', 'Rua A, 123', 'CLT001', 0);
+INSERT INTO cliente VALUES ('Joï¿½o Silva', 'joao.silva@email.com', 'senha123', '9876543210', 'Rua A, 123', 'CLT001', 0);
 INSERT INTO cliente VALUES ('Maria Santos', 'maria.santos@email.com', 'senha456', '9876543211', 'Rua B, 456', 'CLT002', 1);
 INSERT INTO cliente VALUES ('Pedro Almeida', 'pedro.almeida@email.com', 'senha789', '9876543212', 'Rua C, 789', 'CLT003', 1);
 INSERT INTO cliente VALUES ('Ana Oliveira', 'ana.oliveira@email.com', 'senhaabc', '9876543213', 'Rua D, 321', 'CLT004', 1);
@@ -57,7 +58,7 @@ INSERT INTO usuario VALUES ('CLT008', '89012345678', '20070808');
 INSERT INTO usuario VALUES ('CLT009', '90123456789', '20080909');
 INSERT INTO usuario VALUES ('CLT010', '01234567890', '20091010');
 
---Insert instituição--
+--Insert instituiï¿½ï¿½o--
 INSERT INTO instituicao VALUES ('CLT001', '12345678901234');
 INSERT INTO instituicao VALUES ('CLT002', '23456789012345');
 INSERT INTO instituicao VALUES ('CLT003', '34567890123456');
@@ -70,11 +71,11 @@ INSERT INTO instituicao VALUES ('CLT009', '90123456789012');
 INSERT INTO instituicao VALUES ('CLT010', '01234567890123');
 
 --Inserts alimento--
-INSERT INTO alimento VALUES ('ALM001', 'Maçã', TO_DATE('29/03/2003', 'DD/MM/YYYY'), 10, 'CLT001');
+INSERT INTO alimento VALUES ('ALM001', 'Maï¿½ï¿½', TO_DATE('29/03/2003', 'DD/MM/YYYY'), 10, 'CLT001');
 INSERT INTO alimento VALUES ('ALM002', 'Arroz', TO_DATE('31/12/2024', 'DD/MM/YYYY'), 5, 'CLT002');
-INSERT INTO alimento VALUES ('ALM003', 'Feijão', TO_DATE('15/09/2023', 'DD/MM/YYYY'), 7, 'CLT003');
+INSERT INTO alimento VALUES ('ALM003', 'Feijï¿½o', TO_DATE('15/09/2023', 'DD/MM/YYYY'), 7, 'CLT003');
 INSERT INTO alimento VALUES ('ALM004', 'Frango', TO_DATE('01/01/2022', 'DD/MM/YYYY'), 2, 'CLT004');
-INSERT INTO alimento VALUES ('ALM005', 'Pão de Forma', TO_DATE('31/05/2023', 'DD/MM/YYYY'), 3, 'CLT005');
+INSERT INTO alimento VALUES ('ALM005', 'Pï¿½o de Forma', TO_DATE('31/05/2023', 'DD/MM/YYYY'), 3, 'CLT005');
 INSERT INTO alimento VALUES ('ALM006', 'Leite', TO_DATE('01/06/2023', 'DD/MM/YYYY'), 4, 'CLT006');
 INSERT INTO alimento VALUES ('ALM007', 'Cenoura', TO_DATE('28/05/2023', 'DD/MM/YYYY'), 6, 'CLT007');
 INSERT INTO alimento VALUES ('ALM008', 'Banana', TO_DATE('01/07/2023', 'DD/MM/YYYY'), 8, 'CLT008');
@@ -82,16 +83,16 @@ INSERT INTO alimento VALUES ('ALM009', 'Tomate', TO_DATE('29/05/2023', 'DD/MM/YY
 INSERT INTO alimento VALUES ('ALM010', 'Biscoito', TO_DATE('31/07/2023', 'DD/MM/YYYY'), 5, 'CLT010');
 
 --Inserts movimentacao--
-INSERT INTO movimentacao VALUES ('SOL001', TO_DATE('2023-05-29', 'YYYY-MM-DD'), 'Solicitação 1', 'Categoria 1', 'CLT001');
-INSERT INTO movimentacao VALUES ('SOL002', TO_DATE('2023-05-28', 'YYYY-MM-DD'), 'Solicitação 2', 'Categoria 2', 'CLT002');
-INSERT INTO movimentacao VALUES ('SOL003', TO_DATE('2023-05-27', 'YYYY-MM-DD'), 'Solicitação 3', 'Categoria 1', 'CLT003');
-INSERT INTO movimentacao VALUES ('SOL004', TO_DATE('2023-05-26', 'YYYY-MM-DD'), 'Solicitação 4', 'Categoria 3', 'CLT004');
-INSERT INTO movimentacao VALUES ('SOL005', TO_DATE('2023-05-25', 'YYYY-MM-DD'), 'Solicitação 5', 'Categoria 2', 'CLT005');
-INSERT INTO movimentacao VALUES ('SOL006', TO_DATE('2023-05-24', 'YYYY-MM-DD'), 'Solicitação 6', 'Categoria 1', 'CLT006');
-INSERT INTO movimentacao VALUES ('SOL007', TO_DATE('2023-05-23', 'YYYY-MM-DD'), 'Solicitação 7', 'Categoria 3', 'CLT007');
-INSERT INTO movimentacao VALUES ('SOL008', TO_DATE('2023-05-22', 'YYYY-MM-DD'), 'Solicitação 8', 'Categoria 2', 'CLT008');
-INSERT INTO movimentacao VALUES ('SOL009', TO_DATE('2023-05-21', 'YYYY-MM-DD'), 'Solicitação 9', 'Categoria 1', 'CLT009');
-INSERT INTO movimentacao VALUES ('SOL010', TO_DATE('2023-05-20', 'YYYY-MM-DD'), 'Solicitação 10', 'Categoria 3', 'CLT010');
+INSERT INTO movimentacao VALUES ('SOL001', TO_DATE('2023-05-29', 'YYYY-MM-DD'), 'Solicitaï¿½ï¿½o 1', 'Categoria 1', 'CLT001');
+INSERT INTO movimentacao VALUES ('SOL002', TO_DATE('2023-05-28', 'YYYY-MM-DD'), 'Solicitaï¿½ï¿½o 2', 'Categoria 2', 'CLT002');
+INSERT INTO movimentacao VALUES ('SOL003', TO_DATE('2023-05-27', 'YYYY-MM-DD'), 'Solicitaï¿½ï¿½o 3', 'Categoria 1', 'CLT003');
+INSERT INTO movimentacao VALUES ('SOL004', TO_DATE('2023-05-26', 'YYYY-MM-DD'), 'Solicitaï¿½ï¿½o 4', 'Categoria 3', 'CLT004');
+INSERT INTO movimentacao VALUES ('SOL005', TO_DATE('2023-05-25', 'YYYY-MM-DD'), 'Solicitaï¿½ï¿½o 5', 'Categoria 2', 'CLT005');
+INSERT INTO movimentacao VALUES ('SOL006', TO_DATE('2023-05-24', 'YYYY-MM-DD'), 'Solicitaï¿½ï¿½o 6', 'Categoria 1', 'CLT006');
+INSERT INTO movimentacao VALUES ('SOL007', TO_DATE('2023-05-23', 'YYYY-MM-DD'), 'Solicitaï¿½ï¿½o 7', 'Categoria 3', 'CLT007');
+INSERT INTO movimentacao VALUES ('SOL008', TO_DATE('2023-05-22', 'YYYY-MM-DD'), 'Solicitaï¿½ï¿½o 8', 'Categoria 2', 'CLT008');
+INSERT INTO movimentacao VALUES ('SOL009', TO_DATE('2023-05-21', 'YYYY-MM-DD'), 'Solicitaï¿½ï¿½o 9', 'Categoria 1', 'CLT009');
+INSERT INTO movimentacao VALUES ('SOL010', TO_DATE('2023-05-20', 'YYYY-MM-DD'), 'Solicitaï¿½ï¿½o 10', 'Categoria 3', 'CLT010');
 
 --clientes que possuem tipoCliente igual 1--
 SELECT nome, email, endereco FROM cliente WHERE tipoCliente = 1 ORDER BY nome;
@@ -109,7 +110,7 @@ FROM alimento
 JOIN cliente ON alimento.clienteId = cliente.clienteId
 GROUP BY cliente.tipoCliente;
 
---Obter a média de quantidade de alimentos por tipo de cliente, considerando apenas os clientes que possuem mais de 3 alimentos.--
+--Obter a mï¿½dia de quantidade de alimentos por tipo de cliente, considerando apenas os clientes que possuem mais de 3 alimentos.--
 SELECT cliente.tipoCliente, AVG(alimento.quantidade) media_alimentos
 FROM alimento
 JOIN cliente ON alimento.clienteId = cliente.clienteId
