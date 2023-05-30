@@ -11,7 +11,6 @@ public class Instituicao extends Cliente{
         this.website = website;
         this.tipo = tipo;
     }
-
     public Instituicao() {
     }
 
