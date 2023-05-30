@@ -341,13 +341,13 @@ def mostraDados():
         criaBarra()
         # Dados do usuario
         for usuario in listaUsuario:
-            print(f'''\033[1;36mNome: \033[0;0m{usuario[1]}''')
-            print(f'''\033[1;36mEmail: \033[0;0m{usuario[2]}''')
-            print(f'''\033[1;36mSenha: \033[0;0m{usuario[3]}''')
-            print(f'''\033[1;36mCelular: \033[0;0m{usuario[4]}''')
-            print(f'''\033[1;36mEndereco: \033[0;0m{usuario[5]}''')
-            print(f'''\033[1;36mClienteID: \033[0;0m{usuario[6]}''')
-            print(f'''\033[1;36mTipoCliente: \033[0;0m{usuario[7]}''')
+            print(f'''\033[1;36mNome: \033[0;0m{usuario[0]}''')
+            print(f'''\033[1;36mEmail: \033[0;0m{usuario[1]}''')
+            print(f'''\033[1;36mSenha: \033[0;0m{usuario[2]}''')
+            print(f'''\033[1;36mCelular: \033[0;0m{usuario[3]}''')
+            print(f'''\033[1;36mEndereco: \033[0;0m{usuario[4]}''')
+            print(f'''\033[1;36mClienteID: \033[0;0m{usuario[5]}''')
+            print(f'''\033[1;36mTipoCliente: \033[0;0m{usuario[6]}''')
         criaBarra()
         valida = True
     else:
@@ -375,6 +375,7 @@ def usuariosCadastrados():
         print(
             f'''\033[1;36mNome: \033[0;0m{nome} | \033[1;36mcpf: \033[0;0m{cpf} | \033[1;36mNascimento: \033[0;0m{nascimento} ''')
     criaBarra()
+
     return
 
 
