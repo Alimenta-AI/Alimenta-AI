@@ -131,3 +131,11 @@ def endereco():
             return enderecoCompleto
         except ValueError:
             print("Erro! Digite valores válidos!")
+
+
+def tipo():
+    return None
+
+
+def website():
+    return None

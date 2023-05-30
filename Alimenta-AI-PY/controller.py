@@ -7,7 +7,7 @@ from time import sleep
 
 try:
     dnStr = oracledb.makedsn("oracle.fiap.com.br", "1521", "ORCL")
-    conn = oracledb.connect(user='rm97097', password='220104', dsn=dnStr)
+    conn = oracledb.connect(user='rm97136', password='270204', dsn=dnStr)
     inst_SQL = conn.cursor()
 except Exception as e:
     print("Erro: ", e)
@@ -278,26 +278,27 @@ def cadastro():
         print('====== < ''\033[1;92m''Cadastrar Usuário''\033[0;0m'' > ======')
 
         # Retornando valores validados
+        clienteId = service.clienteID()
         nome = service.Nome()
-        senha = service.Senha()
         email = service.Email()
+        senha = service.Senha()
+        celular = service.Celular()
+        endereco = service.endereco()
         cpf = service.Cpf()
+        tipoCliente = service.tipo_cliente()
 
         if confereLoginExistente(cpf):
             print('\033[1;31m''Login ja existente!''\033[0;0m')
             criaBarra()
             return
 
-        endereco = service.endereco()
-        clienteId = service.clienteID()
-        tipoCliente = service.tipo_cliente()
         nascimento = ''.join(service.Data().split('/'))
         print(nascimento)
-        celular = service.Celular()
+
 
         # Executa o insert na tabela do sql
 
-        cadastroCliente = f"""INSERT INTO cliente (nome, email, senha, celular, endereco, clienteId, tipoCliente) VALUES ({nome}, {email}, {senha}, {celular}, {endereco}, {clienteId}, {tipoCliente} )"""
+        cadastroCliente = f"""INSERT INTO cliente (clienteId, nome, email, senha, celular, endereco, tipoCliente) VALUES ({clienteId}, {nome}, {email}, {senha}, {celular}, {endereco}, {tipoCliente} )"""
         cadastroUsuario = f"""INSERT INTO usuario (clienteId, cpf, nascimento) VALUES ({clienteId}, {cpf} , {nascimento})"""
 
         inst_SQL.execute(cadastroCliente)
@@ -482,12 +483,15 @@ def cadastroInstituicao():
             '====== < ''\033[1;92m''Cadastrar Instituicao''\033[0;0m'' > ======')
         clienteId = service.clienteID()
         cnpj = service.cnpj()
+        website = service.website()
+        tipo = service.tipo()
 
-        print(clienteId, cnpj)
-        print(type(clienteId), type(cnpj))
+
+        print(clienteId, cnpj, website, tipo)
+        print(type(clienteId), type(cnpj), type(website), type(tipo))
 
         # Executa o insert na tabela do sql
-        instituicaoCadastro = f"INSERT INTO Instituicao (clienteId, cnpj) VALUES ({clienteId}, '{cnpj}')"
+        instituicaoCadastro = f"INSERT INTO Instituicao (clienteId, website, tipo, cnpj) VALUES ({clienteId}, '{website}', {tipo}, {cnpj})"
         inst_SQL.execute(instituicaoCadastro)
         conn.commit()
         conn.close()
