@@ -23,6 +23,15 @@ CREATE TABLE instituicao (
   FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
+CREATE TABLE alimento (
+  alimentoId CHAR(20) PRIMARY KEY,
+  nome VARCHAR2(50) NOT NULL,
+  validade varchar2(6),
+  quantidade NUMBER(10) NOT NULL,
+  clienteId CHAR(20) NOT NULL,
+  CONSTRAINT fk_cliente_clienteId FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
+);
+
 CREATE TABLE movimentacao (
   clienteIdUsuario CHAR(20),
   clienteIdInstituicao CHAR(20),
