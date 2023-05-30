@@ -239,7 +239,11 @@ def subMenuDoacao():
             for Instituicao in listaInstituicao:
                 print(f'''\033[1;36mClienteID: \033[0;0m{Instituicao[0]}''')
 
-                print(f'''\033[1;36mCnpj: \033[0;0m{Instituicao[1]}''')
+                print(f'''\033[1;36mWebsite: \033[0;0m{Instituicao[1]}''')
+
+                print(f'''\033[1;36mTipo: \033[0;0m{Instituicao[2]}''')
+
+                print(f'''\033[1;36mCnpj: \033[0;0m{Instituicao[3]}''')
 
                 criaBarra()
 
@@ -275,7 +279,7 @@ def confereLoginExistente(cpf):
 def cadastro():
     try:
         limpaTerminal()
-        print('====== < ''\033[1;92m''Cadastrar Usuário''\033[0;0m'' > ======')
+        print('====== < Cadastrar Usuário > ======')
 
         # Retornando valores validados
         clienteId = service.clienteID()
@@ -288,33 +292,44 @@ def cadastro():
         tipoCliente = service.tipo_cliente()
 
         if confereLoginExistente(cpf):
-            print('\033[1;31m''Login ja existente!''\033[0;0m')
+            print('\033[1;31mLogin já existente!\033[0;0m')
             criaBarra()
             return
 
         nascimento = ''.join(service.Data().split('/'))
         print(nascimento)
 
+        # Executa o insert na tabela do SQL
+        cadastroCliente = f"INSERT INTO cliente (clienteId, nome, email, senha, celular, endereco, tipoCliente) VALUES ('{clienteId}', '{nome}', '{email}', '{senha}', '{celular}', '{endereco}', '{tipoCliente}')"
+        cadastroUsuario = f"INSERT INTO usuario (clienteId, cpf, nascimento) VALUES ('{clienteId}', '{cpf}', '{nascimento}')"
 
-        # Executa o insert na tabela do sql
+        try:
+            inst_SQL.execute(cadastroCliente)
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            conn.rollback()
+            raise Exception(f"Erro ao cadastrar cliente: {e}")
 
-        cadastroCliente = f"""INSERT INTO cliente (clienteId, nome, email, senha, celular, endereco, tipoCliente) VALUES ({clienteId}, {nome}, {email}, {senha}, {celular}, {endereco}, {tipoCliente} )"""
-        cadastroUsuario = f"""INSERT INTO usuario (clienteId, cpf, nascimento) VALUES ({clienteId}, {cpf} , {nascimento})"""
+        try:
+            inst_SQL.execute(cadastroUsuario)
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            conn.rollback()
+            raise Exception(f"Erro ao cadastrar usuário: {e}")
 
-        inst_SQL.execute(cadastroCliente)
-        inst_SQL.execute(cadastroUsuario)
-
-        conn.commit()
         conn.close()
         limpaTerminal()
         criaBarra()
-        print('\033[1;32m''Usuario Cadastrado com sucesso!''\033[0;0m')
+        print('\033[1;32mUsuário cadastrado com sucesso!\033[0;0m')
         criaBarra()
-        return
     except ValueError:
         print("Digite valores numéricos")
-    except:
-        print('\033[1;31m''Erro de transação com o BD''\033[0;0m')
+    except Exception as e:
+        print(f"Erro de transação com o BD: {e}")
+
+
 
 
 ''' Logar um usuário e printar seus dados cadastrados '''
@@ -342,12 +357,12 @@ def mostraDados():
         criaBarra()
         # Dados do usuario
         for usuario in listaUsuario:
-            print(f'''\033[1;36mNome: \033[0;0m{usuario[0]}''')
-            print(f'''\033[1;36mEmail: \033[0;0m{usuario[1]}''')
-            print(f'''\033[1;36mSenha: \033[0;0m{usuario[2]}''')
-            print(f'''\033[1;36mCelular: \033[0;0m{usuario[3]}''')
-            print(f'''\033[1;36mEndereco: \033[0;0m{usuario[4]}''')
-            print(f'''\033[1;36mClienteID: \033[0;0m{usuario[5]}''')
+            print(f'''\033[1;36mClienteID: \033[0;0m{usuario[0]}''')
+            print(f'''\033[1;36mNome: \033[0;0m{usuario[1]}''')
+            print(f'''\033[1;36mEmail: \033[0;0m{usuario[2]}''')
+            print(f'''\033[1;36mSenha: \033[0;0m{usuario[3]}''')
+            print(f'''\033[1;36mCelular: \033[0;0m{usuario[4]}''')
+            print(f'''\033[1;36mEndereco: \033[0;0m{usuario[5]}''')
             print(f'''\033[1;36mTipoCliente: \033[0;0m{usuario[6]}''')
         criaBarra()
         valida = True
@@ -404,42 +419,45 @@ def relatorio():
 
 
 def removerUsuario():
-    limpaTerminal()
-    print('=== << ''\033[1; 33m''Dados do cliente''\033[0;0m'' >> ===')
-    criaBarra()
-    print('\033[1;33m''Logue para excluir seu cliente!''\033[0; 0m')
-    criaBarra()
-    userLogin = input('Login: ')
-    userSenha = input('Senha: ')
-
-    # Variavel de validação do login
-    valida = False
-
-    dados = f"""SELECT * FROM cliente WHERE nome = '{userLogin}' AND senha = '{userSenha}'"""
-    inst_SQL.execute(dados)
-    listaUsuario = inst_SQL.fetchall()
-    if (len(listaUsuario) != 0):
+    try:
         limpaTerminal()
+        print('=== << Remover Usuário >> ===')
         criaBarra()
-        print('\033[1;32m''Cliente Logado! Excluindo... ''\033[0; 0m')
-        criaBarra()
-        sleep(5)
-        # Excluir usuario que logou
-        delete_query = f"""DELETE FROM cliente WHERE nome = '{userLogin}'"""
-        inst_SQL.execute(delete_query)
+
+        # Prompt for entering the client ID
+        clienteID = input("\033[1;36mDigite o Cliente ID:\033[0;0m ")
+
+        # Verificar se existem registros na tabela movimentacao relacionados ao cliente
+        count_query = f"SELECT COUNT(*) FROM movimentacao WHERE clienteIdUsuario = '{clienteID}' OR clienteIdInstituicao = '{clienteID}'"
+        inst_SQL.execute(count_query)
+        count = inst_SQL.fetchone()[0]
+
+        if count > 0:
+            delete_movimentacao_query = f"""DELETE FROM movimentacao WHERE clienteIdUsuario = '{clienteID}' OR clienteIdInstituicao = '{clienteID}'"""
+            inst_SQL.execute(delete_movimentacao_query)
+            conn.commit()
+            print('\033[1;33mRegistros na tabela Movimentação relacionados ao usuário foram excluídos.\033[0;0m')
+
+        delete_cliente_query = f"DELETE FROM cliente WHERE clienteId = '{clienteID}'"
+        delete_usuario_query = f"DELETE FROM usuario WHERE clienteId = '{clienteID}'"
+
+        inst_SQL.execute(delete_cliente_query)
+        inst_SQL.execute(delete_usuario_query)
+
         conn.commit()
-        print('\033[1;32m''Usuario Excluido! ''\033[0; 0m')
-        criaBarra()
-        valida = True
-    else:
-        valida = False
+        conn.close()
+        print('\033[1;32mUsuário Excluído!\033[0;0m')
 
-    if not valida:
-        limpaTerminal()
         criaBarra()
-        print('\033[1;31m''Erro! Login ou senha invalidos''\033[0; 0m')
+
+    except Exception as e:
+        print(f"\033[1;31mErro ao remover usuário: {str(e)}\033[0;0m")
         criaBarra()
-        subMenuClientes()
+
+
+
+
+
 
 
 def userAdminValidate():
@@ -482,16 +500,17 @@ def cadastroInstituicao():
         print(
             '====== < ''\033[1;92m''Cadastrar Instituicao''\033[0;0m'' > ======')
         clienteId = service.clienteID()
-        cnpj = service.cnpj()
         website = service.website()
         tipo = service.tipo()
+        cnpj = service.cnpj()
 
-
-        print(clienteId, cnpj, website, tipo)
-        print(type(clienteId), type(cnpj), type(website), type(tipo))
+        if confereLoginExistente(cnpj):
+            print('\033[1;31mInstituicao já existente!\033[0;0m')
+            criaBarra()
+            return
 
         # Executa o insert na tabela do sql
-        instituicaoCadastro = f"INSERT INTO Instituicao (clienteId, website, tipo, cnpj) VALUES ({clienteId}, '{website}', {tipo}, {cnpj})"
+        instituicaoCadastro = f"INSERT INTO Instituicao (clienteId, website, tipo, cnpj) VALUES ('{clienteId}', '{website}', '{tipo}', '{cnpj}')"
         inst_SQL.execute(instituicaoCadastro)
         conn.commit()
         conn.close()
@@ -536,7 +555,12 @@ def dadosInstituicao():
         criaBarra()
         for Instituicao in listaInstituicao:
             print(f'''\033[1;36mClienteID: \033[0;0m{Instituicao[0]}''')
-            print(f'''\033[1;36mCnpj: \033[0;0m{Instituicao[1]}''')
+
+            print(f'''\033[1;36mWebsite: \033[0;0m{Instituicao[1]}''')
+
+            print(f'''\033[1;36mTipo: \033[0;0m{Instituicao[2]}''')
+
+            print(f'''\033[1;36mCnpj: \033[0;0m{Instituicao[3]}''')
 
         criaBarra()
         valida = True
@@ -558,13 +582,15 @@ def mostrarInstituicao():
     listaInstituicoes = inst_SQL.fetchall()
     for Instituicao in listaInstituicoes:
         clienteid = Instituicao[0]
-        cnpj = Instituicao[1]
+        website = Instituicao[1]
+        tipo = Instituicao[2]
+        cnpj = Instituicao[3]
+
         print(
-            f'''\033[1;36mClienteID: \033[0;0m{clienteid} | \033[1;36mcnpj: \033[0;0m{cnpj} ''')
+            f'''\033[1;36mClienteID: \033[0;0m{clienteid} | \033[1;36mwebsite: \033[0;0m{website} 
+            | \033[1;36mtipo: \033[0;0m{tipo} | \033[1;36mcnpj: \033[0;0m{cnpj}''')
     criaBarra()
     return
-
-
 def relatorioInstituicao():
     limpaTerminal()
     arquivo = open('relatorioInstituicoes.txt', 'w+', encoding='utf-8')
@@ -604,16 +630,20 @@ def gerenciarInstituicao():
                 '\033[1;31m''Erro! Código não encontrado ou inexistente.''\033[0; 0m')
         else:
             try:
-                clienteID = input(
-                    f'''\033[1;36mDigite o novo Cliente ID: \033[0;0m''')
+                clienteID = input(f'''\033[1;36mDigite o novo Cliente ID: \033[0;0m''')
+                website = input(f'''\033[1;36mDigite o novo website: \033[0;0m''')
+                tipo = input(f'''\033[1;36mDigite o novo tipo: \033[0;0m''')
                 cnpj = input(f'''\033[1;36mDigite o novo CNPJ: \033[0;0m''')
             except ValueError:
                 print('\033[1;31m''Digite valores numericos''\033[0; 0m')
             else:
                 try:
-                    str_update = f"""UPDATE Instituicao SET clienteID='{clienteID}',CNPJ='{cnpj}' WHERE id_Instituicao='{id}'"""
+                    str_update = f"""UPDATE Instituicao SET clienteID='{clienteID}', website='{website}' ,  tipo='{tipo}', 
+                    CNPJ='{cnpj}', WHERE id_Instituicao='{id}'"""
+
                     inst_SQL.execute(str_update)
                     conn.commit()
+                    conn.close()
                 except:
                     print('\033[1;31m''Erro de transacao com o BD''\033[0; 0m')
                 else:
@@ -645,6 +675,7 @@ def removeInstituicao():
         delete_query = f"""DELETE FROM Instituicao WHERE clienteID = '{id}'"""
         inst_SQL.execute(delete_query)
         conn.commit()
+        conn.close()
         print('\033[1;32m''Instituicao Excluido! ''\033[0; 0m')
         criaBarra()
         valida = True

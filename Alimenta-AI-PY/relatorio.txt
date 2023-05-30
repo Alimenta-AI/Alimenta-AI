@@ -1,14 +1,16 @@
 Relatorio de Usuarios 
 
-A Alimenta-AI possui 10 usuarios 
-1.Jo„o Silva 
-2.Maria Santos 
-3.Pedro Almeida 
-4.Ana Oliveira 
-5.Carlos Pereira 
-6.Laura Costa 
-7.Fernando Santos 
-8.Camila Ribeiro 
-9.Rafaela Lima 
-10.Marcos Oliveira 
-29/5/2023
+A Alimenta-AI possui 12 usuarios 
+1.Felipe Teste 
+2.a 
+3.Jo√£o Silva 
+4.Maria Santos 
+5.Pedro Almeida 
+6.Ana Oliveira 
+7.Carlos Pereira 
+8.Laura Costa 
+9.Fernando Santos 
+10.Camila Ribeiro 
+11.Rafaela Lima 
+12.Marcos Oliveira 
+30/5/2023

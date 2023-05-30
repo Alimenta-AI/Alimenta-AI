@@ -97,10 +97,17 @@ def cnpj():
                 print("Error! Quantidade de caracteres incorreta.")
         except ValueError:
             print("Error! Digite valores válidos!")
+            break
 
 
 def clienteID():
-    return None
+    while True:
+        try:
+            cliente = input("Digite o clienteID: ")
+            return cliente
+        except ValueError:
+            print("Erro! Digite valores válidos!")
+            break
 
 
 def tipo_cliente():
@@ -119,23 +126,25 @@ def tipo_cliente():
 def endereco():
     while True:
         try:
-            cep = input('CEP: ')
-            endereco = input('Endereco: ')
-            numero = input('Número: ')
-            cidade = input('Cidade: ')
-            estado = input('Estado: ')
-
-            enderecoCompleto = ', '.join(
-                [cep, endereco, numero, cidade, estado])
-
+            enderecoCompleto = input('Endereco: ')
             return enderecoCompleto
         except ValueError:
             print("Erro! Digite valores válidos!")
 
 
-def tipo():
-    return None
-
-
 def website():
-    return None
+    while True:
+        try:
+            website = input("Digite o website: ")
+            return website
+        except ValueError:
+            print("Erro! Digite valores válidos!")
+
+
+def tipo():
+    while True:
+        try:
+            tipo = input("Digite o tipo: ")
+            return tipo
+        except ValueError:
+            print("Erro! Digite valores válidos!")
