@@ -1,7 +1,3 @@
-from prettytable import PrettyTable
-import random
-
-
 def Nome():
     while True:
         nome = input('Nome Completo: ')
@@ -90,14 +86,14 @@ def Cpf():
 def cnpj():
     while True:
         try:
-            CNPJ = input(int('CNPJ (Apenas Números): '))
+            CNPJ = input('CNPJ (Apenas Números): ')
             if len(CNPJ) == 14:
                 return CNPJ
             else:
                 print("Error! Quantidade de caracteres incorreta.")
         except ValueError:
             print("Error! Digite valores válidos!")
-            break
+
 
 
 def clienteID():
