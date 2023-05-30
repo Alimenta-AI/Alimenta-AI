@@ -111,6 +111,35 @@ INSERT INTO alimento VALUES ('ALM008', 'Banana', '010723', 8, 'CLT008');
 INSERT INTO alimento VALUES ('ALM009', 'Tomate', '290523', 3, 'CLT009');
 INSERT INTO alimento VALUES ('ALM010', 'Biscoito', '310723', 5, 'CLT010');
 
+--clientes que possuem tipoCliente igual 1--
+SELECT nome, email, endereco FROM cliente WHERE tipoCliente = 1 ORDER BY nome;
+
+ 
+
+--alimentos (nome, validade) e seus respectivos clientes (nome) para alimentos com quantidade maior que 5.--
+SELECT alimento.nome, alimento.validade, cliente.nome
+FROM alimento
+JOIN cliente ON alimento.clienteId = cliente.clienteId
+WHERE alimento.quantidade > 5
+ORDER BY alimento.validade;
+
+ 
+
+--Obter a contagem de alimentos por tipo de cliente--
+SELECT cliente.tipoCliente, COUNT(*) quantidade_alimentos
+FROM alimento
+JOIN cliente ON alimento.clienteId = cliente.clienteId
+GROUP BY cliente.tipoCliente;
+
+ 
+
+--Obter a m�dia de quantidade de alimentos por tipo de cliente, considerando apenas os clientes que possuem mais de 3 alimentos.--
+SELECT cliente.tipoCliente, AVG(alimento.quantidade) media_alimentos
+FROM alimento
+JOIN cliente ON alimento.clienteId = cliente.clienteId
+GROUP BY cliente.tipoCliente
+HAVING COUNT(*) > 3;
+
 
 
 DROP TABLE usuario;
