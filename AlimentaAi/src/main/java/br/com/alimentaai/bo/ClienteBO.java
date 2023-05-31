@@ -2,6 +2,8 @@ package br.com.alimentaai.bo;
 
 import br.com.alimentaai.controller.ClienteController;
 
+import java.sql.Connection;
+
 public class ClienteBO {
     private ClienteController cc;
 
