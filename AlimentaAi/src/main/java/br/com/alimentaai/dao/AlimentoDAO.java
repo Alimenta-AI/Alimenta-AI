@@ -1,6 +1,7 @@
 package br.com.alimentaai.dao;
 
 import br.com.alimentaai.model.Alimento;
+import br.com.alimentaai.model.Cliente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,15 +19,18 @@ public class AlimentoDAO {
             setCon(con);
         }
 
-    public String inserir(Alimento alimento) {
-        String sqlAlimento = "insert into alimento(alimentoId, nome, descricao, validade, quantidade) values (?,?,?,?,?)";
+        Cliente cliente = new Cliente();
+
+    public String inserir(Alimento alimento, String clienteId) {
+
+        String sqlAlimento = "insert into alimento(alimentoId, nome, validade, quantidade, clienteId) values (?,?,?,?,?)";
 
         try (PreparedStatement ps = getCon().prepareStatement(sqlAlimento)) {
             ps.setString(1, alimento.getAlimentoId());
             ps.setString(2, alimento.getNome());
-            ps.setString(3, alimento.getDescricao());
-            ps.setString(4, alimento.getValidade());
-            ps.setInt(5, alimento.getQuantidade());
+            ps.setString(3, alimento.getValidade());
+            ps.setInt(4, alimento.getQuantidade());
+            ps.setString(5, clienteId);
             if (ps.executeUpdate() > 0) {
                 System.out.println("Inserido com sucesso.");
             } else {
