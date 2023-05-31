@@ -6,13 +6,16 @@ public class Usuario extends Cliente{
     private String nascimento;
     private String cpf;
 
-    public Usuario(String nome, String email, String senha, String celular, String endereco, String clienteId, int tipoCliente, String nascimento, String cpf) {
+    private String doador;
+
+    public Usuario() {
+    }
+
+    public Usuario(String nome, String email, String senha, String celular, String endereco, String clienteId, int tipoCliente, String nascimento, String cpf, String doador) {
         super(nome, email, senha, celular, endereco, clienteId, tipoCliente);
         this.nascimento = nascimento;
         this.cpf = cpf;
-    }
-
-    public Usuario() {
+        this.doador = doador;
     }
 
     public String getNascimento() {
@@ -31,11 +34,20 @@ public class Usuario extends Cliente{
         this.cpf = cpf;
     }
 
+    public String getDoador() {
+        return doador;
+    }
+
+    public void setDoador(String doador) {
+        this.doador = doador;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
-                "nascimento=" + nascimento +
+                "nascimento='" + nascimento + '\'' +
                 ", cpf='" + cpf + '\'' +
+                ", doador='" + doador + '\'' +
                 '}';
     }
 }

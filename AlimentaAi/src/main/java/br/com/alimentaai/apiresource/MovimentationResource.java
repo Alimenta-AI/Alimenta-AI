@@ -1,15 +1,29 @@
 package br.com.alimentaai.apiresource;
 
+import br.com.alimentaai.bo.ClienteBO;
 import br.com.alimentaai.bo.MovimentacaoBO;
+import br.com.alimentaai.model.Cliente;
 import br.com.alimentaai.model.Movimentacao;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
 @Path("/movimentacao")
 public class MovimentationResource {
     private MovimentacaoBO movimentacaoBO = new MovimentacaoBO();
+    ClienteBO clienteBO;
+
+//    @GET
+//    @Path("/{clienteId}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String buscarOpçõesMovimentacoes(@PathParam("clienteId") int clienteId) {
+//        clienteBO = new ClienteBO();
+//        if (clienteBO.dadosClienteLogado(String.valueOf(clienteId)) == 0) {
+////            mostra as instituicoes pro usuario
+//        }
+////            mostrar os usuarios pra instituicao
+//    }
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

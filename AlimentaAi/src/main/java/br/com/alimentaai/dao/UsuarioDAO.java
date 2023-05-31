@@ -22,7 +22,7 @@ public class UsuarioDAO {
     public String inserir(Usuario usuario) {
 
         String sqlCliente = "insert into cliente(nome, email, senha, celular, endereco, clienteId, tipoCliente) values (?,?,?,?,?,?,?)";
-        String sqlUsuario = "insert into usuario(clienteId, cpf, nascimento) values (?,?,?)";
+        String sqlUsuario = "insert into usuario(clienteId, cpf, nascimento, doador) values (?,?,?,?)";
 
         try {
             PreparedStatement ps = getCon().prepareStatement(sqlCliente);
@@ -46,6 +46,7 @@ public class UsuarioDAO {
             ps.setString(1, usuario.getClienteId());
             ps.setString(2, usuario.getCpf());
             ps.setString(3, usuario.getNascimento());
+            ps.setString(4, usuario.getDoador());
             if (ps.executeUpdate() > 0) {
                 System.out.println("Inserido com sucesso.");
             } else {
@@ -54,7 +55,6 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             return e.getMessage();
         }
-
         return "Success";
     }
 }

@@ -8,7 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.*;
 
 @Path("/alimento")
-public class AlimentoResource {
+public class FoodBankResource {
     private AlimentoBO alimentoBO = new AlimentoBO();
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

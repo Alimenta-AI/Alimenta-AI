@@ -27,6 +27,7 @@ public class UsuarioController {
         String endereco = usuario.getEndereco();
         String cpf = usuario.getCpf();
         String nascimento = usuario.getNascimento();
+        String doador = usuario.getDoador();
         String clienteIdFixo = clienteId;
         int tipoCliente = 0;
 
@@ -58,6 +59,7 @@ public class UsuarioController {
             usuario.setEndereco(endereco);
             usuario.setCpf(cpf);
             usuario.setNascimento(nascimento);
+            usuario.setDoador(doador);
             usuario.setClienteId(clienteIdFixo);
             usuario.setTipoCliente(tipoCliente);
 
@@ -72,6 +74,7 @@ public class UsuarioController {
     }
     public Usuario cadastro(String json) {
         Gson gson = new Gson();
+        System.out.println(gson.fromJson(json, Usuario.class));
         return gson.fromJson(json, Usuario.class);
     }
 }

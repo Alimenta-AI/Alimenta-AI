@@ -12,6 +12,7 @@ CREATE TABLE usuario (
   clienteId CHAR(20) PRIMARY KEY,
   cpf CHAR(11) UNIQUE NOT NULL,
   nascimento VARCHAR2(8) NOT NULL,
+  doador VARCHAR2(3) NOT NULL,
   FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
@@ -91,9 +92,9 @@ INSERT INTO movimentacao VALUES ('CLT008', 'CLT009', 'SOL008', '20230522', 'Soli
 INSERT INTO movimentacao VALUES ('CLT009', 'CLT010', 'SOL009', '20230521', 'Solicitação 9', 'Categoria 1');
 INSERT INTO movimentacao VALUES ('CLT010', 'CLT001', 'SOL010', '20230520', 'Solicitação 10', 'Categoria 3');
 
-INSERT INTO alimento VALUES ('ALM001', 'Ma�a', '230329', 10, 'CLT001');
+INSERT INTO alimento VALUES ('ALM001', 'Ma�a', '230329', 10, 'CLT001');
 INSERT INTO alimento VALUES ('ALM002', 'Arroz', '241224', 5, 'CLT002');
-INSERT INTO alimento VALUES ('ALM003', 'Feij�o', '150923', 7, 'CLT003');
+INSERT INTO alimento VALUES ('ALM003', 'Feij�o', '150923', 7, 'CLT003');
 INSERT INTO alimento VALUES ('ALM004', 'Frango', '010122', 2, 'CLT004');
 INSERT INTO alimento VALUES ('ALM005', 'Pão de Forma', '310523', 3, 'CLT005');
 INSERT INTO alimento VALUES ('ALM006', 'Leite', '010623', 4, 'CLT006');
