@@ -21,6 +21,8 @@ public class UsuarioDAO {
 
     public String inserir(Usuario usuario) {
 
+        System.out.println(usuario.getDoador());
+
         String sqlCliente = "insert into cliente(nome, email, senha, celular, endereco, clienteId, tipoCliente) values (?,?,?,?,?,?,?)";
         String sqlUsuario = "insert into usuario(clienteId, cpf, nascimento, doador) values (?,?,?,?)";
 

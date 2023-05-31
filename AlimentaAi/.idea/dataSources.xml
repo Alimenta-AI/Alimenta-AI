@@ -17,5 +17,13 @@
       <jdbc-url>jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="AlimentaAI-shima" uuid="08a3728d-5317-4b49-a06b-4258139f23ee">
+      <driver-ref>oracle.19</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

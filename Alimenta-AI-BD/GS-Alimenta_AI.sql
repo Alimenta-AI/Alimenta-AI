@@ -12,7 +12,7 @@ CREATE TABLE usuario (
   clienteId CHAR(20) PRIMARY KEY,
   cpf CHAR(11) UNIQUE NOT NULL,
   nascimento VARCHAR2(8) NOT NULL,
-  doador VARCHAR2(3) NOT NULL,
+  doador CHAR(3) NOT NULL,
   FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 

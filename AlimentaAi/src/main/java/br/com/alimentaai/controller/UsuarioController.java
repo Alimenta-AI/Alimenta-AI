@@ -63,6 +63,8 @@ public class UsuarioController {
             usuario.setClienteId(clienteIdFixo);
             usuario.setTipoCliente(tipoCliente);
 
+            System.out.println(usuario.getDoador());
+
             System.out.println(usuarioDAO.inserir(usuario));
 
         } else {
@@ -74,7 +76,6 @@ public class UsuarioController {
     }
     public Usuario cadastro(String json) {
         Gson gson = new Gson();
-        System.out.println(gson.fromJson(json, Usuario.class));
         return gson.fromJson(json, Usuario.class);
     }
 }
