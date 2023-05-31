@@ -118,6 +118,31 @@ def tipo_cliente():
         except ValueError:
             print("Erro! Digite um valor válido (0 ou 1).")
 
+def confereClienteExistente(clienteId):
+    # Executar uma consulta para verificar se o clienteId existe na tabela cliente
+    sql = "SELECT COUNT(*) FROM cliente WHERE clienteId = :clienteId"
+
+    # Executar a consulta
+    from controller import inst_SQL
+    inst_SQL.execute(sql, {'clienteId': clienteId})
+    result = inst_SQL.fetchone()
+
+    # Verificar se o clienteId existe
+    if result[0] > 0:
+        return True
+    else:
+        return False
+
+def confereInstituicaoExistente(cnpj):
+    dados = f"""SELECT * FROM Instituicao WHERE cnpj = '{cnpj}'"""
+    from controller import inst_SQL
+    inst_SQL.execute(dados)
+    listaInstituicao = inst_SQL.fetchall()
+    if len(listaInstituicao) != 0:
+        return True
+    else:
+        return False
+
 
 def endereco():
     while True:
@@ -144,3 +169,31 @@ def tipo():
             return tipo
         except ValueError:
             print("Erro! Digite valores válidos!")
+
+def puxarClienteId():
+    try:
+        clienteId = input("Digite o clienteId: ")
+
+        # Executar uma consulta para buscar o clienteId na tabela cliente
+        sql = "SELECT clienteid FROM Cliente WHERE clienteid = :clienteId"
+
+        # Crie um objeto de cursor para executar a consulta
+        from controller import conn
+        cursor = conn.cursor()
+
+        # Executar a consulta SQL
+        cursor.execute(sql, {'clienteId': clienteId})
+        result = cursor.fetchone()
+
+        # Feche o cursor
+        cursor.close()
+
+        # Verificar se o clienteId existe
+        if result is not None:
+            return result[0]  # Retorna o clienteId encontrado na tabela cliente
+        else:
+            return None  # Retorna None se o clienteId não existir na tabela cliente
+    except Exception as erro:
+        print("Erro ao buscar clienteId na tabela cliente:", erro)
+        return None
+
