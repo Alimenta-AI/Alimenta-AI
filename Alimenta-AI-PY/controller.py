@@ -136,7 +136,7 @@ def subMenuInstituicoes():
     print(
         '========== <<< ''\033[1;92m''Alimenta-AI''\033[0;0m'' >>> ==========')
     print('|  [''\033[1;32m''1''\033[0;0m''] Cadastrar Instituicao               |')
-    print('|  [''\033[1;32m''2''\033[0;0m''] Dados do Instituicao                |')
+    print('|  [''\033[1;32m''2''\033[0;0m''] Dados da Instituicao                |')
     print('|  [''\033[1;32m''3''\033[0;0m''] Mostrar Instituicoes                |')
     print('|  [''\033[1;32m''4''\033[0;0m''] Gerar Relatorio de Instituicoes     |')
     print('|  [''\033[1;32m''5''\033[0;0m''] Gerenciar Instituicao               |')
@@ -266,7 +266,7 @@ def subMenuDoacao():
 
         limpaTerminal()
 
-        print('=== << ''\033[1;33m''Dados do Instituicao''\033[0;0m'' >> ===')
+        print('=== << ''\033[1;33m''Dados da Instituicao''\033[0;0m'' >> ===')
 
         criaBarra()
 
@@ -417,8 +417,8 @@ def mostraDados():
 
 def usuariosCadastrados():
     limpaTerminal()
-    print('''\033[1;32m=== Clientes Cadastrados ===\033[0;0m''')
-    # Usuarios
+    print('''\033[1;32m=== Usuarios Cadastrados ===\033[0;0m''')
+    # Usuario
     dados = f"""SELECT * FROM usuario"""
     inst_SQL.execute(dados)
     listaUsuario = inst_SQL.fetchall()
@@ -440,7 +440,7 @@ def relatorio():
     arquivo.write('\n')
 
     # Consulta SQL para obter os nomes dos usuários
-    dados = """SELECT nome FROM cliente"""
+    dados = """SELECT clienteid FROM usuario"""
     inst_SQL.execute(dados)
     listaNomes = inst_SQL.fetchall()
 
@@ -657,10 +657,11 @@ def relatorioInstituicao():
 def gerenciarInstituicao():
     limpaTerminal()
     lista_dados = []
+
     id = input(
-        f'''\033[1;32mDigite o código do Instituicao que deseja gerenciar: \033[0;0m''')
-    consulta = f"""SELECT * FROM Instituicao WHERE clienteID = '{id}'"""
-    inst_SQL.execute(consulta)
+        f'''\033[1;32mDigite o clienteID que deseja gerenciar: \033[0;0m''')
+    consultaInstituicao = f"""SELECT * FROM Instituicao WHERE clienteID = '{id}'"""
+    inst_SQL.execute(consultaInstituicao)
     dados = inst_SQL.fetchall()
 
     for dado in dados:
@@ -671,23 +672,25 @@ def gerenciarInstituicao():
                 '\033[1;31m''Erro! Código não encontrado ou inexistente.''\033[0;0m')
         else:
             try:
-                clienteID = input(f'''\033[1;32mDigite o novo Cliente ID: \033[0;0m''')
+                print('\n\033[1;31m''=== Alterando dados de Instituição ===''\033[0;0m')
+
                 website = input(f'''\033[1;32mDigite o novo website: \033[0;0m''')
                 tipo = input(f'''\033[1;32mDigite o novo tipo: \033[0;0m''')
                 cnpj = input(f'''\033[1;32mDigite o novo CNPJ: \033[0;0m''')
+
             except ValueError:
                 print('\033[1;31m''Digite valores numericos''\033[0;0m')
             else:
                 try:
-                    str_update = f"""UPDATE Instituicao SET clienteID='{clienteID}', website='{website}' ,  tipo='{tipo}', 
+                    updateInstituicao = f"""UPDATE Instituicao SET website='{website}' ,  tipo='{tipo}', 
                     CNPJ='{cnpj}' WHERE clienteid='{id}'"""
-                    inst_SQL.execute(str_update)
+                    inst_SQL.execute(updateInstituicao)
                     conn.commit()
                 except Exception as errobd:
                     print('\033[1;31m''Erro de transacao com o BD''\033[0;0m', errobd)
                 else:
                     print(
-                        f'''\033[1;32mDados alterados com sucesso\033[0;0m''')
+                        f'''\033[1;32mInstituicao alterada com sucesso\033[0;0m''')
     subMenuInstituicoes()
 
 

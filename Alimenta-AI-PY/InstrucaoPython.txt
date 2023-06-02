@@ -1,0 +1,9 @@
+Ao acessar o Bd será necessário acessar com um destes dois usuarios: Rm97121 | 290603
+
+(Tivemos problemas de muitas sessoes em um unico usuario então por precaução foi feita essa instrução)
+
+O projeto deverá ser executado dentro da pasta admin com o comando python main.py (Usuario de administrador está dentro do arquivo adminUser.txt)
+
+Para fazer as consultas de CRUD é necessário saber o ClienteID das tabelas, para isso deve acessar o banco de dados através do sql developer com o rm acima.
+
+Se tiver alguma dúvida estamos 100% disponíveis!
