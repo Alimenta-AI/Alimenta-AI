@@ -9,9 +9,7 @@ function App() {
   return (
     <>
     <Navbar/>
-    <h1>Olá</h1>
     <Login/>
-    <Cadastro/>
     <Footer/>
     </>
   );

@@ -1,30 +1,30 @@
-.login-container.background-image{
-    background-image: url('../../../Imagens/login-gren-page.svg');
-    background-size: 100%;
-    margin-top: 55px;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #000000;
-    padding: 0 20px;
-    box-sizing: border-box;
-    margin-bottom: 150px; /* Ajuste o valor conforme necessÃ¡rio */
-    }
-  
-.login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 450px;
-    padding: 40px;
-    background-color: #000000;
-    border-radius: 5px;
-    box-shadow: 0px 0px 20px rgba(0, 255, 17, 0.2);
-    margin-top: -180px; 
+.login-container.background-image {
+  background-image: url('../../../Imagens/login-gren-page.svg');
+  background-size: 100%;
+  margin-top: 0px;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #000000;
+  padding: 0 20px;
+  box-sizing: border-box;
+  margin-bottom: 150px;
 }
-  
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  padding: 40px;
+  background-color: #000000;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgba(0, 255, 17, 0.2);
+  margin: 0 auto; 
+}
+
 .email-input-group input {
     padding: 15px;
     border-radius: 5px;
