@@ -224,13 +224,12 @@ function Cadastro  ()  {
             <span className="span-ai"></span>
             <span className="span-ai"></span> Login
         </button>
-          <p>
-            Já possui uma conta?{" "}
-            {/* <Link to="/login"> */}
-              {" "}
-              Faça<span id="login-  link"> Login </span>{" "}
-            {/* </Link> */}
-          </p>
+        <p className="text-signin">
+          Já possui uma conta,{" "}
+          {/* <Link to="/cadastro"> */}
+            <span id="signup-link"> Login </span>
+          {/* </Link> */}
+        </p>
         </form>
         {/* {error && <div className="error-message">{error}</div>} */}
       </div>

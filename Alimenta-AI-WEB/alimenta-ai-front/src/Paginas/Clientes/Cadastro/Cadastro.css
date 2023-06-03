@@ -1,19 +1,18 @@
 .signup-container.background-image {
   background-image: url('../../../Imagens/login-gren-page.svg');
-  background-size: 80%;
+  background-size: 90%;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   background-color: black;
   margin-top: 0px;
-  padding-left: 100px;
-  padding-right: 100px;
   box-sizing: border-box;
-  margin-bottom: 0px; 
+  
 }
-
+.signup-container{
+  padding-bottom: 30px;
+}
 .signup-form h1 {
   color: #00FF00;
   margin-bottom: 10px;
@@ -23,16 +22,18 @@
 
 .signup-form {
   width: 100%;
-  padding: 10px;
+  padding-left: 35px; /* Reduzido em 10px */
+  padding-top: 35px; /* Reduzido em 10px */
+  padding-right: 35px; /* Reduzido em 10px */
+  padding-bottom: 0px;
   background-color: #000000;
   border-radius: 5px;
   box-shadow: 0px 0px 20px rgba(17, 255, 0, 0.2);
 }
-
 .signup-form input {
   border-radius: 5px;
   border: 1px solid #ffffff;
-  background-color: #faf7f7;
+  color: white; /* Cor do texto dentro do input */
   font-size: 16px;
 }
 
@@ -46,8 +47,8 @@
 .cpf-inputgroup input {
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #333;
-  background-color: #faf7f7;
+  border: 1px solid #00FF00;
+  background-color: #000000;
   font-size: 16px;
   width: 100%;
 }
@@ -93,7 +94,6 @@
 .check-icon.checked {
   color: green;
 }
-
 .loading-indicator {
   position: fixed;
   top: 0;
@@ -104,7 +104,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
 }
 
 .loading-indicator::after {
@@ -138,21 +137,13 @@
   justify-content: center;
   margin-top: 50px;
 }
-
-.signup-form p {
-  padding-left: 80px;
-}
-
 #perfil {
   background-color: #4de64d;
 }
 
-.termos-inputgroup {
-  padding: 10px;
-  font-size: 16px;
-  margin-left: -8px;
+#id {
+  background-color: #000000;
 }
-
-.termos-inputgroup label {
-  padding-left: 5px;
+.button-ai .span-ai{
+  text-align: center;
 }

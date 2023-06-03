@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
-} from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+
 
 const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,13 +18,17 @@ const Example = () => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/components/">Components</NavLink>
+              <NavLink tag={Link} to=".../../Cadastro">
+                Cadastro
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+              <NavLink href="./../home">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/">Logout</NavLink>
+              <NavLink tag={Link} to="../../Login">
+                Login
+              </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
