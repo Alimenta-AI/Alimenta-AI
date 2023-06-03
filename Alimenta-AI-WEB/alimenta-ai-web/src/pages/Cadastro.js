@@ -2,8 +2,8 @@ import React from "react";
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 // import 'react-toastify/dist/ReactToastify.min.css';
-// import { Link } from "react-router-dom";
-import "./Cadastro.css";
+import { Link } from "react-router-dom";
+import "../styles/Cadastro.css";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -96,11 +96,11 @@ function Cadastro  ()  {
 
           {/* Input do nome */}
           <div className="name-inputgroup">
-            <label htmlFor="name">Nome completo:</label>
+            <label htmlFor="name">Nome completo</label>
             <input
               type="name"
               id="name"
-              placeholder="Digite seu nome:"
+              placeholder="Digite seu nome"
             //   value={name}
             //   onChange={(event) => setName(event.target.value)}
             />
@@ -108,11 +108,11 @@ function Cadastro  ()  {
 
           {/* Input do username */}
           <div className="username-inputgroup">
-            <label htmlFor="name">Username:</label>
+            <label htmlFor="name">Username</label>
             <input
               type="name"
               id="username"
-              placeholder="Digite seu username:"
+              placeholder="Digite seu username"
             //   value={username}
             //   onChange={(event) => {
             //     const value = event.target.value;
@@ -126,33 +126,33 @@ function Cadastro  ()  {
 
           {/* Input do email */}
           <div className="email-inputgroup">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
-              placeholder="Digite seu e-mail: "
+              placeholder="Digite seu e-mail"
             //   value={email}
             //   onChange={(event) => setEmail(event.target.value)}
              />
           </div>
 
           <div className="password-inputgroup">
-            <label htmlFor="password">Senha:</label>
+            <label htmlFor="password">Senha</label>
             <input
               type="password"
               id="password"
-              placeholder="Digite sua senha: "
+              placeholder="Digite sua senha"
             //   value={password}
             //   onChange={(event) => setPassword(event.target.value)}
             />
           </div>
 
           <div className="confirm-password-inputgroup">
-            <label htmlFor="confirmPassword">Confirme:</label>
+            <label htmlFor="confirmPassword">Confirme</label>
             <input
               type="password"
               id="confirmpassword"
-              placeholder="Confirme sua senha:"
+              placeholder="Confirme sua senha"
             //   value={confirmPassword}
             //   onChange={(event) => setConfirmPassword(event.target.value)}
             />
@@ -160,11 +160,11 @@ function Cadastro  ()  {
 
           {/* Input do telefone */}
           <div className="phone-inputgroup">
-            <label htmlFor="phone">Telefone:</label>
+            <label htmlFor="phone">Telefone</label>
             <input
               type="tel"
               id="phone"
-              placeholder="Digite seu telefone:"
+              placeholder="Digite seu telefone"
             //   value={phone}
             //   onChange={(event) => setPhone(event.target.value)}
             />
@@ -172,11 +172,11 @@ function Cadastro  ()  {
 
           {/* Input do CPF */}
           <div className="cpf-inputgroup">
-            <label htmlFor="cpf">CPF:</label>
+            <label htmlFor="cpf">CPF</label>
             <input
               type="text"
               id="CPF"
-              placeholder="Digite seu CPF:"
+              placeholder="Digite seu CPF"
             //   value={CPF}
             //   onChange={(event) => {
             //     const value = event.target.value;
@@ -191,7 +191,7 @@ function Cadastro  ()  {
 
           {/* Input da data de nascimento */}
           <div className="form-input">
-            <label htmlFor="birthdate">Data de nascimento:</label>
+            <label htmlFor="birthdate">Data de nascimento</label>
             <input
               type="date"
               id="birthdate"
@@ -218,17 +218,17 @@ function Cadastro  ()  {
             </label>
           </div> */}
 
-        <button className="button-ai" type="submit">
-            <span className="span-ai"></span>
-            <span className="span-ai"></span>
-            <span className="span-ai"></span>
-            <span className="span-ai"></span> Login
+        <button className="button-cadastro" type="submit">
+            <span className="span-cadastro"></span>
+            <span className="span-cadastro"></span>
+            <span className="span-cadastro"></span>
+            <span className="span-cadastro"></span>Cadastre-se
         </button>
-        <p className="text-signin">
-          Já possui uma conta,{" "}
-          {/* <Link to="/cadastro"> */}
+        <p className="text-sign">
+          Já possui uma conta, faça o {" "}
+          <Link to="/login">
             <span id="signup-link"> Login </span>
-          {/* </Link> */}
+          </Link>
         </p>
         </form>
         {/* {error && <div className="error-message">{error}</div>} */}

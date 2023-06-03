@@ -4,6 +4,7 @@
   background-color: #121619;
   display: flex;
   flex-direction: row;
+  position: absolute;
 }
 
 .navbar .leftSide {
@@ -15,7 +16,7 @@
 }
 
 .navbar .leftSide img {
-  width: 70px;
+  width: 100px;
 }
 
 .navbar .rightSide {

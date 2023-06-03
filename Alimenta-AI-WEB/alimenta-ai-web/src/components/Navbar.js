@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../assets/pizzaLogo.png";
+import Logo from "../assets/alimentaAi.png";
 import { Link } from "react-router-dom";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import "../styles/Navbar.css";
@@ -26,6 +26,8 @@ function Navbar() {
         <Link to="/menu"> ? </Link>
         <Link to="/about"> Sobre </Link>
         <Link to="/contact"> Contato </Link>
+        <Link to="/cadastro"> Cadastre-se </Link>
+        <Link to="/login"> Login </Link>
         <button onClick={toggleNavbar}>
           <ReorderIcon />
         </button>

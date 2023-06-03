@@ -1,5 +1,5 @@
 .login-container.background-image {
-  background-image: url('../../../Imagens/login-gren-page.svg');
+  background-image: url('../assets/login-gren-page.svg');
   background-size: 100%;
   margin-top: 0px;
   background-position: center;
@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 450px;
+  width: 460px;
   padding: 40px;
   background-color: #000000;
   border-radius: 5px;
@@ -30,8 +30,10 @@
     border-radius: 5px;
     border: 1px solid #00FF00;
     background-color: #000000;
+    color: white;
     font-size: 16px;
     width: 100%;
+    margin-bottom: 20px;
 }
   
 .password-input-group input {
@@ -39,6 +41,7 @@
     border-radius: 5px;
     border: 1px solid #00FF00;
     background-color: #000000;
+    color: white;
     font-size: 16px;
     width: 100%;
     margin-right: 30px;
@@ -59,7 +62,7 @@
   }
   
   .background-image {
-    background-image: url('../../../Imagens/login-gren-page.svg');
+    background-image: url('../assets/login-gren-page.svg');
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -195,3 +198,16 @@
     transition: none;
     transition-delay: none;
    }
+
+   .email-input-group label {
+    color: white;
+   }
+
+   .password-input-group label {
+    color: white;
+    }
+
+    .email-input-group input::placeholder,
+    .password-input-group input::placeholder {
+      color: rgb(121, 121, 121);
+    }

@@ -1,9 +1,10 @@
 import React from "react";
 // import React, { useState, useContext} from "react";
 // import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
-import "./Login.css";
+import "../styles/Login.css";
 // import { AuthContext } from "../../Navbar/AuthContext";
 
 function Login () {
@@ -68,22 +69,22 @@ function Login () {
         <h2 className="text-form">Login</h2>
 
         <div className="email-input-group">
-          <label htmlFor="email">Username:</label>
+          <label htmlFor="email">Username</label>
           <input
             type="text"
             id="email"
-            placeholder="Digite seu e-mail ou username:"
+            placeholder="Digite seu e-mail ou username"
             // value={email}
             // onChange={(event) => setEmail(event.target.value)}
           />
         </div>
 
         <div className="password-input-group">
-          <label htmlFor="password">Senha:</label>
+          <label htmlFor="password">Senha</label>
           <input
             type="password"
             id="password"
-            placeholder="Digite sua senha: "
+            placeholder="Digite sua senha"
             // value={password}
             // onChange={(event) => setPassword(event.target.value)}
           />
@@ -97,9 +98,9 @@ function Login () {
         </button>
         <p className="text-signin">
           Se não possui uma conta,{" "}
-          {/* <Link to="/cadastro"> */}
+          <Link to="/cadastro">
             <span id="signup-link"> Cadastre-se </span>
-          {/* </Link> */}
+          </Link>
         </p>
       </form>
     </div>
