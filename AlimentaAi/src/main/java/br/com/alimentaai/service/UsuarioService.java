@@ -2,6 +2,10 @@ package br.com.alimentaai.service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,56 +16,103 @@ import java.net.URL;
 
 public class UsuarioService {
 
-    public boolean validarDadosUsuario(String nome, String email, String senha, String celular, String cpf, String nascimento, String endereco) {
-
-        boolean dadosValidos = true;
-
-        // Validar o nome
+    public boolean validarDadosUsuario(String nome, String email, String senha, String celular, String cpf, String nascimento, String endereco) throws IOException {
+        // Validar o nome vazio
         if (nome == null || nome.trim().equals("")) {
-            dadosValidos = false;//validarNome(nome);
+            return false;
         }
-
-        // Validar o e-mail
+        // Validar o e-mail vazio
         if (email == null || email.trim().equals("")) {
-            dadosValidos = false;//validaEmail(email);
+            return false;
         }
-
-        // Validar a senha
+        // Validar a senha vazio
         if (senha == null || senha.trim().equals("")) {
-            dadosValidos = false;//validarSenha(senha);
+            return false;
         }
-
-        // Validar o celular
+        // Validar o celular vazio
         if (celular == null || celular.trim().equals("")) {
-            dadosValidos = false;//validarCelular(celular);
+            return false;
         }
-
-        // Validar o CPF
+        // Validar o CPF vazio
         if (cpf == null || cpf.trim().equals("")) {
-            dadosValidos = false;//validarCpf(cpf);
+            return false;
         }
-
-        // Validar o Nascimento
+        // Validar o Nascimento vazio
         if (nascimento == null) {
-            dadosValidos = false;//validarNascimento(nascimento);
+            return false;
         }
-        //Validar o endereco
+        //Validar o endereco vazio
         if (endereco == null || endereco.trim().equals("")) {
-            dadosValidos = false;//validarEndereco(endereco);
+            return false;
         }
 
-        return dadosValidos;
+        //Validações criadas
+        if(!validarNascimento(nascimento)){
+            return false;
+        }
+        if(!validarSenha(senha)){
+            return false;
+        }
+        if(validarNome(nome)){
+            return false;
+        }
+
+        //Validações por API:
+        if (!validaCPF(cpf)) {
+            return false;
+        }
+        if (!validaEmail(email)) {
+            return false;
+        }
+        if (!validaPhone(celular)) {
+            return false;
+        }
+
+        //Se todas as validações derem certo ele retorna true e faz o insert no Banco, caso contrário retorna dados inválidos
+        return true;
     }
 
+    private static final String API_URL_CPF = "https://api.apicep.com/validar-cpf/";
+
+    public static boolean validaCPF(String cpf) throws IOException {
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpGet request = new HttpGet(API_URL_CPF + cpf);
+        HttpResponse response = httpClient.execute(request);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String jsonResponse = reader.readLine();
+        return jsonResponse.contains("\"status\": true");
+    }
+
+    private static final String API_URL_EMAIL = "https://apilayer.net/api/check?access_key=YOUR_ACCESS_KEY&email=";
+
+    public static boolean validaEmail(String email) throws IOException {
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpGet request = new HttpGet(API_URL_EMAIL + email);
+        HttpResponse response = httpClient.execute(request);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String jsonResponse = reader.readLine();
+        return jsonResponse.contains("\"format_valid\": true");
+    }
+
+    private static final String API_URL_CELULAR = "https://apilayer.net/api/validate?access_key=YOUR_ACCESS_KEY&number=";
+
+    public static boolean validaPhone(String phoneNumber) throws IOException {
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpGet request = new HttpGet(API_URL_CELULAR + phoneNumber);
+        HttpResponse response = httpClient.execute(request);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String jsonResponse = reader.readLine();
+        return jsonResponse.contains("\"valid\": true");
+    }
 
     private boolean validarNascimento(String nascimento) {
         if (nascimento.length() != 8) {
-            return true;
+            return false;
         }
 
         for (char c : nascimento.toCharArray()) {
             if (!Character.isDigit(c)) {
-                return true;
+                return false;
             }
         }
 
@@ -69,157 +120,51 @@ public class UsuarioService {
         int mes = Integer.parseInt(nascimento.substring(2, 4));
         int ano = Integer.parseInt(nascimento.substring(4, 8));
         if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 1900 || ano > 2100) {
-            return true;
+            return false;
         }
         if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) {
-            return true;
+            return false;
         }
         if (mes == 2) {
             boolean bissexto = (ano % 4 == 0 && ano % 100 != 0) || ano % 400 == 0;
             if (bissexto && dia > 29) {
-                return true;
+                return false;
             } else if (!bissexto && dia > 28) {
-                return true;
+                return false;
             }
         }
-
-        return false;
+        return true;
     }
 
-    private boolean validarCpf(String cpf) {
-        if (cpf.length() != 11) {
-            return true;
-        }
-
-        for (char c : cpf.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return true;
-            }
-        }
-
-        int[] numeros = new int[11];
-        for (int i = 0; i < 11; i++) {
-            numeros[i] = Character.getNumericValue(cpf.charAt(i));
-        }
-        int soma = 0;
-        for (int i = 0; i < 9; i++) {
-            soma += numeros[i] * (10 - i);
-        }
-        int resto = soma % 11;
-        if (resto == 10 || resto == 11) {
-            resto = 0;
-        }
-        if (resto != numeros[9]) {
-            return true;
-        }
-        soma = 0;
-        for (int i = 0; i < 10; i++) {
-            soma += numeros[i] * (11 - i);
-        }
-        resto = soma % 11;
-        if (resto == 10 || resto == 11) {
-            resto = 0;
-        }
-        if (resto != numeros[10]) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private boolean validarCelular(String celular) {
-        if (celular.length() != 11 && celular.length() != 12) {
-            return true;
-        }
-
-        for (char c : celular.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
     private boolean validarSenha(String senha) {
         if (senha.length() < 8) {
-            return true;
+            return false;
         }
-
         if (!senha.matches(".*[A-Z].*")) {
-            return true;
+            return false;
         }
-
         if (!senha.matches(".*[a-z].*")) {
-            return true;
+            return false;
         }
-
         if (!senha.matches(".*[0-9].*")) {
-            return true;
+            return false;
         }
-
         if (!senha.matches(".*[@#$%^&+=].*")) {
-            return true;
+            return false;
         }
-
-        return false;
+        return true;
     }
+
     private boolean validarNome(String nome) {
         if (!nome.matches("[a-zA-Z]+")) {
-            return true;
+            return false;
         }
-
         int minimoCaracteres = 3;
         if (nome.length() < minimoCaracteres) {
-            return true;
+            return false;
         }
-
         if (!nome.matches("[A-Z][a-z]+ [A-Z][a-z]+")) {
-            return true;
-        }
-
-        return false;
-    }
-    public boolean validaEmail(String email) {
-
-        String apiKey = "92ddd0010a9620726efc46de85fb711291b86214";
-
-        try {
-            // Cria a URL de chamada da API do Hunter
-            URL url = new URL("https://api.hunter.io/v2/email-verifier?email=" + email + "&api_key=" + apiKey);
-
-            // Abre a conexão com a API do Hunter
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-
-            // Define o método de requisição para GET
-            con.setRequestMethod("GET");
-
-            // Lê a resposta da API do Hunter
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            // Converte a resposta da API do Hunter em um objeto JSON
-            Gson gson = new Gson();
-            JsonObject jsonObject = gson.fromJson(response.toString(), JsonObject.class);
-
-            // Extrai a informação de validação do e-mail do objeto JSON
-            String result = jsonObject.get("data").getAsJsonObject().get("result").getAsString();
-
-            System.out.println(result);
-
-            // Verifica se o e-mail é válido
-            return !result.equals("deliverable");
-
-        } catch (IOException e) {
-            if (e.getMessage().contains("Server returned HTTP response code: 400")) {
-                System.out.println("Erro de digitação: verifique se o endereço de e-mail foi digitado corretamente.");
-            } else {
-                e.printStackTrace();
-            }
+            return false;
         }
         return true;
     }

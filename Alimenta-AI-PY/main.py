@@ -1,11 +1,12 @@
 import controller
 
+
 def main():
     controller.limpaTerminal()
-    admValidated = controller.userAdminValidate()
 
-    while admValidated:
-        controller.menuInicial()
+    while True:
+        controller.menuAcesso()
+
 
 if __name__ == "__main__":
     main()
