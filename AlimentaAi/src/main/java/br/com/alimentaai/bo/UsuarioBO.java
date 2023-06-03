@@ -12,4 +12,18 @@ public class UsuarioBO {
         System.out.println(dadosUsuario);
         return uc.cadastrarUsuario(dadosUsuario);
     }
+
+    public Usuario atualizarUsuarioBo(String json) {
+        uc = new UsuarioController();
+        Usuario dadosUsuario = uc.cadastro(json);
+        System.out.println(dadosUsuario);
+        return uc.atualizarUsuario(dadosUsuario);
+    }
+
+    public Usuario excluiUsuarioBo(String json) {
+        uc = new UsuarioController();
+        Usuario dadosUsuario = uc.cadastro(json);
+        System.out.println(dadosUsuario);
+        return uc.excluirUsuario(dadosUsuario);
+    }
 }

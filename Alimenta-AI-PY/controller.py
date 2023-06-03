@@ -32,13 +32,13 @@ mes = data.month
 ano = data.year
 
 
-def menuInicial():
-    print('=============== <<< ''\033[1;92m''Alimenta-AI''\033[0;0m'' >>> ===============')
-    print('|  [''\033[1;32m''1''\033[0;0m''] Clientes                                 |')
-    print('|  [''\033[1;32m''2''\033[0;0m''] Instituições                             |')
-    print('|  [''\033[1;32m''3''\033[0;0m''] Doação                                   |')
-    print('|  [''\033[1;32m''0''\033[0;0m''] Sair                                     |')
-    print('------------------------------------------------')
+def menuAcesso():
+    limpaTerminal()
+    print(
+        '|  [''\033[1;32m''1''\033[0;0m''] Login                                         |')
+    print(
+        '|  [''\033[1;32m''2''\033[0;0m''] Cadastre-se                                   |')
+
     try:
         escolha = int(input('\033[1;32m''Insira a opção: ''\033[0;0m'))
     except ValueError:
@@ -52,18 +52,12 @@ def menuInicial():
 
     if escolha == 1:
         limpaTerminal()
-        subMenuClientes()
+        if (len(login()) != 0):
+            menuInicial()
     elif escolha == 2:
         limpaTerminal()
-        subMenuInstituicoes()
-    elif escolha == 3:
-        limpaTerminal()
-        subMenuDoacao()
-    elif escolha == 0:
-        print('\033[1;32m''Fechando administração...''\033[0;0m')
-        conn.close()
-        sleep(3)
-        sys.exit()
+        cadastro()
+        menuAcesso()
     else:
         limpaTerminal()
         criaBarra()
@@ -72,25 +66,60 @@ def menuInicial():
         menuInicial()
 
 
+def menuInicial():
+    limpaTerminal()
+    print(
+        '=============== <<< ''\033[1;92m''Bem vindo! Alimenta-AI''\033[0;0m'' >>> ===============')
+    print(
+        '|  [''\033[1;32m''1''\033[0;0m''] Clientes                                 |')
+    print(
+        '|  [''\033[1;32m''2''\033[0;0m''] Doação                                   |')
+    print(
+        '|  [''\033[1;32m''0''\033[0;0m''] Sair                                     |')
+    print('------------------------------------------------')
+    try:
+        escolha = int(input('\033[1;32m''Insira a opção: ''\033[0;0m'))
+    except ValueError:
+        limpaTerminal()
+        criaBarra()
+        print('\033[1;31m''Insira uma opção válida!''\033[0;0m')
+        criaBarra()
+        menuInicial()
+        return
+    print('------------------------------------------------')
+
+    if escolha == 1:
+        limpaTerminal()
+        subMenuClientes()
+    elif escolha == 2:
+        limpaTerminal()
+        subMenuDoacao()
+    elif escolha == 0:
+        print('\033[1;32m''Saindo...''\033[0;0m')
+        conn.close()
+        sleep(3)
+        menuAcesso()
+    else:
+        limpaTerminal()
+        criaBarra()
+        print('\033[1;31m''Insira uma opção válida!''\033[0;0m')
+        criaBarra()
+        menuInicial()
+
+# MATHEUS PAROU O DEV AQUI!
+
 
 def subMenuClientes():
     print(
         '========== <<< ''\033[1;92m''Alimenta-AI''\033[0;0m'' >>> ==========')
     print(
-        '|  [''\033[1;32m''1''\033[0;0m''] Cadastrar Usuário              |')
+        '|  [''\033[1;32m''1''\033[0;0m''] Dados do Usuário                 |')
     print(
-        '|  [''\033[1;32m''2''\033[0;0m''] Dados do Usuário               |')
+        '|  [''\033[1;32m''2''\033[0;0m''] Mostrar Instituições cadastradas |')
     print(
-        '|  [''\033[1;32m''3''\033[0;0m''] Mostrar Usuários               |')
-
+        '|  [''\033[1;32m''3''\033[0;0m''] Deletar minha conta              |')
     print(
-        '|  [''\033[1;32m''4''\033[0;0m''] Gerar Relatório de Usuarios    |')
-
-    print(
-        '|  [''\033[1;32m''5''\033[0;0m''] Remover Usuário                |')
-
-    print(
-        '|  [''\033[1;32m''0''\033[0;0m''] Voltar                         |')
+        '|  [''\033[1;32m''0''\033[0;0m''] Voltar                           |')
     print('--------------------------------------')
     try:
         escolha = int(input('\033[1;32m''Insira a opção: ''\033[0;0m'))
@@ -103,14 +132,10 @@ def subMenuClientes():
         return
     print('--------------------------------------')
     if escolha == 1:
-        if (conexao == True):
-            cadastro()
-            subMenuClientes()
-        else:
-            print('\033[1;31m''Database was not connect!''\033[0;0m')
-    elif escolha == 2:
         mostraDados()
         subMenuClientes()
+    elif escolha == 2:
+
     elif escolha == 3:
         usuariosCadastrados()
         subMenuClientes()
@@ -132,186 +157,6 @@ def subMenuClientes():
         subMenuClientes()
 
 
-def subMenuInstituicoes():
-    print(
-        '========== <<< ''\033[1;92m''Alimenta-AI''\033[0;0m'' >>> ==========')
-    print('|  [''\033[1;32m''1''\033[0;0m''] Cadastrar Instituicao               |')
-    print('|  [''\033[1;32m''2''\033[0;0m''] Dados da Instituicao                |')
-    print('|  [''\033[1;32m''3''\033[0;0m''] Mostrar Instituicoes                |')
-    print('|  [''\033[1;32m''4''\033[0;0m''] Gerar Relatorio de Instituicoes     |')
-    print('|  [''\033[1;32m''5''\033[0;0m''] Gerenciar Instituicao               |')
-    print('|  [''\033[1;32m''6''\033[0;0m''] Remover Instituicao                 |')
-    print('|  [''\033[1;32m''0''\033[0;0m''] Voltar                        |')
-    print('--------------------------------------')
-    try:
-        escolha = int(input('\033[1;32m''Insira a opção: ''\033[0;0m'))
-    except ValueError:
-        limpaTerminal()
-        criaBarra()
-        print('\033[1;31m''Insira uma opção válida!''\033[0;0m')
-        criaBarra()
-        subMenuInstituicoes()
-        return
-    print('--------------------------------------')
-    if escolha == 1:
-        cadastroInstituicao()
-        subMenuInstituicoes()
-    elif escolha == 2:
-        dadosInstituicao()
-        subMenuInstituicoes()
-    elif escolha == 3:
-        mostrarInstituicao()
-        subMenuInstituicoes()
-    elif escolha == 4:
-        relatorioInstituicao()
-        subMenuInstituicoes()
-    elif escolha == 5:
-        gerenciarInstituicao()
-        subMenuInstituicoes()
-    elif escolha == 6:
-        removeInstituicao()
-        subMenuInstituicoes()
-    elif escolha == 0:
-        sleep(1)
-        limpaTerminal()
-        menuInicial()
-    else:
-        limpaTerminal()
-        criaBarra()
-        print('\033[1;31m''Insira uma opção válida!''\033[0;0m')
-        criaBarra()
-        subMenuInstituicoes()
-
-
-def subMenuDoacao():
-    print(
-        '============== <<< ''\033[1;92m''Alimenta-AI''\033[0;0m'' >>> ==============')
-    print('|  [''\033[1;32m''1''\033[0;0m''] Tipos de Doacao                       |')
-    print('|  [''\033[1;32m''2''\033[0;0m''] Empresas                              |')
-    print('|  [''\033[1;32m''0''\033[0;0m''] Voltar                                |')
-    print('----------------------------------------------')
-    x = input('\033[1;32m''Insira a opção: ''\033[0;0m')
-    print('----------------------------------------------')
-
-    if x == '1':
-        # Opção selecionada: Tipos de Doacao
-        print('Tipos de Doacao')
-        print('1. Alimento')
-        print('2. Dinheiro')
-        tipo_doacao = input('Insira a opção: ')
-
-        print('Tipo de doação selecionado:', tipo_doacao)
-
-        if tipo_doacao == '1':
-            print()
-            query = "SELECT nome FROM Alimento"
-            inst_SQL.execute(query)
-            resultados = inst_SQL.fetchall()
-
-            # Exibir os resultados com números sequenciais
-            print('\033[1;32mAlimentos Disponíveis\033[0;0m')
-            contador = 1
-            for row in resultados:
-                print(f"{contador}: {row[0]}")
-                contador += 1
-
-        '''tipo_doacao == '2':
-            print()
-            queryDinheiro = "SELECT clienteid FROM Instituicao"
-            inst_SQL.execute(queryDinheiro)
-            resultado = inst_SQL.fetchall()
-
-            print('\033[1;32mEmpresas Disponíveis Para Doação\033[0;0m32')
-            contador = 1
-            for row in resultado:
-                print(f"{contador}: {row[0]}")
-                contador += 1'''
-
-        if tipo_doacao == '2':
-            print()
-            queryDinheiro = "SELECT clienteid FROM Instituicao"
-            inst_SQL.execute(queryDinheiro)
-            resultado = inst_SQL.fetchall()
-
-            print('\033[1;32mEmpresas Disponíveis Para Doação\033[0;0m')
-            contador = 1
-            empresas = []
-            for row in resultado:
-                empresas.append(row[0])
-                print(f"{contador}: {row[0]}")
-                contador += 1
-
-            empresa_selecionada = input('Insira o número da empresa para doação: \n')
-            if empresa_selecionada.isdigit() and int(empresa_selecionada) <= len(empresas):
-                empresa_id = empresas[int(empresa_selecionada) - 1]
-
-                queryEmpresa = f"SELECT * FROM Instituicao WHERE clienteid = '{empresa_id}'"
-                try:
-                    inst_SQL.execute(queryEmpresa)
-                    detalhes_empresa = inst_SQL.fetchone()
-
-                    print('\nDetalhes da Empresa:')
-                    print('ID:', detalhes_empresa[0])
-                    print('WebSite:', detalhes_empresa[1])
-                    print('CNPJ:', detalhes_empresa[2])
-
-                except Exception as e:
-                    print('Ocorreu um erro ao obter os detalhes da empresa:', str(e))
-            else:
-                print('Opção inválida.')
-
-
-
-    elif x == '2':
-
-        limpaTerminal()
-
-        print('=== << ''\033[1;33m''Dados da Instituicao''\033[0;0m'' >> ===')
-
-        criaBarra()
-
-        print('\033[1;33m''Lista de Instituicoes Cadastradas:''\033[0;0m')
-
-        criaBarra()
-
-        dados = "SELECT * FROM Instituicao"
-
-        inst_SQL.execute(dados)
-
-        listaInstituicao = inst_SQL.fetchall()
-
-        if len(listaInstituicao) != 0:
-
-            for Instituicao in listaInstituicao:
-                print(f'''\033[1;32mClienteID: \033[0;0m{Instituicao[0]}''')
-
-                print(f'''\033[1;32mWebsite: \033[0;0m{Instituicao[1]}''')
-
-                print(f'''\033[1;32mTipo: \033[0;0m{Instituicao[2]}''')
-
-                print(f'''\033[1;32mCnpj: \033[0;0m{Instituicao[3]}''')
-
-                criaBarra()
-
-        else:
-
-            print('\033[1;31m''Nenhuma Instituicao cadastrada!''\033[0;0m')
-
-        subMenuDoacao()
-    elif x == '0':
-        # Opção selecionada: Voltar
-        print('Voltar')
-
-    else:
-        # Opção inválida
-        print('Opção inválida')
-
-    return x
-
-
-''' Função de Cadastrar / Checar login existente / Adicionar dados no arquivo txt de logins '''
-
-
 def confereLoginExistente(cpf):
     dados = f"""SELECT * FROM usuario WHERE cpf = '{cpf}'"""
     inst_SQL.execute(dados)
@@ -320,6 +165,7 @@ def confereLoginExistente(cpf):
         return True
     else:
         return False
+
 
 def cadastro():
     try:
@@ -486,6 +332,7 @@ def removerUsuario():
         print(f"\033[1;31mErro ao remover usuário: {str(e)}\033[0;0m")
         criaBarra()
 
+
 def userAdminValidate():
     limpaTerminal()
     criaBarra()
@@ -574,6 +421,7 @@ def cadastroInstituicao():
     except Exception as e:
         print(f"Erro de transação com o BD: {e}")
 
+
 def dadosInstituicao():
     limpaTerminal()
     print('=== << ''\033[1; 33m''Dados do Instituicao''\033[0;0m'' >> ===')
@@ -632,6 +480,8 @@ def mostrarInstituicao():
             | \033[1;32mtipo: \033[0;0m{tipo} | \033[1;32mcnpj: \033[0;0m{cnpj}''')
     criaBarra()
     return
+
+
 def relatorioInstituicao():
     limpaTerminal()
     arquivo = open('relatorioInstituicoes.txt', 'w+', encoding='utf-8')
@@ -672,9 +522,11 @@ def gerenciarInstituicao():
                 '\033[1;31m''Erro! Código não encontrado ou inexistente.''\033[0;0m')
         else:
             try:
-                print('\n\033[1;31m''=== Alterando dados de Instituição ===''\033[0;0m')
+                print(
+                    '\n\033[1;31m''=== Alterando dados de Instituição ===''\033[0;0m')
 
-                website = input(f'''\033[1;32mDigite o novo website: \033[0;0m''')
+                website = input(
+                    f'''\033[1;32mDigite o novo website: \033[0;0m''')
                 tipo = input(f'''\033[1;32mDigite o novo tipo: \033[0;0m''')
                 cnpj = input(f'''\033[1;32mDigite o novo CNPJ: \033[0;0m''')
 
@@ -687,7 +539,8 @@ def gerenciarInstituicao():
                     inst_SQL.execute(updateInstituicao)
                     conn.commit()
                 except Exception as errobd:
-                    print('\033[1;31m''Erro de transacao com o BD''\033[0;0m', errobd)
+                    print(
+                        '\033[1;31m''Erro de transacao com o BD''\033[0;0m', errobd)
                 else:
                     print(
                         f'''\033[1;32mInstituicao alterada com sucesso\033[0;0m''')
@@ -729,3 +582,20 @@ def removeInstituicao():
         print('\033[1;31m''Erro! Código inválido ou inexistente''\033[0;0m')
         criaBarra()
         subMenuInstituicoes()
+
+
+def login():
+    limpaTerminal()
+    criaBarra()
+    print('\033[1;33m''Logue para acessar seus dados!''\033[0;0m')
+    criaBarra()
+    userLogin = input('Login: ')
+    userSenha = input('Senha: ')
+
+    # Variavel de validação do login
+    valida = False
+
+    dados = f"""SELECT * FROM cliente WHERE clienteid = '{userLogin}' AND senha = '{userSenha}'"""
+    inst_SQL.execute(dados)
+    listaUsuario = inst_SQL.fetchall()
+    return listaUsuario
