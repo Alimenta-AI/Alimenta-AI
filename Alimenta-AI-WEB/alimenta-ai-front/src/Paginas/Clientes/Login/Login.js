@@ -6,9 +6,7 @@ import React from "react";
 import "./Login.css";
 // import { AuthContext } from "../../Navbar/AuthContext";
 
-
-
-const Login = () => {
+function Login () {
 //   const [email, setEmail] = useState("");
 //   const [password, setPassword] = useState("");
 //   const [loading, setLoading] = useState(false);

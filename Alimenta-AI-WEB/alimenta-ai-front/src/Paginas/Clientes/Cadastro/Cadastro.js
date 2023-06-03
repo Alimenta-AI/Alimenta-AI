@@ -4,12 +4,12 @@ import React from "react";
 // import 'react-toastify/dist/ReactToastify.min.css';
 // import { Link } from "react-router-dom";
 import "./Cadastro.css";
-// import { useState } from "react";
+
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 
-const Cadastro = () => {
+function Cadastro  ()  {
 //   const [termsChecked, setTermsChecked] = useState(false);
 //   const [name, setName] = useState("");
 //   const [username, setUserName] = useState("");
@@ -218,12 +218,17 @@ const Cadastro = () => {
             </label>
           </div> */}
 
-          <button className="signup-button" type="submit" >Cadastre-se</button>
+        <button className="button-ai" type="submit">
+            <span className="span-ai"></span>
+            <span className="span-ai"></span>
+            <span className="span-ai"></span>
+            <span className="span-ai"></span> Login
+        </button>
           <p>
             Já possui uma conta?{" "}
             {/* <Link to="/login"> */}
               {" "}
-              Faça<span id="login-link"> Login </span>{" "}
+              Faça<span id="login-  link"> Login </span>{" "}
             {/* </Link> */}
           </p>
         </form>

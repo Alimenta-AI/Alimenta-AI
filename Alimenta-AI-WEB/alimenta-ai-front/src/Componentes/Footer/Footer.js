@@ -1,3 +1,5 @@
+// Footer.js
+
 import React from "react";
 import "./Footer.css";
 
@@ -11,12 +13,12 @@ function Footer() {
             <h1 className="contact-info">
               <li>342-420-6969</li>
               <li>Moscow, Russia</li>
-              <li>123 Streeet South North</li>
+              <li>123 Street South North</li>
             </h1>
           </div>
           <div className="col">
             <h4>Stuff</h4>
-            <ul className="list-unstyled"> {/* Corrigido de 'ui' para 'ul' */}
+            <ul className="list-unstyled">
               <li>DANK MEMES</li>
               <li>OTHER STUFF</li>
               <li>GUD STUFF</li>
@@ -24,7 +26,7 @@ function Footer() {
           </div>
           <div className="col">
             <h4>WELL ANOTHER COLUMN</h4>
-            <ul className="list-unstyled"> {/* Corrigido de 'ui' para 'ul' */}
+            <ul className="list-unstyled">
               <li>DANK MEMES</li>
               <li>OTHER STUFF</li>
               <li>GUD STUFF</li>

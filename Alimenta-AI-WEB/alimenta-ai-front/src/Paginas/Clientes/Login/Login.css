@@ -10,7 +10,7 @@
   background-color: #000000;
   padding: 0 20px;
   box-sizing: border-box;
-  margin-bottom: 150px;
+  margin-bottom: 0px; 
 }
 
 .login-form {
@@ -195,4 +195,3 @@
     transition: none;
     transition-delay: none;
    }
-   
