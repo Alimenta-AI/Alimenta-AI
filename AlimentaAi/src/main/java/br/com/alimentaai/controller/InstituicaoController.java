@@ -23,8 +23,6 @@ public class InstituicaoController {
 
         String clienteId = clienteController.generateUniqueId();
 
-        //parei aqui
-
         String nome = instituicao.getNome();
         String email = instituicao.getEmail();
         String senha = instituicao.getSenha();

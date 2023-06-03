@@ -18,11 +18,13 @@ public class ClienteController {
     public int recebeDadosCliente(String clienteId){
         Connection con= Conexao.abrirConexao();
         ClienteDAO clienteDAO = new ClienteDAO(con);
-        Cliente cliente = clienteDAO.buscarTipoCliente(clienteId);
+        Cliente cliente = clienteDAO.buscarTipoClientePeloClienteId(clienteId);
         if(cliente != null){
+            Conexao.fecharConexao(con);
             return cliente.getTipoCliente();
         }
         else{
+            Conexao.fecharConexao(con);
             System.out.println("Erro ao buscar tipo do cliente");
             return -1;
         }
@@ -59,6 +61,32 @@ public class ClienteController {
                 JsonElement lastValue = jsonObject.get(lastFieldName);
 
                 return gson.toJson(lastValue);
+            }
+        }
+        return null;
+    }
+
+    public String getIdUsuario(String json) {
+        Gson gson = new Gson();
+        JsonElement element = JsonParser.parseString(json);
+        if (element.isJsonObject()) {
+            JsonObject jsonObject = element.getAsJsonObject();
+            if (jsonObject.has("clienteIdUsuario")) {
+                JsonElement clienteIdUsuario = jsonObject.get("clienteIdUsuario");
+                return gson.toJson(clienteIdUsuario);
+            }
+        }
+        return null;
+    }
+
+    public String getIdInstituicao(String json) {
+        Gson gson = new Gson();
+        JsonElement element = JsonParser.parseString(json);
+        if (element.isJsonObject()) {
+            JsonObject jsonObject = element.getAsJsonObject();
+            if (jsonObject.has("clienteIdInstituicao")) {
+                JsonElement clienteIdInstituicao = jsonObject.get("clienteIdInstituicao");
+                return gson.toJson(clienteIdInstituicao);
             }
         }
         return null;

@@ -10,20 +10,8 @@ import javax.ws.rs.core.*;
 
 @Path("/movimentacao")
 public class MovimentationResource {
-    private MovimentacaoBO movimentacaoBO = new MovimentacaoBO();
-    ClienteBO clienteBO;
 
-//    @GET
-//    @Path("/{clienteId}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String buscarOpçõesMovimentacoes(@PathParam("clienteId") int clienteId) {
-//        clienteBO = new ClienteBO();
-//        if (clienteBO.dadosClienteLogado(String.valueOf(clienteId)) == 0) {
-////            mostra as instituicoes pro usuario
-//        }
-////            mostrar os usuarios pra instituicao
-//    }
-
+    MovimentacaoBO movimentacaoBO = new MovimentacaoBO();
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

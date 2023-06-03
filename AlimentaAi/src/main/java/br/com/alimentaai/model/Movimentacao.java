@@ -1,16 +1,12 @@
 package br.com.alimentaai.model;
 
 public class Movimentacao {
-    private String clienteIdUsuario;
-    private String clienteIdInstituicao;
     private String num_solicitacao;
     private String data_movimentacao;
     private String descricao;
     private String categoria;
 
-    public Movimentacao(String clienteIdUsuario, String clienteIdInstituicao, String num_solicitacao, String data_movimentacao, String descricao, String categoria) {
-        this.clienteIdUsuario = clienteIdUsuario;
-        this.clienteIdInstituicao = clienteIdInstituicao;
+    public Movimentacao(String num_solicitacao, String data_movimentacao, String descricao, String categoria) {
         this.num_solicitacao = num_solicitacao;
         this.data_movimentacao = data_movimentacao;
         this.descricao = descricao;
@@ -18,22 +14,6 @@ public class Movimentacao {
     }
 
     public Movimentacao() {
-    }
-
-    public String getClienteIdUsuario() {
-        return clienteIdUsuario;
-    }
-
-    public void setClienteIdUsuario(String clienteIdUsuario) {
-        this.clienteIdUsuario = clienteIdUsuario;
-    }
-
-    public String getClienteIdInstituicao() {
-        return clienteIdInstituicao;
-    }
-
-    public void setClienteIdInstituicao(String clienteIdInstituicao) {
-        this.clienteIdInstituicao = clienteIdInstituicao;
     }
 
     public String getNum_solicitacao() {
@@ -71,9 +51,7 @@ public class Movimentacao {
     @Override
     public String toString() {
         return "Movimentacao{" +
-                "clienteIdUsuario='" + clienteIdUsuario + '\'' +
-                ", clienteIdInstituicao='" + clienteIdInstituicao + '\'' +
-                ", num_solicitacao='" + num_solicitacao + '\'' +
+                "num_solicitacao='" + num_solicitacao + '\'' +
                 ", data_movimentacao='" + data_movimentacao + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", categoria='" + categoria + '\'' +

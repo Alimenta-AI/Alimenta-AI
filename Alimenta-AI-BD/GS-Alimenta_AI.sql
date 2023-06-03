@@ -37,7 +37,7 @@ CREATE TABLE movimentacao (
   clienteIdUsuario CHAR(20),
   clienteIdInstituicao CHAR(20),
   num_solicitacao CHAR(10) PRIMARY KEY,
-  data_movimentacao VARCHAR2(8) NOT NULL,
+  data_movimentacao VARCHAR2(12) NOT NULL,
   descricao VARCHAR2(150) NOT NULL,
   categoria VARCHAR2(20) NOT NULL,
   FOREIGN KEY (clienteIdUsuario) REFERENCES cliente(clienteId),
