@@ -16,14 +16,18 @@ function Navbar() {
         <img src={Logo} />
         <div className="hiddenLinks">
           <Link to="/"> Inicio </Link>
-          <Link to="/menu"> ? </Link>
+          <Link to="/menu"> Doe! </Link>
+          <Link to="/reserva"> Adquira Agora! </Link>
           <Link to="/about"> Sobre </Link>
           <Link to="/contact"> Contato </Link>
+          <Link to="/cadastro"> Cadastre-se </Link>
+          <Link to="/login"> Login </Link>
         </div>
       </div>
       <div className="rightSide">
         <Link to="/"> Inicio </Link>
-        <Link to="/menu"> ? </Link>
+        <Link to="/menu"> Doe! </Link>
+        <Link to="/menu"> Adquira Agora! </Link>
         <Link to="/about"> Sobre </Link>
         <Link to="/contact"> Contato </Link>
         <Link to="/cadastro"> Cadastre-se </Link>
