@@ -1,6 +1,7 @@
 .Menu {
   text-align: center;
 }
+
 body {
   background-color: black;
   overflow-x: hidden;
@@ -10,18 +11,21 @@ body {
   color: red;
   cursor: pointer;
 }
+
 .add-icon {
   color: green;
   cursor: pointer;
   font-size: 24px;
 }
+
 .table-container {
-  margin: 0 auto;
+  margin: 50px auto; /* Adiciona espaço de 50px entre a tabela e o navbar */
   text-align: center;
 }
+
 .clear-all-button {
   margin-top: 20px;
-  margin-right: 20px; /* Adicione esta linha */
+  margin-right: 20px;
   padding: 10px 20px;
   background-color: red;
   color: white;
@@ -55,9 +59,6 @@ body {
   height: 30px;
   text-align: center;
 }
-
-
-
 
 table {
   margin: 0 auto;
@@ -94,4 +95,37 @@ td select {
 
 .estado-select {
   margin-left: 5px;
+}
+
+.quantidade-input,
+.valor-input {
+  background-color: black;
+  color: white;
+  border: 1px solid green;
+  height: 30px;
+  text-align: center;
+  width: 80px;
+}
+table {
+  margin-top: 70px;
+}
+.Titulo-tabela {
+  position: relative;
+  margin-top: 10%;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.alimento{
+  position: relative;
+  margin-right: 60%;
+  width: 20%;
+  border: 3px solid green;
+  border-radius: 25%;
+}
+table{
+  background-image: url(../assets/verde);
 }
