@@ -22,7 +22,7 @@ function App() {
           <Route path="/cadastro" exact component={Cadastro} />
           <Route path="/login" exact component={Login} />
         </Switch>
-        {/* <Footer /> */}
+         <Footer /> 
       </Router>
     </div>
   );

@@ -18,11 +18,14 @@
   flex-direction: column;
   align-items: center;
   width: 460px;
-  padding: 40px;
+  padding: 30px; 
   background-color: #000000;
   border-radius: 5px;
   box-shadow: 0px 0px 20px rgba(0, 255, 17, 0.2);
-  margin: 0 auto; 
+  margin: 0 auto;
+  margin-bottom: -120px;
+  height: 400px;
+  margin-top: -35px;
 }
 
 .email-input-group input {
@@ -31,7 +34,7 @@
     border: 1px solid #00FF00;
     background-color: #000000;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
     margin-bottom: 20px;
 }
@@ -42,7 +45,7 @@
     border: 1px solid #00FF00;
     background-color: #000000;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
     margin-right: 30px;
 }
@@ -51,23 +54,24 @@
     color: #00FF00;
     margin-bottom: 20px;
     font-size: 50px;
+    margin-top: -10px;
 }
 
 .text-signin {
     color: #c8c8c8;
 }
   
-  #signup-link {
+#signup-link {
     color: #00FF00;
-  }
+}
   
-  .background-image {
+.background-image {
     background-image: url('../assets/login-gren-page.svg');
     background-size: cover;
     background-repeat: no-repeat;
-  }
-  
-  .loading-overlay {
+}
+
+.loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -78,9 +82,9 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
-  }
-  
-  .loading-overlay::after {
+}
+
+.loading-overlay::after {
     content: "";
     display: block;
     width: 40px;
@@ -89,22 +93,22 @@
     border: 3px solid #00FF00;
     border-top-color: transparent;
     animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
+}
+
+@keyframes spin {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
 
-  .button-ai {
-    margin-top: 20px;
-    margin-bottom: 20px;
+.button-ai {
+    margin-top: 10px;
+    margin-bottom: 10px;
     position: relative;
-    padding: 1em 1.8em;
+    padding: 1.5em 2.5em; 
     outline: none;
     border: 1px solid #303030;
     background: #212121;
@@ -117,97 +121,100 @@
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-   }
-   
-   .button-ai:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.button-ai:hover {
     box-shadow: 0 0 10px #8BFF00, 0 0 25px #3DFF00, 0 0 30px #66FF00;
     transition-delay: 0.6s;
-   }
-   
-   .button-ai .span-ai {
+}
+
+.button-ai .span-ai {
     position: absolute;
-   }
-   
-   .button-ai .span-ai:nth-child(1) {
+}
+  
+.button-ai .span-ai:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
     height: 2px;
     background: linear-gradient(90deg, transparent, #00FF00);
-   }
-   
-   .button-ai:hover .span-ai:nth-child(1) {
+}
+  
+.button-ai:hover .span-ai:nth-child(1) {
     left: 100%;
     transition: 0.7s;
-   }
-   
-   .button-ai .span-ai:nth-child(3) {
+}
+  
+.button-ai .span-ai:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
     height: 2px;
     background: linear-gradient(90deg, transparent, #3DFF00);
-   }
-   
-   .button-ai:hover .span-ai:nth-child(3) {
+}
+  
+.button-ai:hover .span-ai:nth-child(3) {
     right: 100%;
     transition: 0.7s;
     transition-delay: 0.35s;
-   }
-   
-   .button-ai .span-ai:nth-child(2) {
+}
+  
+.button-ai .span-ai:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
     height: 100%;
     background: linear-gradient(180deg, transparent, #66FF00);
-   }
-   
-   .button-ai:hover .span-ai:nth-child(2) {
+}
+  
+.button-ai:hover .span-ai:nth-child(2) {
     top: 100%;
     transition: 0.7s;
     transition-delay: 0.17s;
-   }
-   
-   .button-ai .span-ai:nth-child(4) {
+}
+  
+.button-ai .span-ai:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;
     height: 100%;
     background: linear-gradient(360deg, transparent, #00A86B);
-   }
-   
-   .button-ai:hover .span-ai:nth-child(4) {
+}
+  
+.button-ai:hover .span-ai:nth-child(4) {
     bottom: 100%;
     transition: 0.7s;
     transition-delay: 0.52s;
-   }
-   
-   .button-ai:active {
+}
+  
+.button-ai:active {
     background: #ae00af;
     background: linear-gradient(to top right, #3DFF00, #00A86B);
     color: #bfbfbf;
     box-shadow: 0 0 8px #3DFF00, 0 0 8px #00A86B, 0 0 8px #3DFF00;
     transition: 0.1s;
-   }
-   
-   .button-ai:active .span-ai:nth-child(1) 
-   .span-ai:nth-child(2) 
-   .span-ai:nth-child(2) 
-   .span-ai:nth-child(2) {
+}
+  
+.button-ai:active .span-ai:nth-child(1),
+.button-ai:active .span-ai:nth-child(2),
+.button-ai:active .span-ai:nth-child(3),
+.button-ai:active .span-ai:nth-child(4) {
     transition: none;
     transition-delay: none;
-   }
+}
 
-   .email-input-group label {
+.email-input-group label {
     color: white;
-   }
+}
 
-   .password-input-group label {
+.password-input-group label {
     color: white;
-    }
+}
 
-    .email-input-group input::placeholder,
-    .password-input-group input::placeholder {
-      color: rgb(121, 121, 121);
-    }
+.email-input-group input::placeholder,
+.password-input-group input::placeholder {
+    color: rgb(121, 121, 121);
+}
