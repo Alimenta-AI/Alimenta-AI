@@ -47,12 +47,51 @@ CREATE TABLE movimentacao (
 CREATE TABLE Avaliacao (
   texto VARCHAR2(150) NOT NULL,
   dataComentario VARCHAR2(12) NOT NULL,
-  instituicao VARCHAR2(50) NOT NULL,
-  usuario VARCHAR2(50) NOT NULL,
-  dataAvaliacao VARCHAR2(12)
+  instituicao CHAR(20) NOT NULL,
+  usuario CHAR(20) NOT NULL,
+  dataAvaliacao VARCHAR2(12),
+  FOREIGN KEY (usuario) REFERENCES cliente(clienteId),
+  FOREIGN KEY (instituicao) REFERENCES instituicao(clienteId)
 );
-CREATE TABLE 
+CREATE TABLE Comentario(
+  comentarioId CHAR(5) PRIMARY KEY,
+  cliente VARCHAR2(40) NOT NULL,
+  instituicao VARCHAR2(50) NOT NULL,
+  alimento VARCHAR2(50) NOT NULL,
+  nota NUMBER(2) NOT NULL
+);
 
+CREATE TABLE Estoque (
+  estoqueId CHAR(5) PRIMARY KEY,
+  tamanho NUMBER(4) NOT NULL, 
+  alimento VARCHAR2(30) NOT NULL,
+  fk_clienteId CHAR(20) NOT NULL,
+  FOREIGN KEY (fk_clienteId) REFERENCES cliente(clienteId)
+);
+
+CREATE TABLE MovimentacaoEstoque(
+ mvEstoqueId CHAR(5) PRIMARY KEY,
+ qtdeMovimentada NUMBER(4),
+ entrada VARCHAR2(12),
+ estoque NUMBER(4)
+);
+
+CREATE TABLE RelatorioMovimentacao(
+  movimentacao VARCHAR2(20) NOT NULL,
+  dataTermino VARCHAR2(12) NOT NULL,
+  dataInicio VARCHAR2(12) NOT NULL,
+  insituicao VARCHAR2(50) NOT NULL,
+  relatotioId CHAR(5) PRIMARY KEY
+);
+
+CREATE TABLE ReservaCliente (
+  checkIn VARCHAR2(12) NOT NULL,
+  dataReserva VARCHAR2(12) NOT NULL,
+  checkOut VARCHAR2(12) NOT NULL,
+  reservaId CHAR(5) NOT NULL,
+  fk_clienteId CHAR(20) NOT NULL,
+  FOREIGN KEY (fk_clienteId) REFERENCES cliente(clienteId)
+);
 
 -- Inserts cliente
 INSERT INTO cliente VALUES ('CLT001', 'João Silva', 'joao.silva@email.com', 'senha123', '9876543210', 'Rua A, 123', 0);
@@ -116,8 +155,6 @@ INSERT INTO alimento VALUES ('ALM010', 'Biscoito', '310723', 5, 'CLT010');
 --clientes que possuem tipoCliente igual 1--
 SELECT nome, email, endereco FROM cliente WHERE tipoCliente = 1 ORDER BY nome;
 
- 
-
 --alimentos (nome, validade) e seus respectivos clientes (nome) para alimentos com quantidade maior que 5.--
 SELECT alimento.nome, alimento.validade, cliente.nome
 FROM alimento
@@ -125,15 +162,11 @@ JOIN cliente ON alimento.clienteId = cliente.clienteId
 WHERE alimento.quantidade > 5
 ORDER BY alimento.validade;
 
- 
-
 --Obter a contagem de alimentos por tipo de cliente--
 SELECT cliente.tipoCliente, COUNT(*) quantidade_alimentos
 FROM alimento
 JOIN cliente ON alimento.clienteId = cliente.clienteId
 GROUP BY cliente.tipoCliente;
-
- 
 
 --Obter a m�dia de quantidade de alimentos por tipo de cliente, considerando apenas os clientes que possuem mais de 3 alimentos.--
 SELECT cliente.tipoCliente, AVG(alimento.quantidade) media_alimentos
@@ -141,8 +174,6 @@ FROM alimento
 JOIN cliente ON alimento.clienteId = cliente.clienteId
 GROUP BY cliente.tipoCliente
 HAVING COUNT(*) > 3;
-
-
 
 DROP TABLE usuario;
 DROP TABLE cliente;
