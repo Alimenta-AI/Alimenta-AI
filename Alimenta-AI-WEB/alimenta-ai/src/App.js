@@ -10,6 +10,7 @@ import Work from "./Components/Work";
 import Testimonial from "./Components/Testimonial";
 import Contact from "./Components/Contact";
 import Senha from "./Components/Senha/Senha"
+import MeuPerfil from "./Components/MeuPerfil/meuperfil"
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/testemunhos" exact component={Testimonial} />
           <Route path="/contato" exact component={Contact} />
           <Route path="/esqueci-minha-senha" exact component={Senha} />
+          <Route path="/MeuPerfil" exact component={MeuPerfil} />
         </Switch>
         <Footer/> 
       </Router>

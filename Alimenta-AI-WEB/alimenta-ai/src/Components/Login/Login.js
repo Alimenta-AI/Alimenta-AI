@@ -1,71 +1,35 @@
-import React from "react";
-// import React, { useState, useContext} from "react";
-// import { Link, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import './Login.css';
-// import { AuthContext } from "../../Navbar/AuthContext";
 
 function Login () {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [loading, setLoading] = useState(false);
-//   const navigate = useNavigate();
-//   const { handleLogin } = useContext(AuthContext);
+  const history = useHistory();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-//     setLoading(true); // Inicia o carregamento
+    setLoading(true); // Inicia o carregamento
 
-//     let usuario = {
-//       nickNameOuEmail: email,
-//       senha: password,
-//     };
+    // Aqui você pode fazer a chamada à API ou implementar a lógica de autenticação
 
-//     fetch(`http://localhost:8080/UInvest/login`, {
-//       method: "post",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(usuario),
-//     })
-//       .then(() => {
-//         handleLogin(email);
-//         navigate("/");
-//         toast.success("Login realizado com sucesso", {
-//           position: toast.POSITION.TOP_CENTER,
-//           autoClose: 3000,
-//         });
-//       })
-//       .catch((error) => {
-//         toast.error("Senha incorreta!", {
-//           position: toast.POSITION.TOP_CENTER,
-//           autoClose: 3000,
-//         });
-//       })
-//       .finally(() => {
-//         setLoading(false); // Finaliza o carregamento
-//       });
-//   };
+    // Exemplo de lógica de autenticação fictícia
+    if (email === "admin" && password === "admin123") {
+      // Login bem-sucedido
+      history.push("/MeuPerfil");
+    } else {
+      // Login inválido
+      alert("Nome de usuário ou senha incorretos");
+    }
 
-//   const handleLogout = () => {
-//     sessionStorage.removeItem("sessao");
-//     navigate("/login");
-//   };
-
-//   const sessionSessao = sessionStorage.getItem("sessao");
-
-//   if (sessionSessao) {
-//     navigate("/");
-//   }
+    setLoading(false); // Finaliza o carregamento
+  };
 
   return (
     <div className="login-container background-image">
-      {/* <ToastContainer /> */}
-      {/* {loading && <div className="loading-overlay">Carregando...</div>} */}
-      <form className="login-form"> {/*onSubmit={handleSubmit}*/}
+      <form className="login-form" onSubmit={handleSubmit}>
         <h2 className="text-form">Login</h2>
 
         <div className="email-input-group">
@@ -74,8 +38,8 @@ function Login () {
             type="text"
             id="email"
             placeholder="Digite seu e-mail ou username"
-            // value={email}
-            // onChange={(event) => setEmail(event.target.value)}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
         </div>
 
@@ -85,8 +49,8 @@ function Login () {
             type="password"
             id="password"
             placeholder="Digite sua senha"
-            // value={password}
-            // onChange={(event) => setPassword(event.target.value)}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
           />
         </div>
         
