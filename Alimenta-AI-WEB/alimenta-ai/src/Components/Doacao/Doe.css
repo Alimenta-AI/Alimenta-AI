@@ -1,0 +1,132 @@
+.Menu {
+  text-align: center;
+}
+
+body {
+  background-color: black;
+  overflow-x: hidden;
+}
+
+.delete-icon {
+  color: red;
+  cursor: pointer;
+}
+
+.add-icon {
+  color: green;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.table-container {
+  margin: 50px auto; /* Adiciona espaço de 50px entre a tabela e o navbar */
+  text-align: center;
+}
+
+.clear-all-button {
+  margin-top: 20px;
+  margin-right: 20px;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cadastrar-doacao-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: rgb(0, 255, 85);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.codigo-input,
+.descricao-input,
+.fornecedor-input,
+.valor-input,
+.quantidade-input,
+.estado-select,
+.unidade-select {
+  background-color: black;
+  color: white;
+  border: 1px solid green;
+  height: 30px;
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: black;
+  box-shadow: 0 0 10px green;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 2px solid black;
+  color: white;
+}
+
+th {
+  color: green;
+}
+
+td input,
+td select {
+  border: 1px solid green;
+  color: black;
+}
+
+.fornecedor-column {
+  display: flex;
+  align-items: center;
+}
+
+.fornecedor-input {
+  margin-right: 5px;
+}
+
+.estado-select {
+  margin-left: 5px;
+}
+
+.quantidade-input,
+.valor-input {
+  background-color: black;
+  color: white;
+  border: 1px solid green;
+  height: 30px;
+  text-align: center;
+  width: 80px;
+}
+table {
+  margin-top: 70px;
+}
+.Titulo-tabela {
+  position: relative;
+  margin-top: 10%;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.alimento{
+  position: relative;
+  margin-right: 60%;
+  width: 20%;
+  border: 3px solid green;
+  border-radius: 25%;
+}
+
+/* table{
+  background-image: url(../assets/verde);
+} */
