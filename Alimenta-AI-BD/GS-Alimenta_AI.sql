@@ -44,6 +44,16 @@ CREATE TABLE movimentacao (
   FOREIGN KEY (clienteIdInstituicao) REFERENCES cliente(clienteId)
 );
 
+CREATE TABLE Avaliacao (
+  texto VARCHAR2(150) NOT NULL,
+  dataComentario VARCHAR2(12) NOT NULL,
+  instituicao VARCHAR2(50) NOT NULL,
+  usuario VARCHAR2(50) NOT NULL,
+  dataAvaliacao VARCHAR2(12)
+);
+CREATE TABLE 
+
+
 -- Inserts cliente
 INSERT INTO cliente VALUES ('CLT001', 'João Silva', 'joao.silva@email.com', 'senha123', '9876543210', 'Rua A, 123', 0);
 INSERT INTO cliente VALUES ('CLT002', 'Maria Santos', 'maria.santos@email.com', 'senha456', '9876543211', 'Rua B, 456', 1);
