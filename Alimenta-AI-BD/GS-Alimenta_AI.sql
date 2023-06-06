@@ -1,96 +1,81 @@
 CREATE TABLE cliente (
   clienteId CHAR(20) PRIMARY KEY,
   nome VARCHAR2(50) NOT NULL,
-  email VARCHAR2(50) UNIQUE NOT NULL,
-  senha VARCHAR2(20) NOT NULL,
+  email VARCHAR2(150) UNIQUE NOT NULL,
+  senha CHAR(20) NOT NULL,
   celular CHAR(11) UNIQUE NOT NULL,
   endereco VARCHAR2(200) NOT NULL,
   tipoCliente NUMBER(1) NOT NULL
 );
 
 CREATE TABLE usuario (
-  clienteId CHAR(20) PRIMARY KEY,
   cpf CHAR(11) UNIQUE NOT NULL,
-  nascimento VARCHAR2(8) NOT NULL,
+  nascimento CHAR(8) NOT NULL,
   doador CHAR(3) NOT NULL,
+  clienteId CHAR(20),
   FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
 CREATE TABLE instituicao (
-  clienteId CHAR(20) PRIMARY KEY,
   website VARCHAR2(150),
   tipo VARCHAR2(15),
   cnpj CHAR(14) UNIQUE NOT NULL,
+  clienteId CHAR(20),
+  FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
+);
+
+CREATE TABLE estoque (
+  estoqueId CHAR(20) PRIMARY KEY,
+  tamanho NUMBER(4) NOT NULL, 
+  alimento VARCHAR2(30) NOT NULL,
+  clienteId CHAR(20) NOT NULL,
   FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
 CREATE TABLE alimento (
   alimentoId CHAR(20) PRIMARY KEY,
   nome VARCHAR2(50) NOT NULL,
-  validade varchar2(6),
+  validade CHAR(6),
   quantidade NUMBER(10) NOT NULL,
-  clienteId CHAR(20) NOT NULL,
-  CONSTRAINT fk_cliente_clienteId FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
+  estoqueId CHAR(20) NOT NULL,  
+  FOREIGN KEY (estoqueId) REFERENCES estoque(estoqueId)
 );
 
 CREATE TABLE movimentacao (
   clienteIdUsuario CHAR(20),
   clienteIdInstituicao CHAR(20),
   num_solicitacao CHAR(10) PRIMARY KEY,
-  data_movimentacao VARCHAR2(12) NOT NULL,
+  data_movimentacao CHAR(12) NOT NULL,
   descricao VARCHAR2(150) NOT NULL,
   categoria VARCHAR2(20) NOT NULL,
   FOREIGN KEY (clienteIdUsuario) REFERENCES cliente(clienteId),
   FOREIGN KEY (clienteIdInstituicao) REFERENCES cliente(clienteId)
 );
 
-CREATE TABLE Avaliacao (
-  texto VARCHAR2(150) NOT NULL,
-  dataComentario VARCHAR2(12) NOT NULL,
-  instituicao CHAR(20) NOT NULL,
-  usuario CHAR(20) NOT NULL,
-  dataAvaliacao VARCHAR2(12),
-  FOREIGN KEY (usuario) REFERENCES cliente(clienteId),
-  FOREIGN KEY (instituicao) REFERENCES instituicao(clienteId)
-);
-CREATE TABLE Comentario(
-  comentarioId CHAR(5) PRIMARY KEY,
-  cliente VARCHAR2(40) NOT NULL,
-  instituicao VARCHAR2(50) NOT NULL,
-  alimento VARCHAR2(50) NOT NULL,
-  nota NUMBER(2) NOT NULL
+CREATE TABLE avaliacao (
+  nota NUMBER(2) NOT NULL,
+  dataAvaliacao CHAR(12),
+  avaliacaoId CHAR(20) PRIMARY KEY,
+  clienteId CHAR(20),
+  usuarioCpf CHAR(11),
+  FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
-CREATE TABLE Estoque (
-  estoqueId CHAR(5) PRIMARY KEY,
-  tamanho NUMBER(4) NOT NULL, 
-  alimento VARCHAR2(30) NOT NULL,
-  fk_clienteId CHAR(20) NOT NULL,
-  FOREIGN KEY (fk_clienteId) REFERENCES cliente(clienteId)
+CREATE TABLE comentario(
+  comentarioId CHAR(20) PRIMARY KEY,
+  texto VARCHAR2(250) NOT NULL,
+  dataComentario CHAR(12) NOT NULL,
+  avaliacaoId CHAR(20),
+  FOREIGN KEY (avaliacaoId) REFERENCES avaliacao(avaliacaoId)
 );
 
-CREATE TABLE MovimentacaoEstoque(
- mvEstoqueId CHAR(5) PRIMARY KEY,
- qtdeMovimentada NUMBER(4),
- entrada VARCHAR2(12),
- estoque NUMBER(4)
-);
-
-CREATE TABLE RelatorioMovimentacao(
-  movimentacao VARCHAR2(20) NOT NULL,
-  dataTermino VARCHAR2(12) NOT NULL,
-  dataInicio VARCHAR2(12) NOT NULL,
-  insituicao VARCHAR2(50) NOT NULL,
-  relatotioId CHAR(5) PRIMARY KEY
-);
-
-CREATE TABLE ReservaCliente (
-  checkIn VARCHAR2(12) NOT NULL,
-  dataReserva VARCHAR2(12) NOT NULL,
-  checkOut VARCHAR2(12) NOT NULL,
-  reservaId CHAR(5) NOT NULL,
-  fk_clienteId CHAR(20) NOT NULL,
-  FOREIGN KEY (fk_clienteId) REFERENCES cliente(clienteId)
+CREATE TABLE reservaCliente (
+  reservaId CHAR(20) PRIMARY KEY,
+  checkIn CHAR(12) NOT NULL,
+  dataReserva CHAR(12) NOT NULL,
+  checkOut CHAR(12) NOT NULL,
+  clienteId CHAR(20),
+  FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 
 -- Inserts cliente

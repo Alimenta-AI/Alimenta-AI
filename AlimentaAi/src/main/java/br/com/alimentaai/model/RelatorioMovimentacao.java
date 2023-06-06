@@ -52,7 +52,7 @@ public class RelatorioMovimentacao {
     }
 
     @Override
-    public String toString() {
+    public String   toString() {
         return "RelatorioMovimentacao{" +
                 "instituicao=" + instituicao +
                 ", dataInicio=" + dataInicio +
