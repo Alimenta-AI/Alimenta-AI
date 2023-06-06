@@ -15,10 +15,10 @@ const Footer = () => {
         </div>
         <div className="footer-icons">
           <ul>
-            <li><a href="#"><BsTwitter /></a></li>
-            <li><a href="#"><SiLinkedin /></a></li>
-            <li><a href="#"><BsYoutube /></a></li>
-            <li><a href="#"><FaFacebookF /></a></li>
+            <li><button><BsTwitter /></button></li>
+            <li><button><SiLinkedin /></button></li>
+            <li><button><BsYoutube /></button></li>
+            <li><button><FaFacebookF /></button></li>
           </ul>
         </div>
       </div>
@@ -36,7 +36,7 @@ const Footer = () => {
         </div>
         <div className="footer-section-columns">
           <span>Termos & Condições</span>
-          <span>Politica de Privacidade</span>
+          <span>Política de Privacidade</span>
         </div>
       </div>
     </div>
