@@ -117,101 +117,101 @@ function Menu() {
   }
 
   return (
-    <div className="Menu">
-      <p className="Titulo-tabela">Cadastro para realizar a doação de alimentos</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th>Descrição alimento</th>
-            <th>Unidade</th>
-            <th>Qtde Alimento</th>
-            <th>Validade</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <tr key={index}>
-              <td>
-                <input type="text" className="codigo-input" value={row.codigo} readOnly />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  className="descricao-input"
-                  value={row.descricao}
-                  onChange={(event) => handleInputChange(event, index, 'descricao')}
-                />
-              </td>
-              <td>
-                <select
-                  className="unidade-select"
-                  value={row.unidade}
-                  onChange={(event) => handleSelectChange(event, index, 'unidade')}
-                >
-                  <option value="">Selecione</option>
-                  {unitsOfMeasure.map((unit) => (
-                    <option key={unit} value={unit}>
-                      {unit}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td>
-                <input
-                  type="text"
-                  className="quantidade-input"
-                  value={row.quantidade}
-                  onChange={(event) => handleInputChange(event, index, 'quantidade')}
-                />
-              </td>
-              <td>
-                <input
-                  type="date"
-                  className="validade-input"
-                  value={row.validade}
-                  onChange={(event) => handleInputChange(event, index, 'validade')}
-                />
-              </td>
-              <td>
-                {index === data.length - 1 ? (
-                  <button className="add-button" onClick={handleAddRow}>
-                    <i className="fa fa-plus-circle add-icon" aria-hidden="true">
-                      +
-                    </i>
-                  </button>
-                ) : (
-                  <button className="delete-button" onClick={() => handleDeleteRow(index)}>
-                    <i className="fa fa-times-circle delete-icon" aria-hidden="true">
-                      x
-                    </i>
-                  </button>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="botoes">
-        <button className="clear-all-button" onClick={handleClearAll}>
-          Limpar Tudo
-        </button>
-        <button className="cadastrar-doacao-button" onClick={handleCadastrarDoacao}>
-          Cadastrar Doação
-        </button>
-      </div>
-      {errorMessage && (
-        <div className="error-message">
-          <p className="error-text">{errorMessage}</p>
+      <div className="Menu page">
+          <p className="Titulo-tabela">Cadastro para realizar a doação de alimentos</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Descrição alimento</th>
+                <th>Unidade</th>
+                <th>Qtde Alimento</th>
+                <th>Validade</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((row, index) => (
+                <tr key={index}>
+                  <td>
+                    <input type="text" className="codigo-input" value={row.codigo} readOnly />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      className="descricao-input"
+                      value={row.descricao}
+                      onChange={(event) => handleInputChange(event, index, 'descricao')}
+                    />
+                  </td>
+                  <td>
+                    <select
+                      className="unidade-select"
+                      value={row.unidade}
+                      onChange={(event) => handleSelectChange(event, index, 'unidade')}
+                    >
+                      <option value="">Selecione</option>
+                      {unitsOfMeasure.map((unit) => (
+                        <option key={unit} value={unit}>
+                          {unit}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      className="quantidade-input"
+                      value={row.quantidade}
+                      onChange={(event) => handleInputChange(event, index, 'quantidade')}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="date"
+                      className="validade-input"
+                      value={row.validade}
+                      onChange={(event) => handleInputChange(event, index, 'validade')}
+                    />
+                  </td>
+                  <td>
+                    {index === data.length - 1 ? (
+                      <button className="add-button" onClick={handleAddRow}>
+                        <i className="fa fa-plus-circle add-icon" aria-hidden="true">
+                          +
+                        </i>
+                      </button>
+                    ) : (
+                      <button className="delete-button" onClick={() => handleDeleteRow(index)}>
+                        <i className="fa fa-times-circle delete-icon" aria-hidden="true">
+                          x
+                        </i>
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="botoes">
+            <button className="clear-all-button" onClick={handleClearAll}>
+              Limpar Tudo
+            </button>
+            <button className="cadastrar-doacao-button" onClick={handleCadastrarDoacao}>
+              Cadastrar Doação
+            </button>
+          </div>
+          {errorMessage && (
+            <div className="error-message">
+              <p className="error-text">{errorMessage}</p>
+            </div>
+          )}
+          {doacaoRealizada && (
+            <div className="popup success-popup">
+              <p>Doação realizada com sucesso!</p>
+            </div>
+          )}
         </div>
-      )}
-      {doacaoRealizada && (
-        <div className="popup success-popup">
-          <p>Doação realizada com sucesso!</p>
-        </div>
-      )}
-    </div>
   );
 }
 

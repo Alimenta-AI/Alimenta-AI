@@ -1,12 +1,6 @@
 .Menu {
   text-align: center;
-}
-
-body {
-  background-color: black;
-  overflow-x: hidden;
-}
-
+  }
 .delete-icon {
   color: red;
   cursor: pointer;
@@ -19,11 +13,11 @@ body {
 }
 
 .table-container {
+  position: relative;
   margin: 0 auto;
   text-align: center;
   margin-top: 100px;
 }
-
 .clear-all-button {
   margin-top: 20px;
   margin-right: 20px;
@@ -34,6 +28,7 @@ body {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  border-radius: s;
 }
 
 .cadastrar-doacao-button {
@@ -45,6 +40,7 @@ body {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .codigo-input,
@@ -59,14 +55,17 @@ body {
   border: 1px solid green;
   height: 30px;
   text-align: center;
+  border-radius: 10px;
 }
-
 table {
   margin: 0 auto;
   margin-top: 50px;
   border-collapse: collapse;
   background-color: white;
   box-shadow: 0 0 10px green;
+  border-radius: 20px;
+  background: #e0e0e0;
+  box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
 }
 
 th,
@@ -84,6 +83,7 @@ td input,
 td select {
   border: 1px solid green;
   color: black;
+  border-radius: 10px;
 }
 
 .fornecedor-column {
@@ -112,7 +112,7 @@ td select {
 .Titulo-tabela {
   position: relative;
   margin-top: 10px;
-  color: rgb(0, 0, 0);
+  color: rgb(11, 43, 23);
   font-size: 25px;
   font-weight: bold;
   text-transform: uppercase;
@@ -171,11 +171,13 @@ td select {
   text-align: center;
   z-index: 9999;
 }
+
 .success-popup {
   font-size: 15px;
   color: rgb(7, 255, 48);
   border-radius: 4px;
 }
+
 .popup-message {
   font-size: 18px;
   color: green;
@@ -195,4 +197,5 @@ td select {
 .popup-button:hover {
   background-color: darkgreen;
 }
+
 
