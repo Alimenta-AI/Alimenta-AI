@@ -42,26 +42,26 @@ public class UsuarioService {
         }
 
         //Validações criadas
-        if(!validarNascimento(nascimento)){
-            return false;
-        }
-        if(!validarSenha(senha)){
-            return false;
-        }
-        if(validarNome(nome)){
-            return false;
-        }
+//        if(!validarNascimento(nascimento)){
+//            return false;
+//        }
+//        if(!validarSenha(senha)){
+//            return false;
+//        }
+//        if(!validarNome(nome)){
+//            return false;
+//        }
 
         //Validações por API:
-        if (!validaCPF(cpf)) {
-            return false;
-        }
-        if (!validaEmail(email)) {
-            return false;
-        }
-        if (!validaPhone(celular)) {
-            return false;
-        }
+//        if (!validaCPF(cpf)) {
+//            return false;
+//        }
+//        if (!validaEmail(email)) {
+//            return false;
+//        }
+//        if (!validaPhone(celular)) {
+//            return false;
+//        }
 
         //Se todas as validações derem certo ele retorna true e faz o insert no Banco, caso contrário retorna dados inválidos
         return true;
@@ -75,6 +75,7 @@ public class UsuarioService {
         HttpResponse response = httpClient.execute(request);
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
         String jsonResponse = reader.readLine();
+        System.out.println("Validação cpf");
         return jsonResponse.contains("\"status\": true");
     }
 
@@ -86,6 +87,7 @@ public class UsuarioService {
         HttpResponse response = httpClient.execute(request);
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
         String jsonResponse = reader.readLine();
+        System.out.println("Validação email");
         return jsonResponse.contains("\"format_valid\": true");
     }
 
@@ -97,6 +99,7 @@ public class UsuarioService {
         HttpResponse response = httpClient.execute(request);
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
         String jsonResponse = reader.readLine();
+        System.out.println("Validação celular");
         return jsonResponse.contains("\"valid\": true");
     }
 

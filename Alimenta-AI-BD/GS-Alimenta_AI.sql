@@ -2,7 +2,7 @@ CREATE TABLE cliente (
   clienteId CHAR(20) PRIMARY KEY,
   nome VARCHAR2(50) NOT NULL,
   email VARCHAR2(150) UNIQUE NOT NULL,
-  senha CHAR(20) NOT NULL,
+  senha VARCHAR2(20) NOT NULL,
   celular CHAR(11) UNIQUE NOT NULL,
   endereco VARCHAR2(200) NOT NULL,
   tipoCliente NUMBER(1) NOT NULL
@@ -34,7 +34,7 @@ CREATE TABLE estoque (
 CREATE TABLE alimento (
   alimentoId CHAR(20) PRIMARY KEY,
   nome VARCHAR2(50) NOT NULL,
-  validade CHAR(6),
+  validade CHAR(6), -- mmyyyy 
   quantidade NUMBER(10) NOT NULL,
   estoqueId CHAR(20) NOT NULL,  
   FOREIGN KEY (estoqueId) REFERENCES estoque(estoqueId)
@@ -43,7 +43,7 @@ CREATE TABLE alimento (
 CREATE TABLE movimentacao (
   clienteIdUsuario CHAR(20),
   clienteIdInstituicao CHAR(20),
-  num_solicitacao CHAR(10) PRIMARY KEY,
+  num_solicitacao VARCHAR2(10) PRIMARY KEY,
   data_movimentacao CHAR(12) NOT NULL,
   descricao VARCHAR2(150) NOT NULL,
   categoria VARCHAR2(20) NOT NULL,
@@ -95,7 +95,7 @@ INSERT INTO usuario VALUES ('56789012345', '20040505', 'SIM', 'CLT005');
 INSERT INTO usuario VALUES ('67890123456', '20050606', 'SIM', 'CLT006');
 INSERT INTO usuario VALUES ('78901234567', '20060707', 'SIM', 'CLT007');
 INSERT INTO usuario VALUES ('89012345678', '20070808', 'SIM', 'CLT008');
-INSERT INTO usuario VALUES ('90123456789', '20080909', 'NÃO', 'CLT009');
+INSERT INTO usuario VALUES ('90123456789', '20080909', 'Nï¿½O', 'CLT009');
 INSERT INTO usuario VALUES ('01234567890', '20091010', 'SIM', 'CLT010');
 
 INSERT INTO instituicao VALUES ('www.instituicao1.com', 'Tipo 1', '12345678901234', 'CLT001');
@@ -109,16 +109,16 @@ INSERT INTO instituicao VALUES ('www.instituicao8.com', 'Tipo 2', '8901234567890
 INSERT INTO instituicao VALUES ('www.instituicao9.com', 'Tipo 1', '90123456789012', 'CLT009');
 INSERT INTO instituicao VALUES ('www.instituicao10.com', 'Tipo 3', '01234567890123', 'CLT010');
 
-INSERT INTO movimentacao VALUES ('CLT001', 'CLT002', 'SOL001', '20230529', 'Solicitação 1', 'Categoria 1');
-INSERT INTO movimentacao VALUES ('CLT002', 'CLT003', 'SOL002', '20230528', 'Solicitação 2', 'Categoria 2');
-INSERT INTO movimentacao VALUES ('CLT003', 'CLT004', 'SOL003', '20230527', 'Solicitação 3', 'Categoria 1');
-INSERT INTO movimentacao VALUES ('CLT004', 'CLT005', 'SOL004', '20230526', 'Solicitação 4', 'Categoria 3');
-INSERT INTO movimentacao VALUES ('CLT005', 'CLT006', 'SOL005', '20230525', 'Solicitação 5', 'Categoria 2');
-INSERT INTO movimentacao VALUES ('CLT006', 'CLT007', 'SOL006', '20230524', 'Solicitação 6', 'Categoria 1');
-INSERT INTO movimentacao VALUES ('CLT007', 'CLT008', 'SOL007', '20230523', 'Solicitação 7', 'Categoria 3');
-INSERT INTO movimentacao VALUES ('CLT008', 'CLT009', 'SOL008', '20230522', 'Solicitação 8', 'Categoria 2');
-INSERT INTO movimentacao VALUES ('CLT009', 'CLT010', 'SOL009', '20230521', 'Solicitação 9', 'Categoria 1');
-INSERT INTO movimentacao VALUES ('CLT010', 'CLT001', 'SOL010', '20230520', 'Solicitação 10', 'Categoria 3');
+INSERT INTO movimentacao VALUES ('CLT001', 'CLT002', 'SOL001', '20230529', 'Solicitaï¿½ï¿½o 1', 'Categoria 1');
+INSERT INTO movimentacao VALUES ('CLT002', 'CLT003', 'SOL002', '20230528', 'Solicitaï¿½ï¿½o 2', 'Categoria 2');
+INSERT INTO movimentacao VALUES ('CLT003', 'CLT004', 'SOL003', '20230527', 'Solicitaï¿½ï¿½o 3', 'Categoria 1');
+INSERT INTO movimentacao VALUES ('CLT004', 'CLT005', 'SOL004', '20230526', 'Solicitaï¿½ï¿½o 4', 'Categoria 3');
+INSERT INTO movimentacao VALUES ('CLT005', 'CLT006', 'SOL005', '20230525', 'Solicitaï¿½ï¿½o 5', 'Categoria 2');
+INSERT INTO movimentacao VALUES ('CLT006', 'CLT007', 'SOL006', '20230524', 'Solicitaï¿½ï¿½o 6', 'Categoria 1');
+INSERT INTO movimentacao VALUES ('CLT007', 'CLT008', 'SOL007', '20230523', 'Solicitaï¿½ï¿½o 7', 'Categoria 3');
+INSERT INTO movimentacao VALUES ('CLT008', 'CLT009', 'SOL008', '20230522', 'Solicitaï¿½ï¿½o 8', 'Categoria 2');
+INSERT INTO movimentacao VALUES ('CLT009', 'CLT010', 'SOL009', '20230521', 'Solicitaï¿½ï¿½o 9', 'Categoria 1');
+INSERT INTO movimentacao VALUES ('CLT010', 'CLT001', 'SOL010', '20230520', 'Solicitaï¿½ï¿½o 10', 'Categoria 3');
 
 INSERT INTO estoque VALUES ('EST001', 100, 'CLT001');
 INSERT INTO estoque VALUES ('EST002', 200, 'CLT002');
@@ -131,11 +131,11 @@ INSERT INTO estoque VALUES ('EST008', 300, 'CLT008');
 INSERT INTO estoque VALUES ('EST009', 200, 'CLT009');
 INSERT INTO estoque VALUES ('EST010', 150, 'CLT010');
 
-INSERT INTO alimento VALUES ('ALM001', 'Maçã', '230329', 10, 'CLT001');
+INSERT INTO alimento VALUES ('ALM001', 'Maï¿½ï¿½', '230329', 10, 'CLT001');
 INSERT INTO alimento VALUES ('ALM002', 'Arroz', '241224', 5, 'CLT002');
-INSERT INTO alimento VALUES ('ALM003', 'Feijão', '150923', 7, 'CLT003');
+INSERT INTO alimento VALUES ('ALM003', 'Feijï¿½o', '150923', 7, 'CLT003');
 INSERT INTO alimento VALUES ('ALM004', 'Frango', '010122', 2, 'CLT004');
-INSERT INTO alimento VALUES ('ALM005', 'Pão', '311221', 15, 'CLT005');
+INSERT INTO alimento VALUES ('ALM005', 'Pï¿½o', '311221', 15, 'CLT005');
 INSERT INTO alimento VALUES ('ALM006', 'Leite', '070322', 8, 'CLT006');
 INSERT INTO alimento VALUES ('ALM007', 'Batata', '230521', 12, 'CLT007');
 INSERT INTO alimento VALUES ('ALM008', 'Cenoura', '060124', 9, 'CLT008');
@@ -153,15 +153,15 @@ INSERT INTO avaliacao VALUES (7, '20230508', 'AVA008', 'CLT008', '89012345678');
 INSERT INTO avaliacao VALUES (6, '20230509', 'AVA009', 'CLT009', '90123456789');
 INSERT INTO avaliacao VALUES (9, '20230510', 'AVA010', 'CLT010', '01234567890');
 
-INSERT INTO comentario VALUES ('COM001', 'Ótimo serviço!', '20230501', 'AVA001');
+INSERT INTO comentario VALUES ('COM001', 'ï¿½timo serviï¿½o!', '20230501', 'AVA001');
 INSERT INTO comentario VALUES ('COM002', 'Excelente atendimento.', '20230502', 'AVA002');
 INSERT INTO comentario VALUES ('COM003', 'Precisa melhorar a pontualidade.', '20230503', 'AVA003');
 INSERT INTO comentario VALUES ('COM004', 'Gostei dos produtos oferecidos.', '20230504', 'AVA004');
-INSERT INTO comentario VALUES ('COM005', 'Serviço de alta qualidade.', '20230505', 'AVA005');
-INSERT INTO comentario VALUES ('COM006', 'Atendimento rápido e eficiente.', '20230506', 'AVA006');
-INSERT INTO comentario VALUES ('COM007', 'Preços competitivos.', '20230507', 'AVA007');
-INSERT INTO comentario VALUES ('COM008', 'Poderia ter mais opções de produtos.', '20230508', 'AVA008');
-INSERT INTO comentario VALUES ('COM009', 'Recomendo o serviço.', '20230509', 'AVA009');
+INSERT INTO comentario VALUES ('COM005', 'Serviï¿½o de alta qualidade.', '20230505', 'AVA005');
+INSERT INTO comentario VALUES ('COM006', 'Atendimento rï¿½pido e eficiente.', '20230506', 'AVA006');
+INSERT INTO comentario VALUES ('COM007', 'Preï¿½os competitivos.', '20230507', 'AVA007');
+INSERT INTO comentario VALUES ('COM008', 'Poderia ter mais opï¿½ï¿½es de produtos.', '20230508', 'AVA008');
+INSERT INTO comentario VALUES ('COM009', 'Recomendo o serviï¿½o.', '20230509', 'AVA009');
 INSERT INTO comentario VALUES ('COM010', 'Nada a reclamar.', '20230510', 'AVA010');
 
 INSERT INTO reservaCliente VALUES ('RES001', '20230601', '20230601', '20230603', 'CLT001');
@@ -178,7 +178,7 @@ INSERT INTO reservaCliente VALUES ('RES010', '20230715', '20230715', '20230718',
 --clientes que possuem tipoCliente igual 1--
 SELECT nome, email, endereco FROM cliente WHERE tipoCliente = 1 ORDER BY nome;
 
---Essa consulta retornará os alimentos (nome e validade) e seus respectivos clientes (nome)
+--Essa consulta retornarï¿½ os alimentos (nome e validade) e seus respectivos clientes (nome)
 ---para alimentos com quantidade maior que 5, ordenados pela validade do alimento.--
 SELECT alimento.nome, alimento.validade, cliente.nome
 FROM alimento
@@ -194,7 +194,7 @@ JOIN estoque e ON a.estoqueId = e.estoqueId
 JOIN cliente c ON e.clienteId = c.clienteId
 GROUP BY c.tipoCliente;
 
- --Obter a média de quantidade de alimentos por tipo de cliente, considerando apenas os clientes que possuem mais de 3 alimentos:
+ --Obter a mï¿½dia de quantidade de alimentos por tipo de cliente, considerando apenas os clientes que possuem mais de 3 alimentos:
 SELECT c.tipoCliente, AVG(a.quantidade) AS media_alimentos
 FROM alimento a
 JOIN estoque e ON a.estoqueId = e.estoqueId

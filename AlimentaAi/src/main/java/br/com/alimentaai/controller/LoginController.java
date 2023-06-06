@@ -19,6 +19,7 @@ public class LoginController {
             ClienteDAO clienteDAO = new ClienteDAO(con);
 
             Cliente cliente = clienteDAO.buscarEmail(email);
+            System.out.println(cliente);
             if (cliente != null) {
                 MessageDigest digest;
                 try {
@@ -34,7 +35,8 @@ public class LoginController {
                     hexString.append(hex);
                 }
                 String senhaEncriptada = hexString.toString();
-                if (senhaEncriptada.equals(clienteDAO.buscarSenha(senhaEncriptada))) {
+
+                if (senhaEncriptada.equals(cliente.getSenha())) {
                     Conexao.fecharConexao(con);
                     return true;
                 } else {

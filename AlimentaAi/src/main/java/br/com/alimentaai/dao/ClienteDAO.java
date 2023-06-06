@@ -2,6 +2,8 @@ package br.com.alimentaai.dao;
 
 import br.com.alimentaai.model.Cliente;
 import com.google.gson.Gson;
+import oracle.jdbc.internal.OraclePreparedStatement;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -104,21 +106,6 @@ public class ClienteDAO {
     public JsonDataLoggedIn login(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, JsonDataLoggedIn.class);
-    }
-
-    public String buscarSenha(String senha) {
-        String sql = "SELECT * FROM cliente WHERE senha = ?";
-        try {
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, senha);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return senha;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public static class JsonDataLoggedIn {
