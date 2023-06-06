@@ -6,13 +6,14 @@ import br.com.alimentaai.model.Usuario;
 import br.com.alimentaai.service.UsuarioService;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 
 public class UsuarioController {
-    public Usuario cadastrarUsuario(Usuario usuario){
+    public Usuario cadastrarUsuario(Usuario usuario) throws IOException {
         Connection con = Conexao.abrirConexao();
         UsuarioDAO usuarioDAO = new UsuarioDAO(con);
         UsuarioService usuarioService = new UsuarioService();
@@ -75,7 +76,7 @@ public class UsuarioController {
         return usuario;
     }
 
-    public Usuario atualizarUsuario(Usuario usuario){
+    public Usuario atualizarUsuario(Usuario usuario) throws IOException {
         Connection con = Conexao.abrirConexao();
         UsuarioDAO usuarioDAO = new UsuarioDAO(con);
         UsuarioService usuarioService = new UsuarioService();

@@ -66,6 +66,14 @@ public class ClienteController {
         return null;
     }
 
+    public int verificaTipoCliente(String json){
+        JsonParser parser = new JsonParser();
+        JsonObject jsonObject = parser.parse(json).getAsJsonObject();
+        int tipoCliente = jsonObject.get("tipoCliente").getAsInt();
+        System.out.println("Tipo de Cliente: " + tipoCliente);
+        return tipoCliente;
+    }
+
     public String getIdUsuario(String json) {
         Gson gson = new Gson();
         JsonElement element = JsonParser.parseString(json);

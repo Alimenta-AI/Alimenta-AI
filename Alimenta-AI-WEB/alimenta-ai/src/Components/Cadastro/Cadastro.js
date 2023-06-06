@@ -64,7 +64,7 @@ function Cadastro() {
       };
     }
 
-    fetch("https://seuservidor.com/cadastro", {
+    fetch("http://localhost:8080/AlimentaAI/cliente", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

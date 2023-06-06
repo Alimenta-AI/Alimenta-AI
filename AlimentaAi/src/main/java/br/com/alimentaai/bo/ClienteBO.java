@@ -13,6 +13,11 @@ public class ClienteBO {
     private ClienteController cc;
     private ClienteDAO cd;
 
+    public int tipoCliente(String json){
+        cc = new ClienteController();
+        return cc.verificaTipoCliente(json);
+    }
+
     public String listar(String clienteId){
         cc = new ClienteController();
         int tipoCliente = cc.recebeDadosCliente(clienteId);

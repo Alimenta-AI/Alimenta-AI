@@ -1,7 +1,5 @@
 package br.com.alimentaai.service;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -10,13 +8,10 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 
 public class UsuarioService {
 
-    public boolean validarDadosUsuario(String nome, String email, String senha, String celular, String cpf, String nascimento, String endereco) throws IOException {
+    public boolean  validarDadosUsuario(String nome, String email, String senha, String celular, String cpf, String nascimento, String endereco) throws IOException {
         // Validar o nome vazio
         if (nome == null || nome.trim().equals("")) {
             return false;
