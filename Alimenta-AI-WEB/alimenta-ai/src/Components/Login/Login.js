@@ -1,31 +1,44 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
 import './Login.css';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-function Login () {
-  const history = useHistory();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
+function Login() {
   const handleSubmit = (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    setLoading(true); // Inicia o carregamento
-
-    // Aqui você pode fazer a chamada à API ou implementar a lógica de autenticação
-
-    // Exemplo de lógica de autenticação fictícia
-    if (email === "admin" && password === "admin123") {
-      // Login bem-sucedido
-      history.push("/MeuPerfil");
-    } else {
-      // Login inválido
-      alert("Nome de usuário ou senha incorretos");
-    }
-
-    setLoading(false); // Finaliza o carregamento
+  const formData = {
+    email: email,
+    senha: senha,
   };
+
+  fetch("http://localhost:8080/AlimentaAI/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      setEmail("");
+      setSenha("");
+      if (data.success) {
+        alert("Login realizado com sucesso!");
+        setTimeout(() => {
+          window.location = "/meuPerfil";
+        }, 2000);
+      } else {
+        alert("Falha no login. Verifique suas credenciais.");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+const [email, setEmail] = useState("");
+const [senha, setSenha] = useState("");
 
   return (
     <div className="login-container background-image">
@@ -49,20 +62,20 @@ function Login () {
             type="password"
             id="password"
             placeholder="Digite sua senha"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            value={senha}
+            onChange={(event) => setSenha(event.target.value)}
           />
         </div>
-        
+
         <Link to="/esqueci-minha-senha" className="forgot-password-link">
           Esqueci minha senha
         </Link>
-        
+
         <button className="button-ai" type="submit">
-            <span className="span-ai"></span>
-            <span className="span-ai"></span>
-            <span className="span-ai"></span>
-            <span className="span-ai"></span> Login
+          <span className="span-ai"></span>
+          <span className="span-ai"></span>
+          <span className="span-ai"></span>
+          <span className="span-ai"></span> Login
         </button>
         <p className="text-signin">
           Se não possui uma conta,{" "}
@@ -73,6 +86,6 @@ function Login () {
       </form>
     </div>
   );
-};
+}
 
 export default Login;

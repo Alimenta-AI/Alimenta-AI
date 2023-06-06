@@ -1,25 +1,17 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function MeuPerfil() {
-  const [foto, setFoto] = useState('');
+  const [foto, setFoto] = useState(null);
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [celular, setCelular] = useState('');
   const [endereco, setEndereco] = useState('');
 
-  const handleFotoChange = (e) => {
-    const file = e.target.files[0];
-    setFoto(file);
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setFoto(reader.result);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+  const handleFotoChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setFoto(URL.createObjectURL(selectedFile));
   };
 
   const handleNomeChange = (event) => {
@@ -42,24 +34,39 @@ function MeuPerfil() {
     setEndereco(event.target.value);
   };
 
-
   const handleEditarPerfil = () => {
-    // Lógica para salvar as alterações do perfil no backend
-    // Pode-se usar uma API ou um serviço de armazenamento de dados
-    console.log('Perfil editado:', {
-      foto,
-      nome,
-      email,
-      senha,
-      celular,
-      endereco
-    });
+    const formData = {
+      nome: nome,
+      email: email,
+      senha: senha,
+      celular: celular,
+      endereco: endereco,
+    };
+
+    axios
+      .put('http://localhost:8080/AlimentaAI/usuario', formData)
+      .then((response) => {
+        console.log(response.data);
+        alert('Perfil atualizado com sucesso!');
+      })
+      .catch((error) => {
+        console.error(error);
+        alert('Ocorreu um erro ao atualizar o perfil.');
+      });
   };
 
   const handleExcluirPerfil = () => {
-    // Lógica para excluir o perfil do usuário
-    // Pode-se usar uma API ou um serviço de armazenamento de dados
-    console.log('Perfil excluído');
+    axios
+      .delete('http://localhost:8080/AlimentaAI/usuario')
+      .then((response) => {
+        console.log(response.data);
+        alert('Perfil excluído com sucesso!');
+        // Redirecionar para a página de login ou qualquer outra ação necessária
+      })
+      .catch((error) => {
+        console.error(error);
+        alert('Ocorreu um erro ao excluir o perfil.');
+      });
   };
 
   return (
@@ -126,7 +133,6 @@ function MeuPerfil() {
         />
       </div>
       <br />
-      <br />
       <div>
         <button className="btn-editar" onClick={handleEditarPerfil}>
           Editar
@@ -140,4 +146,3 @@ function MeuPerfil() {
 }
 
 export default MeuPerfil;
-
