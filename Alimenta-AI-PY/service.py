@@ -1,3 +1,7 @@
+import hashlib
+import time
+
+
 def Nome():
     while True:
         nome = input('Nome Completo: ')
@@ -63,7 +67,6 @@ def Data():
         if data.count('/') == 2 and data != '//':
             dia, mes, ano = data.split('/')
             if 1 <= int(dia) <= 31 and 1 <= int(mes) <= 12 and 1900 <= int(ano) <= 2022:
-                print(data.strip(' '))
                 return data.strip(' ')
             else:
                 print('Dia/Mes/Ano Inválido(s)')
@@ -83,65 +86,11 @@ def Cpf():
             print("Error! Digite valores válidos!")
 
 
-def cnpj():
-    while True:
-        try:
-            CNPJ = input('CNPJ (Apenas Números): ')
-            if len(CNPJ) == 14:
-                return CNPJ
-            else:
-                print("Error! Quantidade de caracteres incorreta.")
-        except ValueError:
-            print("Error! Digite valores válidos!")
-
-
-
 def clienteID():
-    while True:
-        try:
-            cliente = input("Digite o clienteID: ")
-            return cliente
-        except ValueError:
-            print("Erro! Digite valores válidos!")
-            break
-
-
-def tipo_cliente():
-    while True:
-        try:
-            tipo = int(
-                input('Tipo de Cliente (0 - Pessoa Física, 1 - Pessoa Jurídica): '))
-            if tipo == 0 or tipo == 1:
-                return tipo
-            else:
-                print("Erro! Digite um valor válido (0 ou 1).")
-        except ValueError:
-            print("Erro! Digite um valor válido (0 ou 1).")
-
-def confereClienteExistente(clienteId):
-    # Executar uma consulta para verificar se o clienteId existe na tabela cliente
-    sql = "SELECT COUNT(*) FROM cliente WHERE clienteId = :clienteId"
-
-    # Executar a consulta
-    from controller import inst_SQL
-    inst_SQL.execute(sql, {'clienteId': clienteId})
-    result = inst_SQL.fetchone()
-
-    # Verificar se o clienteId existe
-    if result[0] > 0:
-        return True
-    else:
-        return False
-
-def confereInstituicaoExistente(cnpj):
-    dados = f"""SELECT * FROM Instituicao WHERE cnpj = '{cnpj}'"""
-    from controller import inst_SQL
-    inst_SQL.execute(dados)
-    listaInstituicao = inst_SQL.fetchall()
-    if len(listaInstituicao) != 0:
-        return True
-    else:
-        return False
+    timestamp = str(time.time()).encode('utf-8')
+    sha1_hash = hashlib.sha1(timestamp).hexdigest()
+    unique_hash = sha1_hash[:20]
+    return unique_hash
 
 
 def endereco():
@@ -151,49 +100,3 @@ def endereco():
             return enderecoCompleto
         except ValueError:
             print("Erro! Digite valores válidos!")
-
-
-def website():
-    while True:
-        try:
-            website = input("Digite o website: ")
-            return website
-        except ValueError:
-            print("Erro! Digite valores válidos!")
-
-
-def tipo():
-    while True:
-        try:
-            tipo = input("Digite o tipo: ")
-            return tipo
-        except ValueError:
-            print("Erro! Digite valores válidos!")
-
-def puxarClienteId():
-    try:
-        clienteId = input("Digite o clienteId: ")
-
-        # Executar uma consulta para buscar o clienteId na tabela cliente
-        sql = "SELECT clienteid FROM Cliente WHERE clienteid = :clienteId"
-
-        # Crie um objeto de cursor para executar a consulta
-        from controller import conn
-        cursor = conn.cursor()
-
-        # Executar a consulta SQL
-        cursor.execute(sql, {'clienteId': clienteId})
-        result = cursor.fetchone()
-
-        # Feche o cursor
-        cursor.close()
-
-        # Verificar se o clienteId existe
-        if result is not None:
-            return result[0]  # Retorna o clienteId encontrado na tabela cliente
-        else:
-            return None  # Retorna None se o clienteId não existir na tabela cliente
-    except Exception as erro:
-        print("Erro ao buscar clienteId na tabela cliente:", erro)
-        return None
-
