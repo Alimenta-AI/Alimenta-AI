@@ -121,3 +121,84 @@ def subMenuDoacao():
         print('Opção inválida')
 
     return x
+
+
+def puxarClienteId():
+    try:
+        clienteId = input("Digite o clienteId: ")
+
+        # Executar uma consulta para buscar o clienteId na tabela cliente
+        sql = "SELECT clienteid FROM Cliente WHERE clienteid = :clienteId"
+
+        # Crie um objeto de cursor para executar a consulta
+        from controller import conn
+        cursor = conn.cursor()
+
+        # Executar a consulta SQL
+        cursor.execute(sql, {'clienteId': clienteId})
+        result = cursor.fetchone()
+
+        # Feche o cursor
+        cursor.close()
+
+        # Verificar se o clienteId existe
+        if result is not None:
+            # Retorna o clienteId encontrado na tabela cliente
+            return result[0]
+        else:
+            return None  # Retorna None se o clienteId não existir na tabela cliente
+    except Exception as erro:
+        print("Erro ao buscar clienteId na tabela cliente:", erro)
+        return None
+
+
+def confereInstituicaoExistente(cnpj):
+    dados = f"""SELECT * FROM Instituicao WHERE cnpj = '{cnpj}'"""
+    from controller import inst_SQL
+    inst_SQL.execute(dados)
+    listaInstituicao = inst_SQL.fetchall()
+    if len(listaInstituicao) != 0:
+        return True
+    else:
+        return False
+
+
+def usuariosCadastrados():
+    limpaTerminal()
+    print('''\033[1;32m=== Usuarios Cadastrados ===\033[0;0m''')
+    # Usuario
+    dados = f"""SELECT * FROM usuario"""
+    inst_SQL.execute(dados)
+    listaUsuario = inst_SQL.fetchall()
+    for usuario in listaUsuario:
+        nome = usuario[0]
+        cpf = usuario[1]
+        nascimento = usuario[2]
+        print(
+            f'''\033[1;32mNome: \033[0;0m{nome} | \033[1;32mcpf: \033[0;0m{cpf} | \033[1;32mNascimento: \033[0;0m{nascimento} ''')
+    criaBarra()
+
+    return
+
+
+def relatorio():
+    limpaTerminal()
+    arquivo = open('relatorio.txt', 'w+')
+    arquivo.write('Relatorio de Usuarios \n')
+    arquivo.write('\n')
+
+    # Consulta SQL para obter os nomes dos usuários
+    dados = """SELECT clienteid FROM usuario"""
+    inst_SQL.execute(dados)
+    listaNomes = inst_SQL.fetchall()
+
+    countUsers = len(listaNomes)
+    arquivo.write(f'A Alimenta-AI possui {countUsers} usuarios \n')
+    for i, nome in enumerate(listaNomes, start=1):
+        arquivo.write(f'{i}.{nome[0]} \n')
+    arquivo.write(f'{dia}/{mes}/{ano}')
+    criaBarra()
+    print('\033[1;32m'"Relatorio gerado em 'relatorio.txt'"'\033[0;0m')
+    criaBarra()
+    arquivo.close()
+    return
