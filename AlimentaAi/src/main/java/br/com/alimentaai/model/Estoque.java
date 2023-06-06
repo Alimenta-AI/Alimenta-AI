@@ -3,13 +3,15 @@ package br.com.alimentaai.model;
 public class Estoque {
     private Alimento alimento;
     private int tamanho;
-
-    public Estoque(Alimento alimento, int tamanho) {
-        this.alimento = alimento;
-        this.tamanho = tamanho;
-    }
+    private String estoqueId;
 
     public Estoque() {
+    }
+
+    public Estoque(Alimento alimento, int tamanho, String estoqueId) {
+        this.alimento = alimento;
+        this.tamanho = tamanho;
+        this.estoqueId = estoqueId;
     }
 
     public Alimento getAlimento() {
@@ -28,11 +30,20 @@ public class Estoque {
         this.tamanho = tamanho;
     }
 
+    public String getEstoqueId() {
+        return estoqueId;
+    }
+
+    public void setEstoqueId(String estoqueId) {
+        this.estoqueId = estoqueId;
+    }
+
     @Override
     public String toString() {
         return "Estoque{" +
                 "alimento=" + alimento +
                 ", tamanho=" + tamanho +
+                ", estoqueId='" + estoqueId + '\'' +
                 '}';
     }
 }

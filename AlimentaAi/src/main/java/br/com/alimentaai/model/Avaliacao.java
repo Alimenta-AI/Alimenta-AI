@@ -7,19 +7,19 @@ public class Avaliacao {
     private Instituicao instituicao;
     private Cliente cliente;
     private int nota;
-
     private LocalDate dataAvaliacao;
+    private String avaliacaoId;
 
-    public Avaliacao(Alimento alimento, Instituicao instituicao, Cliente cliente, int nota, String comentario, LocalDate dataAvaliacao) {
+    public Avaliacao() {
+    }
+
+    public Avaliacao(Alimento alimento, Instituicao instituicao, Cliente cliente, int nota, LocalDate dataAvaliacao, String avaliacaoId) {
         this.alimento = alimento;
         this.instituicao = instituicao;
         this.cliente = cliente;
         this.nota = nota;
-        this.comentario = comentario;
         this.dataAvaliacao = dataAvaliacao;
-    }
-
-    public Avaliacao() {
+        this.avaliacaoId = avaliacaoId;
     }
 
     public Alimento getAlimento() {
@@ -54,20 +54,20 @@ public class Avaliacao {
         this.nota = nota;
     }
 
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
     public LocalDate getDataAvaliacao() {
         return dataAvaliacao;
     }
 
     public void setDataAvaliacao(LocalDate dataAvaliacao) {
         this.dataAvaliacao = dataAvaliacao;
+    }
+
+    public String getAvaliacaoId() {
+        return avaliacaoId;
+    }
+
+    public void setAvaliacaoId(String avaliacaoId) {
+        this.avaliacaoId = avaliacaoId;
     }
 
     @Override
@@ -77,8 +77,8 @@ public class Avaliacao {
                 ", instituicao=" + instituicao +
                 ", cliente=" + cliente +
                 ", nota=" + nota +
-                ", comentario='" + comentario + '\'' +
                 ", dataAvaliacao=" + dataAvaliacao +
+                ", avaliacaoId='" + avaliacaoId + '\'' +
                 '}';
     }
 }

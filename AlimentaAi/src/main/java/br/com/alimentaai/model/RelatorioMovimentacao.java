@@ -3,20 +3,21 @@ package br.com.alimentaai.model;
 import java.time.LocalDate;
 import java.util.List;
 
-public class RelatorioMovimentacao {
+public class RelatorioMovimentacao extends Movimentacao{
     private Instituicao instituicao;
     private LocalDate dataInicio;
     private LocalDate dataTermino;
     private List<MovimentacaoEstoque> movimentacoes;
 
-    public RelatorioMovimentacao(Instituicao instituicao, LocalDate dataInicio, LocalDate dataTermino, List<MovimentacaoEstoque> movimentacoes) {
+    public RelatorioMovimentacao() {
+    }
+
+    public RelatorioMovimentacao(String num_solicitacao, String data_movimentacao, String descricao, String categoria, Instituicao instituicao, LocalDate dataInicio, LocalDate dataTermino, List<MovimentacaoEstoque> movimentacoes) {
+        super(num_solicitacao, data_movimentacao, descricao, categoria);
         this.instituicao = instituicao;
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
         this.movimentacoes = movimentacoes;
-    }
-
-    public RelatorioMovimentacao() {
     }
 
     public Instituicao getInstituicao() {
@@ -52,7 +53,7 @@ public class RelatorioMovimentacao {
     }
 
     @Override
-    public String   toString() {
+    public String toString() {
         return "RelatorioMovimentacao{" +
                 "instituicao=" + instituicao +
                 ", dataInicio=" + dataInicio +
@@ -60,7 +61,5 @@ public class RelatorioMovimentacao {
                 ", movimentacoes=" + movimentacoes +
                 '}';
     }
-
-    // Métodos para adicionar e remover movimentações
 }
 

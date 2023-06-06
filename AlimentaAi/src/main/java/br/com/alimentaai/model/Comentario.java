@@ -7,16 +7,18 @@ public class Comentario extends Avaliacao{
     private Instituicao instituicao;
     private String texto;
     private LocalDate dataComentario;
+    private String comentarioId;
 
-    public Comentario(Alimento alimento, Instituicao instituicao, Cliente cliente, int nota, String comentario, LocalDate dataAvaliacao, Usuario usuario, Instituicao instituicao1, String texto, LocalDate dataComentario) {
-        super(alimento, instituicao, cliente, nota, comentario, dataAvaliacao);
+    public Comentario() {
+    }
+
+    public Comentario(Alimento alimento, Instituicao instituicao, Cliente cliente, int nota, LocalDate dataAvaliacao, String avaliacaoId, Usuario usuario, Instituicao instituicao1, String texto, LocalDate dataComentario, String comentarioId) {
+        super(alimento, instituicao, cliente, nota, dataAvaliacao, avaliacaoId);
         this.usuario = usuario;
         this.instituicao = instituicao1;
         this.texto = texto;
         this.dataComentario = dataComentario;
-    }
-
-    public Comentario() {
+        this.comentarioId = comentarioId;
     }
 
     public Usuario getUsuario() {
@@ -27,10 +29,12 @@ public class Comentario extends Avaliacao{
         this.usuario = usuario;
     }
 
+    @Override
     public Instituicao getInstituicao() {
         return instituicao;
     }
 
+    @Override
     public void setInstituicao(Instituicao instituicao) {
         this.instituicao = instituicao;
     }
@@ -51,6 +55,14 @@ public class Comentario extends Avaliacao{
         this.dataComentario = dataComentario;
     }
 
+    public String getComentarioId() {
+        return comentarioId;
+    }
+
+    public void setComentarioId(String comentarioId) {
+        this.comentarioId = comentarioId;
+    }
+
     @Override
     public String toString() {
         return "Comentario{" +
@@ -58,6 +70,7 @@ public class Comentario extends Avaliacao{
                 ", instituicao=" + instituicao +
                 ", texto='" + texto + '\'' +
                 ", dataComentario=" + dataComentario +
+                ", comentarioId='" + comentarioId + '\'' +
                 '}';
     }
 }

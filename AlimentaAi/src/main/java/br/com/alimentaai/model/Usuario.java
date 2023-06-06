@@ -5,7 +5,6 @@ import java.sql.Date;
 public class Usuario extends Cliente{
     private String nascimento;
     private String cpf;
-
     private String doador;
 
     public Usuario() {

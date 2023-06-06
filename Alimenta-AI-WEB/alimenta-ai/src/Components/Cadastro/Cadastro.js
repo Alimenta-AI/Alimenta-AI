@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 import "./Cadastro.css";
 
 function Cadastro() {
-  const [name, setName] = useState("");
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [senha, setSenha] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [celular, setCelular] = useState("");
+  const [endereco, setEndereco] = useState("");
   const [clientType, setClientType] = useState("person");
   const [cpf, setCPF] = useState("");
-  const [birthdate, setBirthdate] = useState("");
-  const [isDonor, setIsDonor] = useState(false);
+  const [nascimento, setNascimento] = useState("");
+  const [doador, setDoador] = useState("");
   const [website, setWebsite] = useState("");
-  const [companyType, setCompanyType] = useState("");
+  const [tipo, setTipo] = useState("");
   const [cnpj, setCNPJ] = useState("");
   const [termsChecked, setTermsChecked] = useState(false);
 
@@ -34,15 +34,36 @@ function Cadastro() {
       return;
     }
 
-    // Crie um objeto JSON com os valores do formulário
-    const formData = {
-      name: name,
-      email: email,
-      password: password,
-      // Outros campos do formulário...
-    };
+    let formData;
 
-    // Envie a requisição POST para o servidor
+    if (clientType === "person") {
+      // Cria o objeto JSON para pessoa física
+      formData = {
+        nome: nome,
+        email: email,
+        senha: senha,
+        celular: celular,
+        endereco: endereco,
+        tipoCliente: 0,
+        cpf: cpf,
+        nascimento: nascimento,
+        doador: doador,
+      };
+    } else if (clientType === "company") {
+      // Cria o objeto JSON para pessoa jurídica
+      formData = {
+        nome: nome,
+        email: email,
+        senha: senha,
+        celular: celular,
+        endereco: endereco,
+        tipoCliente: 1,
+        website: website,
+        tipo: tipo,
+        cnpj: cnpj,
+      };
+    }
+
     fetch("https://seuservidor.com/cadastro", {
       method: "POST",
       headers: {
@@ -53,6 +74,18 @@ function Cadastro() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        setNome("");
+        setEmail("");
+        setSenha("");
+        setCelular("");
+        setEndereco("");
+        setCPF("");
+        setNascimento("");
+        setDoador("");
+        setWebsite("");
+        setTipo("");
+        setCNPJ("");
+        setTermsChecked(false);
         alert("Cadastro feito com sucesso!");
         setTimeout(() => {
           window.location = "/login";
@@ -61,30 +94,6 @@ function Cadastro() {
       .catch((error) => {
         console.error(error);
       });
-
-    // Aqui você pode usar os valores dos estados para enviar o formulário para o servidor
-    // ...
-
-    // Resetar os valores dos estados após o envio do formulário
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-    setPhone("");
-    setAddress("");
-    setClientType("person");
-    setCPF("");
-    setBirthdate("");
-    setIsDonor(false);
-    setWebsite("");
-    setCompanyType("");
-    setCNPJ("");
-    setTermsChecked(false);
-
-    alert("Cadastro feito com sucesso!");
-    setTimeout(() => {
-      window.location = "/login";
-    }, 2000);
   };
 
   return (
@@ -99,8 +108,8 @@ function Cadastro() {
               type="text"
               id="name"
               placeholder="Digite seu nome"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
+              value={nome}
+              onChange={(event) => setNome(event.target.value)}
             />
           </div>
 
@@ -121,8 +130,8 @@ function Cadastro() {
               type="password"
               id="password"
               placeholder="Digite sua senha"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              value={senha}
+              onChange={(event) => setSenha(event.target.value)}
             />
           </div>
 
@@ -143,8 +152,8 @@ function Cadastro() {
               type="tel"
               id="phone"
               placeholder="Digite seu telefone"
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
+              value={celular}
+              onChange={(event) => setCelular(event.target.value)}
             />
           </div>
 
@@ -154,8 +163,8 @@ function Cadastro() {
               type="text"
               id="address"
               placeholder="Digite seu endereço"
-              value={address}
-              onChange={(event) => setAddress(event.target.value)}
+              value={endereco}
+              onChange={(event) => setEndereco(event.target.value)}
             />
           </div>
 
@@ -190,8 +199,8 @@ function Cadastro() {
                   type="date"
                   id="birthdate"
                   placeholder="Digite sua data de nascimento"
-                  value={birthdate}
-                  onChange={(event) => setBirthdate(event.target.value)}
+                  value={nascimento}
+                  onChange={(event) => setNascimento(event.target.value)}
                 />
               </div>
 
@@ -201,8 +210,8 @@ function Cadastro() {
                   <input
                     type="checkbox"
                     id="isDonor"
-                    checked={isDonor}
-                    onChange={(event) => setIsDonor(event.target.checked)}
+                    checked={doador}
+                    onChange={(event) => setDoador(event.target.checked)}
                   />
                 </label>
               </div>
@@ -228,8 +237,8 @@ function Cadastro() {
                   type="text"
                   id="companyType"
                   placeholder="Digite o tipo de empresa"
-                  value={companyType}
-                  onChange={(event) => setCompanyType(event.target.value)}
+                  value={tipo}
+                  onChange={(event) => setTipo(event.target.value)}
                 />
               </div>
 
@@ -267,7 +276,6 @@ function Cadastro() {
             </Link>
           </p>
         </form>
-        {/* {error && <div className="error-message">{error}</div>} */}
       </div>
     </div>
   );

@@ -27,7 +27,6 @@ CREATE TABLE instituicao (
 CREATE TABLE estoque (
   estoqueId CHAR(20) PRIMARY KEY,
   tamanho NUMBER(4) NOT NULL, 
-  alimento VARCHAR2(30) NOT NULL,
   clienteId CHAR(20) NOT NULL,
   FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
@@ -57,7 +56,6 @@ CREATE TABLE avaliacao (
   dataAvaliacao CHAR(12),
   avaliacaoId CHAR(20) PRIMARY KEY,
   clienteId CHAR(20),
-  usuarioCpf CHAR(11),
   FOREIGN KEY (clienteId) REFERENCES cliente(clienteId)
 );
 

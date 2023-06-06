@@ -6,14 +6,14 @@ public class Movimentacao {
     private String descricao;
     private String categoria;
 
+    public Movimentacao() {
+    }
+
     public Movimentacao(String num_solicitacao, String data_movimentacao, String descricao, String categoria) {
         this.num_solicitacao = num_solicitacao;
         this.data_movimentacao = data_movimentacao;
         this.descricao = descricao;
         this.categoria = categoria;
-    }
-
-    public Movimentacao() {
     }
 
     public String getNum_solicitacao() {

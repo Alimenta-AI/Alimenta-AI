@@ -1,17 +1,18 @@
 package br.com.alimentaai.model;
 
-public class MovimentacaoEstoque {
+public class MovimentacaoEstoque  extends Movimentacao{
     private Estoque estoque;
     private int qtdeMovimentada;
     private boolean entrada; // Indica se é uma entrada (true) ou saída (false) no estoque
 
-    public MovimentacaoEstoque(Estoque estoque, int qtdeMovimentada, boolean entrada) {
+    public MovimentacaoEstoque() {
+    }
+
+    public MovimentacaoEstoque(String num_solicitacao, String data_movimentacao, String descricao, String categoria, Estoque estoque, int qtdeMovimentada, boolean entrada) {
+        super(num_solicitacao, data_movimentacao, descricao, categoria);
         this.estoque = estoque;
         this.qtdeMovimentada = qtdeMovimentada;
         this.entrada = entrada;
-    }
-
-    public MovimentacaoEstoque() {
     }
 
     public Estoque getEstoque() {

@@ -5,13 +5,14 @@ public class Instituicao extends Cliente{
     private String website;
     private String tipo;
 
+    public Instituicao() {
+    }
+
     public Instituicao(String nome, String email, String senha, String celular, String endereco, String clienteId, int tipoCliente, String cnpj, String website, String tipo) {
         super(nome, email, senha, celular, endereco, clienteId, tipoCliente);
         this.cnpj = cnpj;
         this.website = website;
         this.tipo = tipo;
-    }
-    public Instituicao() {
     }
 
     public String getCnpj() {

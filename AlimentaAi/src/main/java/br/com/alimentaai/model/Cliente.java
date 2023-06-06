@@ -8,6 +8,10 @@ public class Cliente {
     private String endereco;
     private String clienteId;
     private int tipoCliente;
+
+    public Cliente() {
+    }
+
     public Cliente(String nome, String email, String senha, String celular, String endereco, String clienteId, int tipoCliente) {
         this.nome = nome;
         this.email = email;
@@ -16,9 +20,6 @@ public class Cliente {
         this.endereco = endereco;
         this.clienteId = clienteId;
         this.tipoCliente = tipoCliente;
-    }
-
-    public Cliente() {
     }
 
     public String getNome() {
