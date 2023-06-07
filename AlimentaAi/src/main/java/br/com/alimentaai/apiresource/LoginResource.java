@@ -21,6 +21,6 @@ public class LoginResource {
         Cliente logando = loginBO.loginBo(json);
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
         builder.path((logando.getEmail()));
-        return Response.created(builder.build()).build();
+        return Response.ok(builder.build()).build();
     }
 }

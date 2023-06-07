@@ -23,7 +23,7 @@ public class ClienteDAO {
         setCon(con);
     }
 
-    public Cliente buscarTipoClientePeloClienteId(String clienteId) {
+    public Cliente buscarClientePeloClienteId(String clienteId) {
         String sql = "SELECT * FROM cliente WHERE clienteid = ?";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);

@@ -11,23 +11,16 @@ import java.util.List;
 
 public class ClienteBO {
     private ClienteController cc;
-    private ClienteDAO cd;
 
     public int tipoCliente(String json){
         cc = new ClienteController();
         return cc.verificaTipoCliente(json);
     }
 
-    public String listar(String clienteId){
+    public Cliente dadosCliente(String clienteId){
         cc = new ClienteController();
-        int tipoCliente = cc.recebeDadosCliente(clienteId);
-        Connection con = Conexao.abrirConexao();
-        cd = new ClienteDAO(con);
-        List<Cliente> clientes = cd.buscarClientesPeloTipo(tipoCliente);
-        Conexao.fecharConexao(con);
-        Gson gson = new Gson();
-        String json = gson.toJson(clientes);
-        return json;
+        Cliente cliente = cc.recebeDadosCliente(clienteId);
+        return cliente;
     }
 
 }

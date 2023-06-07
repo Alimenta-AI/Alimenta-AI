@@ -1,7 +1,9 @@
 package br.com.alimentaai.controller;
 
 import br.com.alimentaai.connection.Conexao;
+import br.com.alimentaai.dao.ClienteDAO;
 import br.com.alimentaai.dao.UsuarioDAO;
+import br.com.alimentaai.model.Cliente;
 import br.com.alimentaai.model.Usuario;
 import br.com.alimentaai.service.UsuarioService;
 import com.google.gson.Gson;
@@ -76,6 +78,20 @@ public class UsuarioController {
         return usuario;
     }
 
+    public Usuario recebeDadosUsuario(String clienteId){
+        Connection con= Conexao.abrirConexao();
+        UsuarioDAO usuarioDAO = new UsuarioDAO(con);
+        Usuario usuario = usuarioDAO.buscarUsuarioPeloClienteId(clienteId);
+        Conexao.fecharConexao(con);
+        if(usuario != null){
+            return usuario;
+        }
+        else{
+            System.out.println("Erro ao buscar cliente");
+            return null;
+        }
+    }
+
     public Usuario atualizarUsuario(Usuario usuario) throws IOException {
         Connection con = Conexao.abrirConexao();
         UsuarioDAO usuarioDAO = new UsuarioDAO(con);
@@ -145,7 +161,7 @@ public class UsuarioController {
         return usuario;
     }
 
-    public Usuario cadastro(String json) {
+    public Usuario usuarioJsonToClass(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Usuario.class);
     }

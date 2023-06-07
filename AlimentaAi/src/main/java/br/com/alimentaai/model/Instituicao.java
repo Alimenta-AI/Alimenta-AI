@@ -1,5 +1,8 @@
 package br.com.alimentaai.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Instituicao extends Cliente{
     private String cnpj;
     private String website;

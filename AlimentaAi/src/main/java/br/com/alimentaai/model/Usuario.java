@@ -1,7 +1,8 @@
 package br.com.alimentaai.model;
 
-import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Usuario extends Cliente{
     private String nascimento;
     private String cpf;

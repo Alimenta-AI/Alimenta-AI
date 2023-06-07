@@ -15,18 +15,18 @@ import java.util.UUID;
 
 public class ClienteController {
 
-    public int recebeDadosCliente(String clienteId){
+    public Cliente recebeDadosCliente(String clienteId){
         Connection con= Conexao.abrirConexao();
         ClienteDAO clienteDAO = new ClienteDAO(con);
-        Cliente cliente = clienteDAO.buscarTipoClientePeloClienteId(clienteId);
+        Cliente cliente = clienteDAO.buscarClientePeloClienteId(clienteId);
         if(cliente != null){
             Conexao.fecharConexao(con);
-            return cliente.getTipoCliente();
+            return cliente;
         }
         else{
             Conexao.fecharConexao(con);
-            System.out.println("Erro ao buscar tipo do cliente");
-            return -1;
+            System.out.println("Erro ao buscar cliente");
+            return null;
         }
     }
 

@@ -1,10 +1,14 @@
 package br.com.alimentaai.dao;
 
+import br.com.alimentaai.model.Cliente;
 import br.com.alimentaai.model.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UsuarioDAO {
@@ -58,6 +62,25 @@ public class UsuarioDAO {
             return e.getMessage();
         }
         return "Success";
+    }
+
+    public Usuario buscarUsuarioPeloClienteId(String clienteId) {
+        String sql = "SELECT * FROM usuario WHERE clienteid = ?";
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, clienteId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setNascimento(rs.getString("nascimento"));
+                usuario.setDoador(rs.getString("doador"));
+                return usuario;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String atualizar(Usuario usuario) {
