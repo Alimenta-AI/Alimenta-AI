@@ -11,8 +11,8 @@ public class Conexao {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String url = "jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL";
-			final String USER = "RM97121";
-			final String PASS = "290603";
+			final String USER = "RM96920";
+			final String PASS = "080903";
 			con = DriverManager.getConnection(url, USER, PASS);
 			System.out.println("Conexao aberta");
 		} catch (ClassNotFoundException e) {
