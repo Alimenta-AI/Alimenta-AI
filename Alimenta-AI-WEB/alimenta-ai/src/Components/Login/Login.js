@@ -40,7 +40,7 @@ const Login = () => {
         handleLogin(email);
 
         // Armazene a sessão no sessionStorage
-        sessionStorage.setItem("sessao", JSON.stringify(userData));
+        sessionStorage.setItem("usuario", JSON.stringify(userData));
 
         history.push("/meuperfil");
         toast.success("Login realizado com sucesso", {
@@ -60,11 +60,11 @@ const Login = () => {
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("sessao");
+    sessionStorage.removeItem("usuario");
     history.push("/login");
   };
 
-  const sessionSessao = sessionStorage.getItem("sessao");
+  const sessionSessao = sessionStorage.getItem("usuario");
 
   if (sessionSessao) {
     history.push("/");

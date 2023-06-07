@@ -8,6 +8,12 @@ function MeuPerfil() {
   const [senha, setSenha] = useState("");
   const [celular, setCelular] = useState("");
   const [endereco, setEndereco] = useState("");
+  const [cpf, setCPF] = useState("");
+  const [nascimento, setNascimento] = useState("");
+  const [doador, setDoador] = useState(false);
+  const [website, setWebsite] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [cnpj, setCnpj] = useState("");
 
   useEffect(() => {
     getUsuario(); // Chama a função getUsuario ao montar o componente
@@ -15,15 +21,46 @@ function MeuPerfil() {
 
   const getUsuario = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/AlimentaAI/cliente/`
-      );
-      const { nome, email, senha, celular, endereco } = response.data;
+      // Obter o clienteId da sessão atual do sessionStorage
+      const usuarioJson = sessionStorage.getItem("usuario");
+      const usuario = JSON.parse(usuarioJson);
+
+      // Verificar se o usuário existe na sessão
+      if (!usuario) {
+        console.error("Usuário não encontrado na sessão.");
+        return;
+      }
+
+      const {
+        nome,
+        email,
+        senha,
+        celular,
+        endereco,
+        cpf,
+        nascimento,
+        doador,
+        website,
+        tipo,
+        cnpj,
+      } = usuario;
+
       setNome(nome);
       setEmail(email);
       setSenha(senha);
       setCelular(celular);
       setEndereco(endereco);
+
+      // Configurar os campos adicionais com base no tipoCliente
+      if (usuario.tipoCliente === 0) {
+        setCPF(cpf);
+        setNascimento(nascimento);
+        setDoador(doador);
+      } else if (usuario.tipoCliente === 1) {
+        setWebsite(website);
+        setTipo(tipo);
+        setCnpj(cnpj);
+      }
     } catch (error) {
       console.error("Erro ao obter usuário:", error);
     }
@@ -88,36 +125,61 @@ function MeuPerfil() {
         <label htmlFor="nome">Nome:</label>
         <input type="text" id="nome" value={nome} />
       </div>
-      <br />
       <div className="input-container">
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" value={email} />
       </div>
-      <br />
-      <div className="input-container">
-        <label htmlFor="senha">Senha:</label>
-        <input type="password" id="senha" value={senha} />
-      </div>
-      <br />
       <div className="input-container">
         <label htmlFor="celular">Celular:</label>
         <input type="text" id="celular" value={celular} />
       </div>
-      <br />
       <div className="input-container">
         <label htmlFor="endereco">Endereço:</label>
         <input type="text" id="endereco" value={endereco} />
       </div>
-      <br />
+
+      {/* Renderizar campos adicionais com base no tipoCliente */}
+      {sessionStorage.getItem("tipoCliente") === 0 && (
+        <div>
+          <div className="input-container">
+            <label htmlFor="cpf">CPF:</label>
+            <input type="text" id="cpf" value={cpf} />
+          </div>
+          <div className="input-container">
+            <label htmlFor="nascimento">Data de Nascimento:</label>
+            <input type="text" id="nascimento" value={nascimento} />
+          </div>
+          <div className="input-container">
+            <label htmlFor="doador">Doador:</label>
+            <input type="checkbox" id="doador" checked={doador} />
+          </div>
+        </div>
+      )}
+
+      {sessionStorage.getItem("tipoCliente") === 1 && (
+        <div>
+          <div className="input-container">
+            <label htmlFor="website">Website:</label>
+            <input type="text" id="website" value={website} />
+          </div>
+          <div className="input-container">
+            <label htmlFor="tipo">Tipo:</label>
+            <input type="text" id="tipo" value={tipo} />
+          </div>
+          <div className="input-container">
+            <label htmlFor="cnpj">CNPJ:</label>
+            <input type="text" id="cnpj" value={cnpj} />
+          </div>
+        </div>
+      )}
+
       <div className="button-container">
         <div className="btn-wrapper">
           <button className="btn-editar" onClick={handleEditarPerfil}>
             Editar
           </button>
         </div>
-        <div className="btn-wrapper">
-          <input type="file" id="foto" accept=".png,.jpg" />
-        </div>
+
         <div className="btn-wrapper">
           <button className="btn-excluir" onClick={handleExcluirPerfil}>
             Excluir

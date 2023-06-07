@@ -19,7 +19,6 @@ public class UsuarioBO {
     public Usuario cadastrarUsuarioBo(String json) throws IOException {
         uc = new UsuarioController();
         Usuario dadosUsuario = uc.usuarioJsonToClass(json);
-        System.out.println(dadosUsuario);
         return uc.cadastrarUsuario(dadosUsuario);
     }
 

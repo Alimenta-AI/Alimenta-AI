@@ -98,10 +98,10 @@ INSERT INTO usuario VALUES ('89012345678', '20070808', 'SIM', 'CLT008');
 INSERT INTO usuario VALUES ('90123456789', '20080909', 'NAO', 'CLT009');
 INSERT INTO usuario VALUES ('01234567890', '20091010', 'SIM', 'CLT010');
 
-INSERT INTO instituicao VALUES ('www.instituicao1.com', 'ONG', '12345678901234', 'CLT001');
-INSERT INTO instituicao VALUES ('www.instituicao2.com', 'ONG', '23456789012345', 'CLT002');
+INSERT INTO instituicao VALUES ('www.instituicao1.com', 'Tipo 1', '12345678901234', 'CLT001');
+INSERT INTO instituicao VALUES ('www.instituicao2.com', 'Tipo 2', '23456789012345', 'CLT002');
 INSERT INTO instituicao VALUES ('www.instituicao3.com', 'Tipo 1', '34567890123456', 'CLT003');
-INSERT INTO instituicao VALUES ('www.instituicao4.com', 'ONG', '45678901234567', 'CLT004');
+INSERT INTO instituicao VALUES ('www.instituicao4.com', 'Tipo 3', '45678901234567', 'CLT004');
 INSERT INTO instituicao VALUES ('www.instituicao5.com', 'Tipo 2', '56789012345678', 'CLT005');
 INSERT INTO instituicao VALUES ('www.instituicao6.com', 'Tipo 1', '67890123456789', 'CLT006');
 INSERT INTO instituicao VALUES ('www.instituicao7.com', 'Tipo 3', '78901234567890', 'CLT007');

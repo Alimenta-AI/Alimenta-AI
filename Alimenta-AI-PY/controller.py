@@ -9,7 +9,7 @@ import hashlib
 
 try:
     dnStr = oracledb.makedsn("oracle.fiap.com.br", "1521", "ORCL")
-    conn = oracledb.connect(user='rm96920', password='080903', dsn=dnStr)
+    conn = oracledb.connect(user='rm97121', password='290603', dsn=dnStr)
     inst_SQL = conn.cursor()
 except Exception as e:
     print("Erro: ", e)
@@ -60,6 +60,8 @@ def menuAcesso():
         listaUsuario = login()
         if (len(listaUsuario) != 0):
             menuInicial(listaUsuario)
+        else:
+            print('\033[1;31m''Dados inválidos''\033[0;0m')
     elif escolha == 2:
         cadastro()
         menuAcesso()
@@ -163,6 +165,8 @@ def menuInicial(listaUsuario):
     print(
         '|  [''\033[1;32m''2''\033[0;0m''] Onde receber ajuda?                      |')
     print(
+        '|  [''\033[1;32m''3''\033[0;0m''] Relatórios do projeto                    |')
+    print(
         '|  [''\033[1;32m''0''\033[0;0m''] Sair                                     |')
     print('------------------------------------------------')
     try:
@@ -180,7 +184,11 @@ def menuInicial(listaUsuario):
         limpaTerminal()
         subMenuClientes(listaUsuario)
     elif escolha == 2:
-        print("dev")
+        limpaTerminal()
+        menuAjuda(listaUsuario)
+    elif escolha == 3:
+        limpaTerminal()
+        relatorios(listaUsuario)
     elif escolha == 0:
         print('\033[1;32m''Saindo...''\033[0;0m')
         sleep(3)
@@ -223,7 +231,7 @@ def subMenuClientes(listaUsuario):
         subMenuClientes(listaUsuario)
     elif escolha == 3:
         removerUsuario(listaUsuario)
-        subMenuClientes(listaUsuario)
+        menuAcesso()
     elif escolha == 0:
         sleep(1)
         limpaTerminal()
@@ -282,6 +290,8 @@ def gerenciarUsuario(listaUsuario):
             except:
                 print('\033[1;31m''Erro de transacao com o BD''\033[0; 0m' + e)
             else:
+                listaUsuario = [
+                    (clienteId, nome, email, senha, celular, endereco, 0)]
                 print(
                     f'''\033[1;32mDados alterados com sucesso\033[0;0m''')
     subMenuClientes(listaUsuario)
@@ -315,23 +325,198 @@ def removerUsuario(listaUsuario):
         print(f"\033[1;31mErro ao remover usuário: {str(e)}\033[0;0m")
         criaBarra()
 
-# Parei aqui 05/06/2023
+
+def menuAjuda(listaUsuario):
+    print(
+        '========== <<< ''\033[1;92m''A Alimenta-AI pode te ajudar!''\033[0;0m'' >>> ==========')
+    print(
+        '|  [''\033[1;32m''1''\033[0;0m''] Instituições que estão em nossa plataforma         |')
+    print(
+        '|  [''\033[1;32m''2''\033[0;0m''] Apenas os endereços das instituições               |')
+    print(
+        '|  [''\033[1;32m''3''\033[0;0m''] Solicitar comida neste ponto de encontro           |')
+    print(
+        '|  [''\033[1;32m''0''\033[0;0m''] Voltar                                             |')
+    print('-----------------------------------------------------------')
+    try:
+        escolha = int(input('\033[1;32m''Insira a opção: ''\033[0;0m'))
+    except ValueError:
+        limpaTerminal()
+        criaBarra()
+        print('\033[1;31m''Insira uma opção válida!''\033[0;0m')
+        criaBarra()
+        subMenuClientes()
+        return
+    print('--------------------------------------')
+    if escolha == 1:
+        mostrarInstituicoes()
+        menuAjuda(listaUsuario)
+    elif escolha == 2:
+        mostrarNomeEnderecoInstituicoes()
+        menuAjuda(listaUsuario)
+    elif escolha == 3:
+        print(f'''\033[1;32mSua solicitação de ajuda foi enviada e a instituição disponível irá ajuda-la! Aguarde para mais informações...''')
+        sleep(3)
+        menuAjuda(listaUsuario)
+    elif escolha == 0:
+        sleep(1)
+        limpaTerminal()
+        menuInicial(listaUsuario)
+    else:
+        limpaTerminal()
+        criaBarra()
+        print('\033[1;31m''Insira uma opção válida!''\033[0;0m')
+        criaBarra()
+        menuAjuda(listaUsuario)
 
 
-def mostrarInstituicao():
+def mostrarInstituicoes():
     limpaTerminal()
-    print('=== Instituicoes Cadastrados ===')
-    dados = f"""SELECT * FROM Instituicao"""
-    inst_SQL.execute(dados)
-    listaInstituicoes = inst_SQL.fetchall()
-    for Instituicao in listaInstituicoes:
-        clienteid = Instituicao[0]
-        website = Instituicao[1]
-        tipo = Instituicao[2]
-        cnpj = Instituicao[3]
+    print('\033[1;32m=== Instituições Cadastradas ===\033[0;0m')
+    query = "SELECT * FROM cliente WHERE tipoCliente = 1"
+    inst_SQL.execute(query)
+    clientes = inst_SQL.fetchall()
 
-        print(
-            f'''\033[1;32mClienteID: \033[0;0m{clienteid} | \033[1;32mwebsite: \033[0;0m{website} 
-            | \033[1;32mtipo: \033[0;0m{tipo} | \033[1;32mcnpj: \033[0;0m{cnpj}''')
-    criaBarra()
+    for cliente in clientes:
+        clienteId = cliente[0]
+        nome = cliente[1]
+        email = cliente[2]
+        senha = cliente[3]
+        celular = cliente[4]
+        endereco = cliente[5]
+
+        print(f"\033[1;32mClienteID: {clienteId}\033[0;0m")
+        print(f"\033[1;32mNome: {nome}\033[0;0m")
+        print(f"\033[1;32mE-mail: {email}\033[0;0m")
+        print(f"\033[1;32mSenha: {senha}\033[0;0m")
+        print(f"\033[1;32mCelular: {celular}\033[0;0m")
+        print(f"\033[1;32mEndereço: {endereco}\033[0;0m")
+
+        print('\033[1;32m=== Dados da Instituição ===\033[0;0m')
+        query = f"SELECT * FROM instituicao WHERE clienteId = '{clienteId}'"
+        inst_SQL.execute(query)
+        instituicoes = inst_SQL.fetchall()
+
+        for instituicao in instituicoes:
+            website = instituicao[0]
+            tipo = instituicao[1]
+            cnpj = instituicao[2]
+
+            print(f"\033[1;32mWebsite: {website}\033[0;0m")
+            print(f"\033[1;32mTipo: {tipo}\033[0;0m")
+            print(f"\033[1;32mCNPJ: {cnpj}\033[0;0m")
+
+        print("==============================")
+
     return
+
+
+def mostrarNomeEnderecoInstituicoes():
+    limpaTerminal()
+    print('\033[1;32m=== Instituições Cadastradas ===\033[0;0m')
+    query = "SELECT c.nome, c.endereco, i.cnpj FROM cliente c JOIN instituicao i ON c.clienteId = i.clienteId WHERE c.tipoCliente = 1"
+    inst_SQL.execute(query)
+    instituicoes = inst_SQL.fetchall()
+
+    for instituicao in instituicoes:
+        nome = instituicao[0]
+        endereco = instituicao[1]
+        cnpj = instituicao[2]
+
+        print(f"\033[1;32mNome: {nome}\033[0;0m")
+        print(f"\033[1;32mEndereço: {endereco}\033[0;0m")
+        print(f"\033[1;32mCNPJ: {cnpj}\033[0;0m")
+        criaBarra()
+
+    return
+
+
+def relatorios(listaUsuario):
+    relatorio_cliente()
+    relatorio_usuario()
+    relatorio_instituicao()
+    relatorio_estoque()
+    relatorio_alimento()
+    relatorio_movimentacao()
+    relatorio_avaliacao()
+    relatorio_comentario()
+    relatorio_reserva_cliente()
+    return
+
+
+def executar_consulta(query):
+    inst_SQL.execute(query)
+    resultado = inst_SQL.fetchall()
+    colunas = [desc[0] for desc in inst_SQL.description]
+    print('\033[1m' + ' | '.join(colunas) + '\033[0m')
+    for linha in resultado:
+        # Converter os valores em strings
+        valores_formatados = [str(valor) for valor in linha]
+        # Imprimir os valores separados por |
+        print(' | '.join(valores_formatados))
+
+    return
+
+
+# Consulta na tabela cliente
+
+
+def relatorio_cliente():
+    query = "SELECT * FROM cliente WHERE tipoCliente = 1"
+    executar_consulta(query)
+
+# Consulta na tabela usuario
+
+
+def relatorio_usuario():
+    query = "SELECT * FROM usuario WHERE doador = 'SIM'"
+    executar_consulta(query)
+
+# Consulta na tabela instituicao
+
+
+def relatorio_instituicao():
+    query = "SELECT * FROM instituicao WHERE tipo = 'ONG'"
+    executar_consulta(query)
+
+# Consulta na tabela estoque
+
+
+def relatorio_estoque():
+    query = "SELECT * FROM estoque WHERE tamanho > 100"
+    executar_consulta(query)
+
+# Consulta na tabela alimento
+
+
+def relatorio_alimento():
+    query = "SELECT * FROM alimento WHERE quantidade > 8"
+    executar_consulta(query)
+
+# Consulta na tabela movimentacao
+
+
+def relatorio_movimentacao():
+    query = "SELECT * FROM movimentacao WHERE categoria = 'Faz Doação'"
+    executar_consulta(query)
+
+# Consulta na tabela avaliacao
+
+
+def relatorio_avaliacao():
+    query = "SELECT * FROM avaliacao WHERE nota >= 4"
+    executar_consulta(query)
+
+# Consulta na tabela comentario
+
+
+def relatorio_comentario():
+    query = "SELECT * FROM comentario WHERE dataComentario = '20230508'"
+    executar_consulta(query)
+
+# Consulta na tabela reservaCliente
+
+
+def relatorio_reserva_cliente():
+    query = "SELECT * FROM reservaCliente WHERE clienteId = 'CLT001'"
+    executar_consulta(query)

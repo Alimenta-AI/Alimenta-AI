@@ -16,7 +16,6 @@ import javax.ws.rs.core.*;
 public class LoginResource {
     private LoginBO loginBO = new LoginBO();
     private ClienteController cc = new ClienteController();
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response logar(String json, @Context UriInfo uriInfo) {
