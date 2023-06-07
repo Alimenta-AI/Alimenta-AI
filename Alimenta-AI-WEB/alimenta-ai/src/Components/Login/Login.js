@@ -1,21 +1,21 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
-import { AuthContext } from "../../Navbar/AuthContext";
+import { AuthContext } from "../AuthContext";
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const { handleLogin } = useContext(AuthContext);
+  const history = useHistory();
+  const handleLogin  = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setLoading(true); // Inicia o carregamento
+    setLoading(true); 
 
     const formData = {
       email: email,
@@ -31,7 +31,7 @@ function Login() {
     })
       .then(() => {
         handleLogin(email);
-        navigate("/");
+        history.push("/meuperfil");
         toast.success("Login realizado com sucesso", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
@@ -50,13 +50,13 @@ function Login() {
 
   const handleLogout = () => {
     sessionStorage.removeItem("sessao");
-    navigate("/login");
+    history.push("/login");
   };
 
   const sessionSessao = sessionStorage.getItem("sessao");
 
   if (sessionSessao) {
-    navigate("/");
+    history.push("/");
   }
 
   return (
