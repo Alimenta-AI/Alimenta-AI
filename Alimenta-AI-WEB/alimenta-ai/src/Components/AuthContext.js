@@ -5,13 +5,13 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const handleLogin = (email) => {
-    sessionStorage.setItem("sessao", email);
+  const handleLogin = (userData) => {
+    sessionStorage.setItem("usuario", userData);
     setIsAuthenticated(true);
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("sessao");
+    sessionStorage.removeItem("usuario")
     setIsAuthenticated(false);
   };
 

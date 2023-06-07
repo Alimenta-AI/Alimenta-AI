@@ -37,7 +37,6 @@ function Cadastro() {
     let formData;
 
     if (clientType === "person") {
-      // Cria o objeto JSON para pessoa física
 
       let nascimentoSplitado = nascimento.split("-");
       let nascimentoFormatado =
@@ -61,7 +60,6 @@ function Cadastro() {
         doador: doador,
       };
     } else if (clientType === "company") {
-      // Cria o objeto JSON para pessoa jurídica
       formData = {
         nome: nome,
         email: email,
@@ -277,7 +275,10 @@ function Cadastro() {
           </div>
 
           <button className="button-cadastro" type="submit">
-            Cadastre-se
+          <span className="span-cadastro"></span>
+          <span className="span-cadastro"></span>
+          <span className="span-cadastro"></span>
+          <span className="span-cadastro"></span> Cadastre-se
           </button>
 
           <p className="text-sign">

@@ -37,10 +37,8 @@ const Login = () => {
         }
       })
       .then((userData) => {
-        handleLogin(email);
-
         // Armazene a sessão no sessionStorage
-        sessionStorage.setItem("usuario", JSON.stringify(userData));
+        handleLogin(JSON.stringify(userData));
 
         history.push("/meuperfil");
         toast.success("Login realizado com sucesso", {
@@ -59,17 +57,11 @@ const Login = () => {
       });
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("usuario");
-    history.push("/login");
-  };
-
   const sessionSessao = sessionStorage.getItem("usuario");
 
   if (sessionSessao) {
     history.push("/");
   }
-
   return (
     <div className="login-container background-image">
       <ToastContainer />

@@ -137,11 +137,12 @@ nav {
   background-color: #3cff7a;
 }
 .about-section-container {
-  margin-top: 20rem;
+  margin-top: 1rem;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1rem;
 }
 .about-background-image-container {
   position: absolute;
