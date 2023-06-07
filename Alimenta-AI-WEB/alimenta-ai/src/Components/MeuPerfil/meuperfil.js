@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../MeuPerfil/MeuPerfil.css";
 
 function MeuPerfil() {
   const [foto, setFoto] = useState(null);
@@ -70,25 +71,23 @@ function MeuPerfil() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Meu Perfil</h1>
-      <div>
-        <label htmlFor="foto">Foto:</label>
-        <input
-          type="file"
-          id="foto"
-          accept=".png,.jpg"
-          onChange={handleFotoChange}
-        />
-        {foto && <img src={foto} alt="Foto do Perfil" />}
+      <div className="input-container">
+        {foto && <img className="Imagem-perfil" src={foto} alt="Foto do Perfil" />}
       </div>
       <br />
-      <div>
+      <div className="input-container">
         <label htmlFor="nome">Nome:</label>
-        <input type="text" id="nome" value={nome} onChange={handleNomeChange} />
+        <input
+          type="text"
+          id="nome"
+          value={nome}
+          onChange={handleNomeChange}
+        />
       </div>
       <br />
-      <div>
+      <div className="input-container">
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -98,7 +97,7 @@ function MeuPerfil() {
         />
       </div>
       <br />
-      <div>
+      <div className="input-container">
         <label htmlFor="senha">Senha:</label>
         <input
           type="password"
@@ -108,7 +107,7 @@ function MeuPerfil() {
         />
       </div>
       <br />
-      <div>
+      <div className="input-container">
         <label htmlFor="celular">Celular:</label>
         <input
           type="text"
@@ -118,7 +117,7 @@ function MeuPerfil() {
         />
       </div>
       <br />
-      <div>
+      <div className="input-container">
         <label htmlFor="endereco">Endereço:</label>
         <input
           type="text"
@@ -128,14 +127,25 @@ function MeuPerfil() {
         />
       </div>
       <br />
-      <div>
-        <button className="btn-editar" onClick={handleEditarPerfil}>
-          Editar
-        </button>
-        &nbsp;
-        <button className="btn-excluir" onClick={handleExcluirPerfil}>
-          Excluir
-        </button>
+      <div className="button-container">
+        <div className="btn-wrapper">
+          <button className="btn-editar" onClick={handleEditarPerfil}>
+            Editar
+          </button>
+        </div>
+        <div className="btn-wrapper">
+          <input
+            type="file"
+            id="foto"
+            accept=".png,.jpg"
+            onChange={handleFotoChange}
+          />
+        </div>
+        <div className="btn-wrapper">
+          <button className="btn-excluir" onClick={handleExcluirPerfil}>
+            Excluir
+          </button>
+        </div>
       </div>
     </div>
   );
