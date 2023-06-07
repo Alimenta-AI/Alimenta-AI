@@ -70,7 +70,6 @@ public class ClienteController {
         JsonParser parser = new JsonParser();
         JsonObject jsonObject = parser.parse(json).getAsJsonObject();
         int tipoCliente = jsonObject.get("tipoCliente").getAsInt();
-        System.out.println("Tipo de Cliente: " + tipoCliente);
         return tipoCliente;
     }
 
@@ -98,6 +97,12 @@ public class ClienteController {
             }
         }
         return null;
+    }
+
+    public String converterParaJson(Cliente cliente) {
+        Gson gson = new Gson();
+        String json = gson.toJson(cliente);
+        return json;
     }
 
 }

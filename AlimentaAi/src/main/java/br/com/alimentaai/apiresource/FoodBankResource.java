@@ -9,16 +9,16 @@ import javax.ws.rs.core.*;
 
 @Path("/alimento")
 public class FoodBankResource {
-    private AlimentoBO alimentoBO = new AlimentoBO();
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response cadastraAlimento(String json, @Context UriInfo uriInfo) {
-        System.out.println(json);
-        Alimento cadastrando = alimentoBO.cadastrarAlimentoBo(json);
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-        builder.path((cadastrando.getNome()));
-        return Response.created(builder.build()).build();
-    }
+//    private AlimentoBO alimentoBO = new AlimentoBO();
+//    @POST
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response cadastraAlimento(String json, @Context UriInfo uriInfo) {
+//        System.out.println(json);
+//        Alimento cadastrando = alimentoBO.cadastrarAlimentoBo(json);
+//        UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+//        builder.path((cadastrando.getNome()));
+//        return Response.created(builder.build()).build();
+//    }
 }
 
 

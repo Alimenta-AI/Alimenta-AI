@@ -54,7 +54,8 @@ public class UsuarioController {
         }
         String senhaEncriptada = hexString.toString();
 
-        if (usuarioService.validarDadosUsuario(nome, email, senha, celular, cpf, nascimento, endereco)) {
+        if (usuarioService.validarDadosUsuario(nome, email, senha, celular, endereco, cpf, nascimento, doador)) {
+            System.out.println("Passou");
             usuario.setNome(nome);
             usuario.setEmail(email);
             usuario.setSenha(senhaEncriptada);
@@ -65,8 +66,6 @@ public class UsuarioController {
             usuario.setDoador(doador);
             usuario.setClienteId(clienteIdFixo);
             usuario.setTipoCliente(tipoCliente);
-
-            System.out.println(usuario.getDoador());
 
             System.out.println(usuarioDAO.inserir(usuario));
 
@@ -128,7 +127,7 @@ public class UsuarioController {
         }
         String senhaEncriptada = hexString.toString();
 
-        if (usuarioService.validarDadosUsuario(nome, email, senha, celular, cpf, nascimento, endereco)) {
+        if (usuarioService.validarDadosUsuario(nome, email, senha, celular, endereco, cpf, nascimento, doador)) {
             usuario.setNome(nome);
             usuario.setEmail(email);
             usuario.setSenha(senhaEncriptada);
