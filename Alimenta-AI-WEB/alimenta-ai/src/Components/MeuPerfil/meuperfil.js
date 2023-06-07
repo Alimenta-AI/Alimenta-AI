@@ -15,34 +15,26 @@ function MeuPerfil() {
   const [cnpj, setCnpj] = useState("");
 
   useEffect(() => {
-    getUsuario(); // Chama a função getUsuario ao montar o componente
+    getUsuario();
   }, []);
+
+  const usuarioJson = sessionStorage.getItem("usuario");
+  const usuario = JSON.parse(usuarioJson);
 
   const getUsuario = async () => {
     try {
-      // Obter o clienteId da sessão atual do sessionStorage
-      const usuarioJson = sessionStorage.getItem("usuario");
-      const usuario = JSON.parse(usuarioJson);
-
-      // Verificar se o usuário existe na sessão
       if (!usuario) {
         console.error("Usuário não encontrado na sessão.");
         return;
       }
 
-      const {
-        nome,
-        email,
-        senha,
-        celular,
-        endereco,
-        cpf,
-        nascimento,
-        doador,
-        website,
-        tipo,
-        cnpj,
-      } = usuario;
+      const response = await axios.get(
+        `http://localhost:8080/AlimentaAI/cliente/${usuario.clienteId}`
+      );
+      const usuarioData = response.data;
+
+      const { nome, email, senha, celular, endereco, tipoCliente } =
+        usuarioData.cliente;
 
       setNome(nome);
       setEmail(email);
@@ -50,12 +42,13 @@ function MeuPerfil() {
       setCelular(celular);
       setEndereco(endereco);
 
-      // Configurar os campos adicionais com base no tipoCliente
-      if (usuario.tipoCliente === 0) {
+      if (tipoCliente === 0) {
+        const { cpf, nascimento, doador } = usuarioData.usuario;
         setCPF(cpf);
         setNascimento(nascimento);
-        setDoador(doador);
-      } else if (usuario.tipoCliente === 1) {
+        setDoador(doador === "sim");
+      } else if (tipoCliente === 1) {
+        const { website, tipo, cnpj } = usuarioData.usuario;
         setWebsite(website);
         setTipo(tipo);
         setCnpj(cnpj);
@@ -66,7 +59,7 @@ function MeuPerfil() {
   };
 
   const handleEditarPerfil = async () => {
-    const formData = {
+    const perfilData = {
       nome: nome,
       email: email,
       senha: senha,
@@ -74,7 +67,7 @@ function MeuPerfil() {
       endereco: endereco,
     };
     axios
-      .put("http://localhost:8080/AlimentaAI/usuario", formData)
+      .put("http://localhost:8080/AlimentaAI/usuario", perfilData)
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data);
@@ -91,25 +84,22 @@ function MeuPerfil() {
 
   const handleExcluirPerfil = async () => {
     try {
-      // Obter o clienteId da sessão atual do sessionStorage
       const clienteId = sessionStorage.getItem("clienteId");
       const tipoCliente = sessionStorage.getItem("tipoCliente");
 
-      // Verificar se o clienteId existe na sessão
       if (!clienteId) {
         console.error("clienteId não encontrado na sessão.");
         return;
       }
 
-      // Montar o objeto de dados para a requisição DELETE
-      const data = {
+      const deleteData = {
         clienteId: clienteId,
         tipoCliente: tipoCliente,
       };
 
       const response = await axios.delete(
         "http://localhost:8080/AlimentaAI/cliente/",
-        { data }
+        { data: deleteData }
       );
       console.log("Perfil excluído com sucesso:", response.data);
     } catch (error) {
@@ -122,52 +112,101 @@ function MeuPerfil() {
       <h1>Meu Perfil</h1>
       <div className="input-container">
         <label htmlFor="nome">Nome:</label>
-        <input type="text" id="nome" value={nome} />
+        <input
+          type="text"
+          id="nome"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+        />
       </div>
       <div className="input-container">
         <label htmlFor="email">Email:</label>
-        <input type="email" id="email" value={email} />
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
       <div className="input-container">
         <label htmlFor="celular">Celular:</label>
-        <input type="text" id="celular" value={celular} />
+        <input
+          type="text"
+          id="celular"
+          value={celular}
+          onChange={(e) => setCelular(e.target.value)}
+        />
       </div>
       <div className="input-container">
         <label htmlFor="endereco">Endereço:</label>
-        <input type="text" id="endereco" value={endereco} />
+        <input
+          type="text"
+          id="endereco"
+          value={endereco}
+          onChange={(e) => setEndereco(e.target.value)}
+        />
       </div>
 
-      {/* Renderizar campos adicionais com base no tipoCliente */}
-      {sessionStorage.getItem("tipoCliente") === 0 && (
+      {usuario.tipoCliente === "0" && (
         <div>
           <div className="input-container">
             <label htmlFor="cpf">CPF:</label>
-            <input type="text" id="cpf" value={cpf} />
+            <input
+              type="text"
+              id="cpf"
+              value={cpf}
+              onChange={(e) => setCPF(e.target.value)}
+            />
           </div>
           <div className="input-container">
             <label htmlFor="nascimento">Data de Nascimento:</label>
-            <input type="text" id="nascimento" value={nascimento} />
+            <input
+              type="text"
+              id="nascimento"
+              value={nascimento}
+              onChange={(e) => setNascimento(e.target.value)}
+            />
           </div>
           <div className="input-container">
             <label htmlFor="doador">Doador:</label>
-            <input type="checkbox" id="doador" checked={doador} />
+            <input
+              type="checkbox"
+              id="doador"
+              checked={doador}
+              onChange={(e) => setDoador(e.target.checked)}
+            />
           </div>
         </div>
       )}
 
-      {sessionStorage.getItem("tipoCliente") === 1 && (
+      {usuario.tipoCliente === "1" && (
         <div>
           <div className="input-container">
             <label htmlFor="website">Website:</label>
-            <input type="text" id="website" value={website} />
+            <input
+              type="text"
+              id="website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
           </div>
           <div className="input-container">
             <label htmlFor="tipo">Tipo:</label>
-            <input type="text" id="tipo" value={tipo} />
+            <input
+              type="text"
+              id="tipo"
+              value={tipo}
+              onChange={(e) => setTipo(e.target.value)}
+            />
           </div>
           <div className="input-container">
             <label htmlFor="cnpj">CNPJ:</label>
-            <input type="text" id="cnpj" value={cnpj} />
+            <input
+              type="text"
+              id="cnpj"
+              value={cnpj}
+              onChange={(e) => setCnpj(e.target.value)}
+            />
           </div>
         </div>
       )}
