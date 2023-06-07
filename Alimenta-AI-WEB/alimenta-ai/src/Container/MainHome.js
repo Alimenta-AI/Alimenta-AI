@@ -9,7 +9,6 @@ function MainHome() {
   return (
     <div className="App">
       <Home />
-      <About />
       <Work />
       <Testimonial />
       <Contact />

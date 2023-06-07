@@ -479,3 +479,19 @@ a {
   color: #000000;
   text-decoration: none;
 }
+
+.primary-heading-about {
+  text-align: left;
+  max-width: 90%;
+  font-size: clamp(0.3rem, 3vw, 2rem);
+  color: #4c4c4c;
+  /* line-height: 5rem; */
+}
+
+.primary-text-about {
+  font-size: clamp(0.5rem, 3vw, 1rem);
+  max-width: 500px;
+  color: #6a6a6a;
+  margin: 0.7rem 0rem;
+  text-align: left;
+}
