@@ -47,6 +47,12 @@ function Cadastro() {
         tipoCliente: 0,
         cpf: cpf,
         nascimento: nascimento,
+
+let data = "2004-09-02";
+let partes = data.split("-");
+let dataFormatada = partes[2] + partes[1] + partes[0];
+
+
         doador: doador,
       };
     } else if (clientType === "company") {

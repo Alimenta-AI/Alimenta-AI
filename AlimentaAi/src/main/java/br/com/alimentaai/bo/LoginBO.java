@@ -15,11 +15,9 @@ public class LoginBO {
         lc = new LoginController();
         ClienteDAO.JsonDataLoggedIn dadosAutenticar = cd.login(json);
         Boolean responseAuth = lc.autenticarUsuario(dadosAutenticar.getEmail(), dadosAutenticar.getSenha());
-        System.out.println(responseAuth);
         if(responseAuth){
             Cliente cliente = new Cliente();
             cliente = cd.buscarEmail(dadosAutenticar.getEmail());
-            System.out.println(cliente);
             Conexao.fecharConexao(con);
             return cliente;
         }

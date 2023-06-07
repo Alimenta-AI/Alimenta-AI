@@ -1,44 +1,81 @@
-import './Login.css';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import "./Login.css";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
-  const handleSubmit = (event) => {
-  event.preventDefault();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { handleLogin } = useContext(AuthContext);
 
-  const formData = {
-    email: email,
-    senha: senha,
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setLoading(true); // Inicia o carregamento
+
+    const formData = {
+      email: email,
+      senha: senha,
+    };
+
+    fetch("http://localhost:8080/AlimentaAI/login", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setEmail("");
+        setSenha("");
+        if (data.success) {
+          alert("Login realizado com sucesso!");
+          setTimeout(() => {
+            window.location = "/meuPerfil";
+          }, 2000);
+        } else {
+          alert("Falha no login. Verifique suas credenciais.");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
-  fetch("http://localhost:8080/AlimentaAI/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      setEmail("");
-      setSenha("");
-      if (data.success) {
-        alert("Login realizado com sucesso!");
-        setTimeout(() => {
-          window.location = "/meuPerfil";
-        }, 2000);
-      } else {
-        alert("Falha no login. Verifique suas credenciais.");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
 
-const [email, setEmail] = useState("");
-const [senha, setSenha] = useState("");
+
+    
+
+    
+
+    fetch(`http://localhost:8080/UInvest/login`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(usuario),
+    })
+      .then(() => {
+        handleLogin(email);
+        navigate("/");
+        toast.success("Login realizado com sucesso", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+        });
+      })
+      .catch((error) => {
+        toast.error("Senha incorreta!", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+        });
+      })
+      .finally(() => {
+        setLoading(false); // Finaliza o carregamento
+      });
+  };
 
   return (
     <div className="login-container background-image">

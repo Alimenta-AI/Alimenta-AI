@@ -116,7 +116,7 @@ nav {
 }
 .secondary-button {
   padding: 1rem 2.5rem;
-  background-color: #00FF00;
+  background-color: #00ff00;
   outline: none;
   border: none;
   border-radius: 5rem;
@@ -160,7 +160,7 @@ nav {
 }
 .primary-subheading {
   font-weight: 700;
-  color: #00FF00;
+  color: #00ff00;
   font-size: 2rem;
 }
 .about-buttons-container {
@@ -205,7 +205,7 @@ nav {
   align-items: center;
   padding: 1rem;
   border-radius: 5rem;
-  border: 2px solid #00FF00;
+  border: 2px solid #00ff00;
 }
 .contact-form-container input {
   flex: 1;
@@ -216,9 +216,7 @@ nav {
   padding: 0.5rem 1rem;
 }
 .footer-wrapper {
-  margin: 6rem 0rem;
   display: flex;
-  margin-top: 10rem;
 }
 .footer-logo-container {
   max-width: 110px;
@@ -232,7 +230,7 @@ nav {
   margin-left: -30px;
 }
 
-.footer-icons ul li{
+.footer-icons ul li {
   display: inline;
   /* padding-right: 10px; */
 }
@@ -256,7 +254,7 @@ nav {
   min-width: 190px;
 }
 
-.footer-section-columns .span-footer a{
+.footer-section-columns .span-footer a {
   color: #4c4c4c;
   text-decoration: none;
 }
@@ -292,7 +290,7 @@ nav {
 .testimonials-stars-container svg {
   margin: 0rem 0.25rem;
   font-size: 1.5rem;
-  color: #00FF00;
+  color: #00ff00;
 }
 .testimonial-section-bottom h2 {
   margin-top: 1.5rem;

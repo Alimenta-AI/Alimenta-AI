@@ -301,15 +301,3 @@ html {
 body {
   margin-bottom: 360px;
 }
-
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 200px;
-  background: black;
-  color: white;
-  text-align: center;
-  padding: 20px;
-}
