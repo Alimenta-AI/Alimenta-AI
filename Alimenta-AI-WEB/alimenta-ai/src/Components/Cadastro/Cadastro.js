@@ -12,11 +12,12 @@ function Cadastro() {
   const [clientType, setClientType] = useState("person");
   const [cpf, setCPF] = useState("");
   const [nascimento, setNascimento] = useState("");
-  let [doador, setDoador] = useState("");
+  const [doador, setDoador] = useState(false);
   const [website, setWebsite] = useState("");
   const [tipo, setTipo] = useState("");
   const [cnpj, setCNPJ] = useState("");
   const [termsChecked, setTermsChecked] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   const handleClientTypeChange = (event) => {
     setClientType(event.target.value);
@@ -26,29 +27,101 @@ function Cadastro() {
     setTermsChecked(event.target.checked);
   };
 
+  const validateForm = () => {
+    const errors = {};
+
+    // Validar nome (campo obrigatório)
+    if (nome.trim() === "") {
+      errors.nome = "Campo obrigatório.";
+    }
+
+    // Validar email (campo obrigatório e formato)
+    if (email.trim() === "") {
+      errors.email = "Campo obrigatório.";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errors.email = "Formato de e-mail inválido.";
+      }
+    }
+
+    // Validar senha (campo obrigatório)
+    if (senha.trim() === "") {
+      errors.senha = "Campo obrigatório.";
+    }
+
+    // Validar confirmação de senha (igual à senha)
+    if (confirmPassword.trim() === "") {
+      errors.confirmPassword = "Campo obrigatório.";
+    } else if (confirmPassword !== senha) {
+      errors.confirmPassword = "As senhas não coincidem.";
+    }
+
+    // Validar celular (campo obrigatório)
+    if (celular.trim() === "") {
+      errors.celular = "Campo obrigatório.";
+    }
+
+    // Validar endereço (campo obrigatório)
+    if (endereco.trim() === "") {
+      errors.endereco = "Campo obrigatório.";
+    }
+
+    // Validar CPF (campo obrigatório)
+    if (clientType === "person" && cpf.trim() === "") {
+      errors.cpf = "Campo obrigatório.";
+    }
+
+    // Validar data de nascimento (campo obrigatório)
+    if (clientType === "person" && nascimento.trim() === "") {
+      errors.nascimento = "Campo obrigatório.";
+    }
+
+    // Validar website (campo obrigatório)
+    if (clientType === "company" && website.trim() === "") {
+      errors.website = "Campo obrigatório.";
+    }
+
+    // Validar tipo (campo obrigatório)
+    if (clientType === "company" && tipo.trim() === "") {
+      errors.tipo = "Campo obrigatório.";
+    }
+
+    // Validar CNPJ (campo obrigatório)
+    if (clientType === "company" && cnpj.trim() === "") {
+      errors.cnpj = "Campo obrigatório.";
+    }
+
+    // Validar aceite dos termos e condições
+    if (!termsChecked) {
+      errors.terms = "Por favor, aceite os termos e condições.";
+    }
+
+    setFormErrors(errors);
+
+    // Retorna true se não houver erros
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!termsChecked) {
-      alert("Por favor, aceite os termos e condições.");
+    if (!validateForm()) {
+      // Se houver erros de validação, não envia o formulário
       return;
     }
 
-    let formData;
+    // Cria o objeto de dados a serem enviados para o servidor
+    let formData = {};
+
+    function converterData(data) {
+      var partes = data.split("-");
+      var dataFormatada = partes[2] + partes[1] + partes[0];
+      return dataFormatada;
+    }
 
     if (clientType === "person") {
-      // Cria o objeto JSON para pessoa física
-
-      let nascimentoSplitado = nascimento.split("-");
-      let nascimentoFormatado =
-        nascimentoSplitado[2] + nascimentoSplitado[1] + nascimentoSplitado[0];
-
-      if (doador === true) {
-        doador = "sim";
-      } else {
-        doador = "nao";
-      }
-
+      // Preenche os dados para pessoa física
       formData = {
         nome: nome,
         email: email,
@@ -57,11 +130,11 @@ function Cadastro() {
         endereco: endereco,
         tipoCliente: 0,
         cpf: cpf,
-        nascimento: nascimentoFormatado,
-        doador: doador,
+        nascimento: converterData(nascimento),
+        doador: doador ? "sim" : "nao",
       };
     } else if (clientType === "company") {
-      // Cria o objeto JSON para pessoa jurídica
+      // Preenche os dados para pessoa jurídica
       formData = {
         nome: nome,
         email: email,
@@ -75,6 +148,7 @@ function Cadastro() {
       };
     }
 
+    // Envia os dados para o servidor
     fetch("http://localhost:8080/AlimentaAI/cliente", {
       method: "POST",
       headers: {
@@ -85,19 +159,25 @@ function Cadastro() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+
+        // Limpa os campos após o envio
         setNome("");
         setEmail("");
         setSenha("");
+        setConfirmPassword("");
         setCelular("");
         setEndereco("");
         setCPF("");
         setNascimento("");
-        setDoador("");
+        setDoador(false);
         setWebsite("");
         setTipo("");
         setCNPJ("");
         setTermsChecked(false);
+
+        // Exibe uma mensagem de sucesso
         alert("Cadastro feito com sucesso!");
+        // Redireciona para a página de login após 2 segundos
         setTimeout(() => {
           window.location = "/login";
         }, 2000);
@@ -113,6 +193,9 @@ function Cadastro() {
         <form className="signup-form" onSubmit={handleSubmit}>
           <h1>Cadastre-se</h1>
 
+          {/* Campos de formulário e mensagens de erro */}
+
+          {/* Nome */}
           <div className="name-inputgroup">
             <label htmlFor="name">Nome completo</label>
             <input
@@ -122,8 +205,12 @@ function Cadastro() {
               value={nome}
               onChange={(event) => setNome(event.target.value)}
             />
+            {formErrors.nome && (
+              <span className="error-message">{formErrors.nome}</span>
+            )}
           </div>
 
+          {/* Email */}
           <div className="email-inputgroup">
             <label htmlFor="email">Email</label>
             <input
@@ -133,8 +220,12 @@ function Cadastro() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
+            {formErrors.email && (
+              <span className="error-message">{formErrors.email}</span>
+            )}
           </div>
 
+          {/* Senha */}
           <div className="password-inputgroup">
             <label htmlFor="password">Senha</label>
             <input
@@ -144,41 +235,31 @@ function Cadastro() {
               value={senha}
               onChange={(event) => setSenha(event.target.value)}
             />
+            {formErrors.senha && (
+              <span className="error-message">{formErrors.senha}</span>
+            )}
           </div>
 
+          {/* Confirmação de Senha */}
           <div className="confirm-password-inputgroup">
             <label htmlFor="confirmPassword">Confirme sua senha</label>
             <input
               type="password"
-              id="confirmpassword"
-              placeholder="Confirme sua senha"
+              id="confirmPassword"
+              placeholder="Digite novamente sua senha"
               value={confirmPassword}
               onChange={(event) => setConfirmPassword(event.target.value)}
             />
+            {formErrors.confirmPassword && (
+              <span className="error-message">
+                {formErrors.confirmPassword}
+              </span>
+            )}
           </div>
 
-          <div className="phone-inputgroup">
-            <label htmlFor="phone">Telefone</label>
-            <input
-              type="tel"
-              id="phone"
-              placeholder="Digite seu telefone"
-              value={celular}
-              onChange={(event) => setCelular(event.target.value)}
-            />
-          </div>
+          {/* Outros campos do formulário e mensagens de erro */}
 
-          <div className="address-inputgroup">
-            <label htmlFor="address">Endereço</label>
-            <input
-              type="text"
-              id="address"
-              placeholder="Digite seu endereço"
-              value={endereco}
-              onChange={(event) => setEndereco(event.target.value)}
-            />
-          </div>
-
+          {/* Tipo de Cliente (Pessoa Física ou Jurídica) */}
           <div className="client-type-inputgroup">
             <label htmlFor="clientType">Tipo de Cliente</label>
             <select
@@ -191,46 +272,85 @@ function Cadastro() {
             </select>
           </div>
 
+          {/* Celular */}
+          <div className="celular-inputgroup">
+            <label htmlFor="celular">Celular</label>
+            <input
+              type="text"
+              id="celular"
+              placeholder="Digite seu celular"
+              value={celular}
+              onChange={(event) => setCelular(event.target.value)}
+            />
+            {formErrors.celular && (
+              <span className="error-message">{formErrors.celular}</span>
+            )}
+          </div>
+
+          {/* Endereço */}
+          <div className="endereco-inputgroup">
+            <label htmlFor="endereco">Endereço</label>
+            <input
+              type="text"
+              id="endereco"
+              placeholder="Digite seu endereço"
+              value={endereco}
+              onChange={(event) => setEndereco(event.target.value)}
+            />
+            {formErrors.endereco && (
+              <span className="error-message">{formErrors.endereco}</span>
+            )}
+          </div>
+
+          {/* Outros campos específicos para Pessoa Física */}
           {clientType === "person" && (
-            <div>
+            <div className="person-fields">
+              {/* CPF */}
               <div className="cpf-inputgroup">
                 <label htmlFor="cpf">CPF</label>
                 <input
                   type="text"
-                  id="CPF"
+                  id="cpf"
                   placeholder="Digite seu CPF"
                   value={cpf}
                   onChange={(event) => setCPF(event.target.value)}
                 />
+                {formErrors.cpf && (
+                  <span className="error-message">{formErrors.cpf}</span>
+                )}
               </div>
 
-              <div className="birthdate-inputgroup">
-                <label htmlFor="birthdate">Data de Nascimento</label>
+              {/* Data de Nascimento */}
+              <div className="nascimento-inputgroup">
+                <label htmlFor="nascimento">Data de Nascimento</label>
                 <input
                   type="date"
-                  id="birthdate"
-                  placeholder="Digite sua data de nascimento"
+                  id="nascimento"
                   value={nascimento}
                   onChange={(event) => setNascimento(event.target.value)}
                 />
+                {formErrors.nascimento && (
+                  <span className="error-message">{formErrors.nascimento}</span>
+                )}
               </div>
 
-              <div className="donor-inputgroup">
-                <label htmlFor="isDonor">
-                  Doador
-                  <input
-                    type="checkbox"
-                    id="isDonor"
-                    checked={doador}
-                    onChange={(event) => setDoador(event.target.checked)}
-                  />
-                </label>
+              {/* Doador */}
+              <div className="doador-inputgroup">
+                <label htmlFor="doador">Doador de Alimentos</label>
+                <input
+                  type="checkbox"
+                  id="doador"
+                  checked={doador}
+                  onChange={(event) => setDoador(event.target.checked)}
+                />
               </div>
             </div>
           )}
 
+          {/* Outros campos específicos para Pessoa Jurídica */}
           {clientType === "company" && (
-            <div>
+            <div className="company-fields">
+              {/* Website */}
               <div className="website-inputgroup">
                 <label htmlFor="website">Website</label>
                 <input
@@ -240,19 +360,27 @@ function Cadastro() {
                   value={website}
                   onChange={(event) => setWebsite(event.target.value)}
                 />
+                {formErrors.website && (
+                  <span className="error-message">{formErrors.website}</span>
+                )}
               </div>
 
-              <div className="company-type-inputgroup">
-                <label htmlFor="companyType">Tipo de Empresa</label>
+              {/* Tipo */}
+              <div className="tipo-inputgroup">
+                <label htmlFor="tipo">Tipo de Empresa</label>
                 <input
                   type="text"
-                  id="companyType"
+                  id="tipo"
                   placeholder="Digite o tipo de empresa"
                   value={tipo}
                   onChange={(event) => setTipo(event.target.value)}
                 />
+                {formErrors.tipo && (
+                  <span className="error-message">{formErrors.tipo}</span>
+                )}
               </div>
 
+              {/* CNPJ */}
               <div className="cnpj-inputgroup">
                 <label htmlFor="cnpj">CNPJ</label>
                 <input
@@ -262,30 +390,37 @@ function Cadastro() {
                   value={cnpj}
                   onChange={(event) => setCNPJ(event.target.value)}
                 />
+                {formErrors.cnpj && (
+                  <span className="error-message">{formErrors.cnpj}</span>
+                )}
               </div>
             </div>
           )}
 
-          <div className="termos-inputgroup">
+          {/* Aceite dos Termos e Condições */}
+          <div className="terms-inputgroup">
             <input
               type="checkbox"
               id="terms"
               checked={termsChecked}
               onChange={handleTermsChange}
             />
-            <label htmlFor="terms">Eu concordo com os termos e condições</label>
+            <label htmlFor="terms">
+              Li e concordo com os <Link to="/termos">termos e condições</Link>
+            </label>
+            {formErrors.terms && (
+              <span className="error-message">{formErrors.terms}</span>
+            )}
           </div>
 
-          <button className="button-cadastro" type="submit">
-            Cadastre-se
-          </button>
+          {/* Botão de Cadastro */}
+          <button type="submit">Cadastrar</button>
 
-          <p className="text-sign">
-            Já possui uma conta, faça o{" "}
-            <Link to="/login">
-              <span id="signup-link">Login</span>
-            </Link>
-          </p>
+          {/* Link para a página de login */}
+          <div className="login-link">
+            <span>Já possui uma conta?</span>{" "}
+            <Link to="/login">Faça login aqui</Link>
+          </div>
         </form>
       </div>
     </div>

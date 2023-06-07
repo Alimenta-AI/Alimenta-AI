@@ -14,6 +14,7 @@ import MeuPerfil from "./Components/MeuPerfil/meuperfil";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthProvider } from "./Components/AuthContext";
+import FooterIntegrantes from "./Components/FooterIntegrantes";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/MeuPerfil" exact component={MeuPerfil} />
           </Switch>
           <Footer />
+          <FooterIntegrantes />
         </AuthProvider>
       </Router>
     </div>
