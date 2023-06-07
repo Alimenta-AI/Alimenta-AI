@@ -2,6 +2,8 @@ import React from "react";
 import PickMeals from "../Assets/pick-meals-image.png";
 import ChooseMeals from "../Assets/choose-image.png";
 import DeliveryMeals from "../Assets/delivery-image.png";
+import AboutBackground from "../Assets/about-background.png";
+import AboutBackgroundImage from "../Assets/about-background-image.png";
 
 const Work = () => {
   const workInfoData = [
@@ -22,26 +24,34 @@ const Work = () => {
     },
   ];
   return (
-    <div className="work-section-wrapper">
-      <div className="work-section-top">
-        <p className="primary-subheading">Alimente-se</p>
-        <h1 className="primary-heading">Como nós trabalhamos?</h1>
-        <p className="primary-text">
-          Fornecemos suporte efetivo aos moradores de rua por meio de uma plataforma digital interativa, alimentada pela inteligência artificial. Nosso foco é garantir acesso a alimentos adequados e programas de assistência, além de facilitar a conexão entre doadores e aqueles em necessidade. Com uma equipe dedicada, estamos comprometidos em fazer a diferença e construir um futuro melhor para os mais vulneráveis
-        </p>
-      </div>
-      <div className="work-section-bottom">
-        {workInfoData.map((data) => (
-          <div className="work-section-info" key={data.title}>
-            <div className="info-boxes-img-container">
-              <img src={data.image} alt="" />
+    <div className="about-section-container">
+        <div className="about-background-image-container">
+          <img src={AboutBackground} alt="" />
+        </div>
+        <div className="about-section-image-container">
+          <img src={AboutBackgroundImage} alt="" />
+        </div>
+        <div className="work-section-wrapper">
+        <div className="work-section-top">
+          <p className="primary-subheading">Alimente-se</p>
+          <h1 className="primary-heading">Como nós trabalhamos?</h1>
+          <p className="primary-text">
+            Fornecemos suporte efetivo aos moradores de rua por meio de uma plataforma digital interativa, alimentada pela inteligência artificial. Nosso foco é garantir acesso a alimentos adequados e programas de assistência, além de facilitar a conexão entre doadores e aqueles em necessidade. Com uma equipe dedicada, estamos comprometidos em fazer a diferença e construir um futuro melhor para os mais vulneráveis
+          </p>
+        </div>
+        <div className="work-section-bottom">
+          {workInfoData.map((data) => (
+            <div className="work-section-info" key={data.title}>
+              <div className="info-boxes-img-container">
+                <img src={data.image} alt="" />
+              </div>
+              <h2>{data.title}</h2>
+              <p>{data.text}</p>
             </div>
-            <h2>{data.title}</h2>
-            <p>{data.text}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+      </div>
   );
 };
 

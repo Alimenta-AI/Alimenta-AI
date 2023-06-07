@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../MeuPerfil/MeuPerfil.css";
 
 function MeuPerfil() {
   const [nome, setNome] = useState("");
@@ -109,7 +108,7 @@ function MeuPerfil() {
   };
 
   return (
-    <div className="container">
+    <div>
       <h1>Meu Perfil</h1>
       <div className="input-container">
         <label htmlFor="nome">Nome:</label>
