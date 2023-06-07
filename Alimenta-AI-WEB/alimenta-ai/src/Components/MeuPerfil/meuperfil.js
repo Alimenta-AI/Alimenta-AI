@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 function MeuPerfil() {
   const [foto, setFoto] = useState(null);
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [celular, setCelular] = useState('');
-  const [endereco, setEndereco] = useState('');
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [celular, setCelular] = useState("");
+  const [endereco, setEndereco] = useState("");
 
   const handleFotoChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -44,28 +44,28 @@ function MeuPerfil() {
     };
 
     axios
-      .put('http://localhost:8080/AlimentaAI/usuario', formData)
+      .put("http://localhost:8080/AlimentaAI/usuario", formData)
       .then((response) => {
         console.log(response.data);
-        alert('Perfil atualizado com sucesso!');
+        alert("Perfil atualizado com sucesso!");
       })
       .catch((error) => {
         console.error(error);
-        alert('Ocorreu um erro ao atualizar o perfil.');
+        alert("Ocorreu um erro ao atualizar o perfil.");
       });
   };
 
   const handleExcluirPerfil = () => {
     axios
-      .delete('http://localhost:8080/AlimentaAI/usuario')
+      .delete("http://localhost:8080/AlimentaAI/usuario")
       .then((response) => {
         console.log(response.data);
-        alert('Perfil excluído com sucesso!');
+        alert("Perfil excluído com sucesso!");
         // Redirecionar para a página de login ou qualquer outra ação necessária
       })
       .catch((error) => {
         console.error(error);
-        alert('Ocorreu um erro ao excluir o perfil.');
+        alert("Ocorreu um erro ao excluir o perfil.");
       });
   };
 
@@ -85,12 +85,7 @@ function MeuPerfil() {
       <br />
       <div>
         <label htmlFor="nome">Nome:</label>
-        <input
-          type="text"
-          id="nome"
-          value={nome}
-          onChange={handleNomeChange}
-        />
+        <input type="text" id="nome" value={nome} onChange={handleNomeChange} />
       </div>
       <br />
       <div>
@@ -135,8 +130,9 @@ function MeuPerfil() {
       <br />
       <div>
         <button className="btn-editar" onClick={handleEditarPerfil}>
-          Editar
-        </button>&nbsp;
+          editar
+        </button>
+        &nbsp;
         <button className="btn-excluir" onClick={handleExcluirPerfil}>
           Excluir
         </button>
