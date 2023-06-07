@@ -44,7 +44,7 @@ const Login = () => {
         });
       })
       .finally(() => {
-        setLoading(false); // Finaliza o carregamento
+        setLoading(false);
       });
   };
 

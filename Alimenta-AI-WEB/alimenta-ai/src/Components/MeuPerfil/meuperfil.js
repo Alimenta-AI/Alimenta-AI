@@ -130,7 +130,7 @@ function MeuPerfil() {
       <br />
       <div>
         <button className="btn-editar" onClick={handleEditarPerfil}>
-          editar
+          Editar
         </button>
         &nbsp;
         <button className="btn-excluir" onClick={handleExcluirPerfil}>
