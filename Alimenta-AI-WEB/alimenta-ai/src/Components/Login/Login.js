@@ -10,7 +10,7 @@ const Login = () => {
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const handleLogin  = useContext(AuthContext);
+  const { handleLogin } = useContext(AuthContext); 
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,7 +44,7 @@ const Login = () => {
         });
       })
       .finally(() => {
-        setLoading(false); // Finaliza o carregamento
+        setLoading(false);
       });
   };
 

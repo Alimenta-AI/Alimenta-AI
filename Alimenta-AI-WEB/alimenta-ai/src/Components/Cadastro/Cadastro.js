@@ -12,7 +12,7 @@ function Cadastro() {
   const [clientType, setClientType] = useState("person");
   const [cpf, setCPF] = useState("");
   const [nascimento, setNascimento] = useState("");
-  const [doador, setDoador] = useState("");
+  let [doador, setDoador] = useState("");
   const [website, setWebsite] = useState("");
   const [tipo, setTipo] = useState("");
   const [cnpj, setCNPJ] = useState("");
@@ -43,7 +43,7 @@ function Cadastro() {
       let nascimentoFormatado =
         nascimentoSplitado[2] + nascimentoSplitado[1] + nascimentoSplitado[0];
 
-      if (doador == true) {
+      if (doador === true) {
         doador = "sim";
       } else {
         doador = "nao";

@@ -13,25 +13,28 @@ import Senha from "./Components/Senha/Senha";
 import MeuPerfil from "./Components/MeuPerfil/MeuPerfil";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { AuthProvider } from "./Components/AuthContext";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
-        <Switch>
-          <Route path="/" exact component={MainHome} />
-          <Route path="/doe" exact component={Doe} />
-          <Route path="/cadastro" exact component={Cadastro} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/sobre" exact component={About} />
-          <Route path="/trabalho" exact component={Work} />
-          <Route path="/testemunhos" exact component={Testimonial} />
-          <Route path="/contato" exact component={Contact} />
-          <Route path="/esqueci-minha-senha" exact component={Senha} />
-          <Route path="/MeuPerfil" exact component={MeuPerfil} />
-        </Switch>
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={MainHome} />
+            <Route path="/doe" exact component={Doe} />
+            <Route path="/cadastro" exact component={Cadastro} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/sobre" exact component={About} />
+            <Route path="/trabalho" exact component={Work} />
+            <Route path="/testemunhos" exact component={Testimonial} />
+            <Route path="/contato" exact component={Contact} />
+            <Route path="/esqueci-minha-senha" exact component={Senha} />
+            <Route path="/MeuPerfil" exact component={MeuPerfil} />
+          </Switch>
+          <Footer />
+        </AuthProvider>
       </Router>
     </div>
   );
