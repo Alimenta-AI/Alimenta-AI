@@ -122,12 +122,12 @@ function Menu() {
           <table>
             <thead>
               <tr>
-                <th>Código</th>
-                <th>Descrição alimento</th>
-                <th>Unidade</th>
-                <th>Qtde Alimento</th>
-                <th>Validade</th>
-                <th>Ações</th>
+                <th className='text-table'>Código</th>
+                <th className='text-table'>Descrição alimento</th>
+                <th className='text-table'>Unidade</th>
+                <th className='text-table'>Qtde Alimento</th>
+                <th className='text-table'>Validade</th>
+                <th className='text-table'>Ações</th>
               </tr>
             </thead>
             <tbody>

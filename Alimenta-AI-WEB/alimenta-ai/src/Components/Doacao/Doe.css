@@ -1,6 +1,7 @@
 .Menu {
   text-align: center;
-  }
+}
+
 .delete-icon {
   color: red;
   cursor: pointer;
@@ -16,8 +17,9 @@
   position: relative;
   margin: 0 auto;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 20px;
 }
+
 .clear-all-button {
   margin-top: 20px;
   margin-right: 20px;
@@ -28,7 +30,6 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  border-radius: s;
 }
 
 .cadastrar-doacao-button {
@@ -40,7 +41,6 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  border-radius: 10px;
 }
 
 .codigo-input,
@@ -57,9 +57,10 @@
   text-align: center;
   border-radius: 10px;
 }
+
 table {
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 20px;
   border-collapse: collapse;
   background-color: white;
   box-shadow: 0 0 10px green;
@@ -122,8 +123,8 @@ td select {
 
 .alimento {
   position: relative;
-  margin-right: 60%;
-  width: 20%;
+  margin-right: 10%;
+  width: 80%;
   border: 3px solid green;
   border-radius: 25%;
 }
@@ -157,8 +158,6 @@ td select {
 .delete-button .delete-icon {
   color: red;
 }
-
-/* Estilos para o pop-up */
 .popup-container {
   position: fixed;
   top: 50%;
@@ -177,7 +176,6 @@ td select {
   color: rgb(7, 255, 48);
   border-radius: 4px;
 }
-
 .popup-message {
   font-size: 18px;
   color: green;
@@ -193,9 +191,159 @@ td select {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .popup-button:hover {
   background-color: darkgreen;
+}
+@media (max-width: 390px) {
+  .add-icon {
+    font-size: 12px;
+  }
+  .table-container {
+    margin-top: 10px;
+  }
+  
+  .clear-all-button {
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 5px 5px;
+    font-size: 15px;
+  }
+  .cadastrar-doacao-button {
+    margin-top: 10px;
+    padding: 5px 5px;
+    font-size: 15px;
+    border-radius: 4px;
+  }
+  .Titulo-tabela{
+    font-size: 20px;
+  }
+  .codigo-input,
+  .descricao-input,
+  .valor-input, 
+  .estado-select,
+  .unidade-select {
+    height: 23px; 
+    font-size: 12px; 
+    width: 80px;
+  }
+  .validade-input{
+    height: 23px; 
+    width: 70%;
+    font-size: 12px;
+  }
+  .quantidade-input{
+    height: 23px;
+  }
+  .text-table{
+    font-size: 12px;
+  }
+  table {
+    margin: 0 auto;
+    margin-top: 5px;
+    border-radius: 20px;
+    background: #e0e0e0;
+    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+  }
+  th,
+  td {
+    padding: 5px;
+  }  
+  .fornecedor-column {
+    display: flex;
+    align-items: center;
+  }
+  .quantidade-input,
+  .valor-input {
+    background-color: white;
+    color: black;
+    border: 1px solid green;
+    height: 15px; 
+    text-align: center;
+    width: 40px; 
+    font-size: 10px; 
+  }
+  
+  .Titulo-tabela {
+    position: relative;
+    margin-top: 10px;
+    color: rgb(11, 43, 23);
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .alimento {
+    position: relative;
+    margin-right: 10%;
+    width: 00%;
+    border-radius: 25%;
+  }
+  
+  .add-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .delete-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .add-button:focus,
+  .delete-button:focus {
+    outline: none;
+  }
+  
+  .add-button .add-icon,
+  .delete-button .delete-icon {
+    font-size: 24px;
+  }
+  
+  .add-button .add-icon {
+    color: green;
+  }
+
+  .delete-button .delete-icon {
+    color: red;
+  }
+  .popup-container {
+    position: fixed;
+    top: 60%;
+    left: 60%;
+    background-color: white;
+    border: 2px solid green;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  .success-popup {
+    font-size: 15px;
+  }
+  
+  .popup-message {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .popup-button {
+    padding: 10px 10px;
+    font-size: 12px;
+  }
+  
+  .quantidade-input,
+  .valor-input {
+    background-color: white;
+    color: black;
+    border: 1px solid green;
+    height: 23px; 
+    text-align: center;
+    width: 60px; 
+    font-size: 10px; 
+  }
 }
 
 
