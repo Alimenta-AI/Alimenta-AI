@@ -195,7 +195,7 @@
   font-weight: bold;
   width: 200px;
   padding-top: 11px;
-  margin-left: 50px;
+  margin-left: 60px;
 }
 
 .button-cadastro:hover {
@@ -317,4 +317,7 @@ body {
 .data-input {
   margin-left: 10px;
 }
-  
+
+.login-link {
+  margin-left: 50px;
+}

@@ -322,10 +322,12 @@ function Cadastro() {
               <div className="birthdate-inputgroup">
                 <label htmlFor="birthdate">Data de Nascimento</label>
                 <input
+                  className="data-input"
                   type="date"
                   id="nascimento"
                   value={nascimento}
                   onChange={(event) => setNascimento(event.target.value)}
+                  style={{color: "black"}}
                 />
                 {formErrors.nascimento && (
                   <span className="error-message">{formErrors.nascimento}</span>
@@ -420,8 +422,8 @@ function Cadastro() {
 
           {/* Link para a página de login */}
           <div className="login-link">
-            <span>Já possui uma conta?</span>{" "}
-            <Link to="/login">Faça login aqui</Link>
+            <span>Já possui uma conta? Faça o </span>{" "}
+            <Link to="/login">login</Link>
           </div>
         </form>
       </div>
