@@ -127,7 +127,7 @@ public class UsuarioController {
         }
         String senhaEncriptada = hexString.toString();
 
-        if (usuarioService.validarDadosUsuario(nome, email, senha, celular, endereco, cpf, nascimento, doador)) {
+        if (usuarioService.validarDadosUsuarioAtualizar(nome, email, senha, celular, endereco, cpf, nascimento, doador)) {
             usuario.setNome(nome);
             usuario.setEmail(email);
             usuario.setSenha(senhaEncriptada);

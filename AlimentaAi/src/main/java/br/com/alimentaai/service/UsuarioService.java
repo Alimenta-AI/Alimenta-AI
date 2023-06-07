@@ -76,6 +76,61 @@ public class UsuarioService {
         //Se todas as validações derem certo ele retorna true e faz o insert no Banco, caso contrário retorna dados inválidos
     }
 
+    public boolean validarDadosUsuarioAtualizar(String nome, String email, String senha, String celular, String endereco, String cpf, String nascimento, String doador) throws IOException {
+        // Validar o nome vazio
+        if (nome == null || nome.trim().equals("")) {
+            return false;
+        }
+        // Validar o e-mail vazio
+        if (email == null || email.trim().equals("")) {
+            return false;
+        }
+        // Validar a senha vazio
+        if (senha == null || senha.trim().equals("")) {
+            return false;
+        }
+        // Validar o celular vazio
+        if (celular == null || celular.trim().equals("")) {
+            return false;
+        }
+        //Validar o endereco vazio
+        if (endereco == null || endereco.trim().equals("")) {
+            return false;
+        }
+        // Validar o CPF vazio
+        if (cpf == null || cpf.trim().equals("")) {
+            return false;
+        }
+        // Validar o Nascimento vazio
+        if (nascimento == null) {
+            return false;
+        }
+        // Validar o Nascimento vazio
+        if (doador == null) {
+            return false;
+        }
+
+        //Validações criadas
+        if(!validarNascimento(nascimento)){
+            return false;
+        }
+        if(!validarNome(nome)){
+            return false;
+        }
+        if(!validateCPF(cpf)){
+            return false;
+        }
+
+        //Validações por API:
+        if (!validateEmail(email)) {
+            return false;
+        }
+
+        return validatePhoneNumber("55" + celular);
+
+        //Se todas as validações derem certo ele retorna true e faz o insert no Banco, caso contrário retorna dados inválidos
+    }
+
     private static final String API_URL_EMAIL = "https://api.apilayer.com/email_verification/check?email=";
 
     public static boolean validateEmail(String email) throws IOException {

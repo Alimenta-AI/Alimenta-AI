@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import "../MeuPerfil/MeuPerfil.css";
+import { AuthContext } from "../AuthContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from "react-router-dom";
 
 function MeuPerfil() {
   const [nome, setNome] = useState("");
@@ -13,6 +18,19 @@ function MeuPerfil() {
   const [website, setWebsite] = useState("");
   const [tipo, setTipo] = useState("");
   const [cnpj, setCnpj] = useState("");
+  const { isAuthenticated, handleLogout } = useContext(AuthContext);
+  const [loggingOut, setLoggingOut] = useState(false);
+  const history = useHistory();
+
+  const handleLogoutClick = async () => {
+    try {
+      setLoggingOut(true);
+      await handleLogout();
+    } catch (error) {
+      console.log(error);
+      setLoggingOut(false);
+    }
+  };
 
   useEffect(() => {
     getUsuario();
@@ -60,32 +78,48 @@ function MeuPerfil() {
 
   const handleEditarPerfil = async () => {
     const perfilData = {
+      clienteId: usuario.clienteId,
       nome: nome,
       email: email,
       senha: senha,
       celular: celular,
       endereco: endereco,
+      tipoCliente: usuario.tipoCliente,
     };
-    axios
-      .put("http://localhost:8080/AlimentaAI/usuario", perfilData)
-      .then((response) => {
-        if (response.status === 200) {
-          console.log(response.data);
-          alert("Perfil atualizado com sucesso!");
-        } else {
-          alert("Ocorreu um erro ao atualizar o perfil.");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
+
+    if (usuario.tipoCliente === 0) {
+      perfilData.doador = doador ? "sim" : "nao";
+      perfilData.nascimento = nascimento;
+      perfilData.cpf = cpf;
+    } else if (usuario.tipoCliente === 1) {
+      perfilData.website = website;
+      perfilData.tipo = tipo;
+      perfilData.cnpj = cnpj;
+    }
+
+    try {
+      const response = await axios.put(
+        "http://localhost:8080/AlimentaAI/cliente",
+        perfilData
+      );
+
+      if (response.status === 200) {
+        console.log(response.data);
+        alert("Perfil atualizado com sucesso!");
+        window.location.reload();
+      } else {
         alert("Ocorreu um erro ao atualizar o perfil.");
-      });
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Ocorreu um erro ao atualizar o perfil.");
+    }
   };
 
   const handleExcluirPerfil = async () => {
     try {
-      const clienteId = sessionStorage.getItem("clienteId");
-      const tipoCliente = sessionStorage.getItem("tipoCliente");
+      const clienteId = usuario.clienteId;
+      const tipoCliente = usuario.tipoCliente;
 
       if (!clienteId) {
         console.error("clienteId não encontrado na sessão.");
@@ -97,134 +131,159 @@ function MeuPerfil() {
         tipoCliente: tipoCliente,
       };
 
+      console.log(clienteId);
+      console.log(tipoCliente);
+
       const response = await axios.delete(
         "http://localhost:8080/AlimentaAI/cliente/",
         { data: deleteData }
       );
-      console.log("Perfil excluído com sucesso:", response.data);
+
+      if (response.status === 200) {
+        history.push("/login");
+        toast.success("Removido com sucesso", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+        });
+        if (isAuthenticated) {
+          handleLogoutClick();
+        }
+        window.location = "/login";
+      } else {
+        alert("Ocorreu um erro ao excluir o perfil.");
+      }
     } catch (error) {
       console.error("Erro ao excluir perfil:", error);
+      alert("Ocorreu um erro ao excluir o perfil.");
     }
   };
 
   return (
-    <div>
-      <h1>Meu Perfil</h1>
-      <div className="input-container">
-        <label htmlFor="nome">Nome:</label>
-        <input
-          type="text"
-          id="nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
-      </div>
-      <div className="input-container">
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="input-container">
-        <label htmlFor="celular">Celular:</label>
-        <input
-          type="text"
-          id="celular"
-          value={celular}
-          onChange={(e) => setCelular(e.target.value)}
-        />
-      </div>
-      <div className="input-container">
-        <label htmlFor="endereco">Endereço:</label>
-        <input
-          type="text"
-          id="endereco"
-          value={endereco}
-          onChange={(e) => setEndereco(e.target.value)}
-        />
-      </div>
+    <>
+      <ToastContainer />
+      <div>
+        <h1>Meu Perfil</h1>
+        <div className="input-container">
+          <label htmlFor="nome">Nome:</label>
+          <input
+            type="text"
+            id="nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
+        </div>
+        <div className="input-container">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="input-container">
+          <label htmlFor="celular">Celular:</label>
+          <input
+            type="text"
+            id="celular"
+            value={celular}
+            onChange={(e) => setCelular(e.target.value)}
+          />
+        </div>
+        <div className="input-container">
+          <label htmlFor="endereco">Endereço:</label>
+          <input
+            type="text"
+            id="endereco"
+            value={endereco}
+            onChange={(e) => setEndereco(e.target.value)}
+          />
+        </div>
 
-      {usuario.tipoCliente === "0" && (
-        <div>
-          <div className="input-container">
-            <label htmlFor="cpf">CPF:</label>
-            <input
-              type="text"
-              id="cpf"
-              value={cpf}
-              onChange={(e) => setCPF(e.target.value)}
-            />
+        {usuario.tipoCliente === 0 && (
+          <div>
+            <div className="input-container">
+              <label htmlFor="cpf">CPF:</label>
+              <input
+                type="text"
+                id="cpf"
+                value={cpf}
+                onChange={(e) => setCPF(e.target.value)}
+              />
+            </div>
+            <div className="input-container">
+              <label htmlFor="nascimento">Data de Nascimento:</label>
+              <input
+                type="text"
+                id="nascimento"
+                value={nascimento}
+                onChange={(e) => setNascimento(e.target.value)}
+              />
+            </div>
+            <div className="input-container">
+              <label htmlFor="doador">Doador:</label>
+              <input
+                type="checkbox"
+                id="doador"
+                checked={doador}
+                onChange={(e) => setDoador(e.target.checked)}
+              />
+            </div>
           </div>
-          <div className="input-container">
-            <label htmlFor="nascimento">Data de Nascimento:</label>
-            <input
-              type="text"
-              id="nascimento"
-              value={nascimento}
-              onChange={(e) => setNascimento(e.target.value)}
-            />
+        )}
+
+        {usuario.tipoCliente === 1 && (
+          <div>
+            <div className="input-container">
+              <label htmlFor="website">Website:</label>
+              <input
+                type="text"
+                id="website"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+              />
+            </div>
+            <div className="input-container">
+              <label htmlFor="tipo">Tipo:</label>
+              <input
+                type="text"
+                id="tipo"
+                value={tipo}
+                onChange={(e) => setTipo(e.target.value)}
+              />
+            </div>
+            <div className="input-container">
+              <label htmlFor="cnpj">CNPJ:</label>
+              <input
+                type="text"
+                id="cnpj"
+                value={cnpj}
+                onChange={(e) => setCnpj(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="input-container">
-            <label htmlFor="doador">Doador:</label>
-            <input
-              type="checkbox"
-              id="doador"
-              checked={doador}
-              onChange={(e) => setDoador(e.target.checked)}
-            />
+        )}
+
+        <div className="button-container">
+          <div className="btn-wrapper">
+            <button className="btn-editar" onClick={handleEditarPerfil}>
+              Editar
+            </button>
           </div>
+
+          <div className="btn-wrapper">
+            <button className="btn-excluir" onClick={handleExcluirPerfil}>
+              Excluir
+            </button>
+          </div>
+        </div>
+      </div>
+      {loggingOut && (
+        <div className="loading-overlay">
+          <div className=""> Carregando...</div>
         </div>
       )}
-
-      {usuario.tipoCliente === "1" && (
-        <div>
-          <div className="input-container">
-            <label htmlFor="website">Website:</label>
-            <input
-              type="text"
-              id="website"
-              value={website}
-              onChange={(e) => setWebsite(e.target.value)}
-            />
-          </div>
-          <div className="input-container">
-            <label htmlFor="tipo">Tipo:</label>
-            <input
-              type="text"
-              id="tipo"
-              value={tipo}
-              onChange={(e) => setTipo(e.target.value)}
-            />
-          </div>
-          <div className="input-container">
-            <label htmlFor="cnpj">CNPJ:</label>
-            <input
-              type="text"
-              id="cnpj"
-              value={cnpj}
-              onChange={(e) => setCnpj(e.target.value)}
-            />
-          </div>
-        </div>
-      )}
-
-      <div className="button-container">
-        <div className="btn-wrapper">
-          <button className="btn-editar" onClick={handleEditarPerfil}>
-            Editar
-          </button>
-        </div>
-
-        <div className="btn-wrapper">
-          <button className="btn-excluir" onClick={handleExcluirPerfil}>
-            Excluir
-          </button>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 
