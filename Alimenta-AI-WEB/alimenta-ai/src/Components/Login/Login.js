@@ -1,6 +1,9 @@
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { AuthContext } from "../../Navbar/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -26,38 +29,6 @@ function Login() {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setEmail("");
-        setSenha("");
-        if (data.success) {
-          alert("Login realizado com sucesso!");
-          setTimeout(() => {
-            window.location = "/meuPerfil";
-          }, 2000);
-        } else {
-          alert("Falha no login. Verifique suas credenciais.");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-
-
-    
-
-    
-
-    fetch(`http://localhost:8080/UInvest/login`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(usuario),
-    })
       .then(() => {
         handleLogin(email);
         navigate("/");
@@ -77,8 +48,21 @@ function Login() {
       });
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("sessao");
+    navigate("/login");
+  };
+
+  const sessionSessao = sessionStorage.getItem("sessao");
+
+  if (sessionSessao) {
+    navigate("/");
+  }
+
   return (
     <div className="login-container background-image">
+      <ToastContainer />
+      {loading && <div className="loading-overlay">Carregando...</div>}
       <form className="login-form" onSubmit={handleSubmit}>
         <h2 className="text-form">Login</h2>
 
@@ -87,7 +71,7 @@ function Login() {
           <input
             type="text"
             id="email"
-            placeholder="Digite seu e-mail ou username"
+            placeholder="Digite seu e-mail"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
