@@ -38,6 +38,17 @@ function Cadastro() {
 
     if (clientType === "person") {
       // Cria o objeto JSON para pessoa física
+
+      let nascimentoSplitado = nascimento.split("-");
+      let nascimentoFormatado =
+        nascimentoSplitado[2] + nascimentoSplitado[1] + nascimentoSplitado[0];
+
+      if (doador == true) {
+        doador = "sim";
+      } else {
+        doador = "nao";
+      }
+
       formData = {
         nome: nome,
         email: email,
@@ -46,13 +57,7 @@ function Cadastro() {
         endereco: endereco,
         tipoCliente: 0,
         cpf: cpf,
-        nascimento: nascimento,
-
-let data = "2004-09-02";
-let partes = data.split("-");
-let dataFormatada = partes[2] + partes[1] + partes[0];
-
-
+        nascimento: nascimentoFormatado,
         doador: doador,
       };
     } else if (clientType === "company") {
