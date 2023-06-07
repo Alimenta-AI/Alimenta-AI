@@ -29,8 +29,19 @@ const Login = () => {
       },
       body: JSON.stringify(formData),
     })
-      .then(() => {
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Senha incorreta!");
+        }
+      })
+      .then((userData) => {
         handleLogin(email);
+
+        // Armazene a sessão no sessionStorage
+        sessionStorage.setItem("sessao", JSON.stringify(userData));
+
         history.push("/meuperfil");
         toast.success("Login realizado com sucesso", {
           position: toast.POSITION.TOP_CENTER,
@@ -38,7 +49,7 @@ const Login = () => {
         });
       })
       .catch((error) => {
-        toast.error("Senha incorreta!", {
+        toast.error(error.message, {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
         });

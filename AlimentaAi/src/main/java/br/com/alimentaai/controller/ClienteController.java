@@ -100,4 +100,10 @@ public class ClienteController {
         return null;
     }
 
+    public String converterParaJson(Cliente cliente) {
+        Gson gson = new Gson();
+        String json = gson.toJson(cliente);
+        return json;
+    }
+
 }
