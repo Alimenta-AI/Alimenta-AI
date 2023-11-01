@@ -1,0 +1,78 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.input-container {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.input-container label {
+  display: block;
+}
+
+.input-container input[type="text"],
+.input-container input[type="email"],
+.input-container input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 2px solid #00ff00;
+  border-radius: 4px;
+}
+
+.input-container input[type="text"]:focus,
+.input-container input[type="email"]:focus,
+.input-container input[type="password"]:focus {
+  outline: none;
+  border-color: #28a745;
+  border-radius: 10px;
+}
+
+.button-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-container .btn-wrapper {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.button-container input[type="file"],
+.button-container button {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-container button.btn-editar {
+  background-color: #00ff00;
+}
+
+.button-container button.btn-excluir {
+  background-color: #dc3545;
+}
+
+#foto {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.Imagem-perfil {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
